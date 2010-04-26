@@ -1,5 +1,10 @@
 package ttf.model;
 
+/**
+ * Based class for model ids.
+ * 
+ * @author Mihai Paraschiv
+ */
 public abstract class ModelId {
 	protected final String id;
 

@@ -18,6 +18,9 @@ public class EntryFactory {
 		DateValue publishedAt = new DateValue(incomingEntry.getPublishedAt());
 		entry.getPublishedAt().setValue(publishedAt);
 		
+		DateValue discoveredAt = new DateValue(incomingEntry.getDiscoveredAt());
+		entry.getDiscoveredAt().setValue(discoveredAt);
+		
 		TextValue content = new TextValue(incomingEntry.getContent());
 		entry.getContent().setValue(content);
 		

@@ -1,4 +1,4 @@
-package ttf.analyzer;
+package ttf.test.analysis;
 
 import ttf.analysis.EntryProvider;
 import ttf.model.entry.Entry;

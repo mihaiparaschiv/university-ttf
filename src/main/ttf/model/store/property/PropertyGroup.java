@@ -1,10 +1,10 @@
 package ttf.model.store.property;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-import com.google.common.collect.Iterators;
+import org.apache.commons.collections15.collection.UnmodifiableCollection;
 
 import ttf.model.store.property.key.PropertyKey;
 import ttf.model.store.property.value.PropertyValue;
@@ -49,11 +49,8 @@ public class PropertyGroup<K extends PropertyKey<?>, V extends PropertyValue> {
 	public boolean contains(K key) {
 		return map.containsKey(key);
 	}
-
-	/**
-	 * @return an iterator that does not allow element removal
-	 */
-	public Iterator<KeyedProperty<K, V>> getIterator() {
-		return Iterators.unmodifiableIterator(map.values().iterator());
+	
+	public Collection<KeyedProperty<K, V>> getProperties() {
+		return UnmodifiableCollection.decorate(map.values());
 	}
 }

@@ -11,8 +11,7 @@ import ttf.model.store.property.value.TextValue;
 import ttf.model.topic.TopicValue;
 
 /**
- * Provides access to information pertaining to a story. This is a proof of
- * concept model.
+ * Provides access to information pertaining to a story.
  * 
  * @author Mihai Paraschiv
  */
@@ -20,6 +19,7 @@ public class Entry extends Model<EntryId> {
 	private Property<TextValue> name;
 	private Property<TextValue> author;
 	private Property<DateValue> publishedAt;
+	private Property<DateValue> discoveredAt;
 	private Property<TextValue> content;
 	private Property<DoubleValue> score;
 	private Property<TopicValue> topic;
@@ -32,6 +32,7 @@ public class Entry extends Model<EntryId> {
 		name = new Property<TextValue>(null);
 		author = new Property<TextValue>(null);
 		publishedAt = new Property<DateValue>(null);
+		discoveredAt = new Property<DateValue>(null);
 		content = new Property<TextValue>(null);
 		score = new Property<DoubleValue>(null);
 		tags = new Property<SetValue<String>>(null);
@@ -52,6 +53,10 @@ public class Entry extends Model<EntryId> {
 
 	public Property<DateValue> getPublishedAt() {
 		return publishedAt;
+	}
+	
+	public Property<DateValue> getDiscoveredAt() {
+		return discoveredAt;
 	}
 
 	public Property<TextValue> getContent() {
