@@ -19,7 +19,7 @@ import ttf.model.property.value.PropertyValue;
  * @param <V>
  *            the type of value managed by the store
  */
-public class PropertyGroup<K extends PropertyKey<?>, V extends PropertyValue> {
+public class PropertyGroup<K extends PropertyKey, V extends PropertyValue> {
 
 	private final Map<K, KeyedProperty<K, V>> map;
 

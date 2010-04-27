@@ -13,7 +13,7 @@ import ttf.model.property.value.PropertyValue;
  * @param <V>
  *            property value
  */
-public class KeyedProperty<K extends PropertyKey<?>, V extends PropertyValue> extends Property<V> {
+public class KeyedProperty<K extends PropertyKey, V extends PropertyValue> extends Property<V> {
 	protected final K key;
 
 	public KeyedProperty(K key, V value) {
