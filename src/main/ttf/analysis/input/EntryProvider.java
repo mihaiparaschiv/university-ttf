@@ -1,5 +1,7 @@
 package ttf.analysis.input;
 
+import ttf.model.entry.Entry;
+
 /**
  * Provides new entries.
  * 
@@ -7,5 +9,5 @@ package ttf.analysis.input;
  * 
  */
 public interface EntryProvider {
-	public IncomingEntry poll();
+	public Entry poll();
 }

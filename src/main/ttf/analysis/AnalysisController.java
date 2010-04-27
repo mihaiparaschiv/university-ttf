@@ -1,7 +1,7 @@
 package ttf.analysis;
 
 import ttf.analysis.input.EntryProvider;
-import ttf.analysis.input.IncomingEntry;
+import ttf.model.entry.Entry;
 
 public class AnalysisController {
 	private final EntryProvider entryProvider;
@@ -11,9 +11,9 @@ public class AnalysisController {
 	}
 	
 	public void start() {
-		IncomingEntry incomingEntry = null;
-		while ((incomingEntry = entryProvider.poll()) != null) {
-			EntryProcessor processor = new EntryProcessor(incomingEntry);
+		Entry entry = null;
+		while ((entry = entryProvider.poll()) != null) {
+			EntryProcessor processor = new EntryProcessor(entry);
 			processor.process();
 		}
 	}

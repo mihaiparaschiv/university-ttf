@@ -1,12 +1,12 @@
 package ttf.analysis;
 
-import ttf.analysis.input.IncomingEntry;
+import ttf.model.entry.Entry;
 
 public class EntryProcessor {
-	private final IncomingEntry incomingEntry;
+	private final Entry entry;
 
-	public EntryProcessor(IncomingEntry incomingEntry) {
-		this.incomingEntry = incomingEntry;
+	public EntryProcessor(Entry entry) {
+		this.entry = entry;
 	}
 	
 	public void process() {
