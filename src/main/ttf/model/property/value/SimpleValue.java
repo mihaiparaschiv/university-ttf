@@ -1,6 +1,6 @@
 package ttf.model.property.value;
 
-public class SimpleValue<V> implements PropertyValue {
+public abstract class SimpleValue<V> implements PropertyValue {
 	private final V value;
 
 	public SimpleValue(V value) {

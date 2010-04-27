@@ -1,6 +1,6 @@
 package ttf.model.property.key;
 
-public class AbstractPropertyKey<K> implements PropertyKey {
+public abstract class AbstractPropertyKey<K> implements PropertyKey {
 	protected final K key;
 
 	public AbstractPropertyKey(K key) {
@@ -26,5 +26,10 @@ public class AbstractPropertyKey<K> implements PropertyKey {
 			return false;
 		AbstractPropertyKey<?> other = (AbstractPropertyKey<?>) obj;
 		return key.equals(other.key);
+	}
+
+	@Override
+	public String toString() {
+		return "AbstractPropertyKey [key=" + key + "]";
 	}
 }
