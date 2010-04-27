@@ -1,6 +1,6 @@
 package ttf.test.analysis.processing;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import org.junit.Test;
 import ttf.analysis.AnalysisController;
 import ttf.analysis.processing.Processor;
 import ttf.analysis.processing.ProcessorFactory;
-import ttf.analysis.processing.ProcessorStore;
+import ttf.analysis.processing.store.SimpleStore;
 import ttf.analysis.processing.task.Task;
 import ttf.model.entry.Entry;
 import ttf.model.entry.EntryFactory;
@@ -32,15 +32,15 @@ public class DummyTest {
 
 		LinkedListProvider entryProvider = new LinkedListProvider();
 		entryProvider.add(entry);
-		ProcessorFactory processorFactory = new DummyProcessorFactory();
+		ProcessorFactory<?> processorFactory = new DummyProcessorFactory();
 		AnalysisController controller = new AnalysisController(entryProvider,
 				processorFactory);
 		controller.execute();
 		assertEquals(NEW_NAME, entry.getName().getValue().get());
 	}
 
-	private class DummyTask extends Task {
-		public DummyTask(Processor processor) {
+	private class DummyTask extends Task<SimpleStore> {
+		public DummyTask(Processor<SimpleStore> processor) {
 			super(processor);
 		}
 
@@ -52,12 +52,12 @@ public class DummyTest {
 		}
 	}
 
-	private class DummyProcessorFactory implements ProcessorFactory {
+	private class DummyProcessorFactory implements ProcessorFactory<SimpleStore> {
 		@Override
-		public Processor build(Entry entry) {
-			ProcessorStore store = new ProcessorStore();
+		public Processor<SimpleStore> build(Entry entry) {
+			SimpleStore store = new SimpleStore();
 			store.setEntry(entry);
-			Processor processor = new Processor(store);
+			Processor<SimpleStore> processor = new Processor<SimpleStore>(store);
 			processor.addTask(new DummyTask(processor));
 			return processor;
 		}

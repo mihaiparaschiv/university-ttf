@@ -7,9 +7,9 @@ import ttf.model.entry.Entry;
 
 public class AnalysisController {
 	private final EntryProvider entryProvider;
-	private final ProcessorFactory processorFactory;
+	private final ProcessorFactory<?> processorFactory;
 	
-	public AnalysisController(EntryProvider entryProvider, ProcessorFactory processorFactory) {
+	public AnalysisController(EntryProvider entryProvider, ProcessorFactory<?> processorFactory) {
 		this.entryProvider = entryProvider;
 		this.processorFactory = processorFactory;
 	}
@@ -17,7 +17,7 @@ public class AnalysisController {
 	public void execute() {
 		Entry entry = null;
 		while ((entry = entryProvider.poll()) != null) {
-			Processor processor = processorFactory.build(entry);
+			Processor<?> processor = processorFactory.build(entry);
 			processor.execute();
 		}
 	}

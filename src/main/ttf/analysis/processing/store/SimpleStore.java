@@ -1,9 +1,9 @@
-package ttf.analysis.processing;
+package ttf.analysis.processing.store;
 
 import ttf.model.entry.Entry;
 import ttf.model.topic.Topic;
 
-public class ProcessorStore {
+public class SimpleStore implements ProcessingStore {
 	private Entry entry;
 	private Topic topic;
 
