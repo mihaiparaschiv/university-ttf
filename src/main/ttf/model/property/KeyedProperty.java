@@ -24,4 +24,9 @@ public class KeyedProperty<K extends PropertyKey<?>, V extends PropertyValue> ex
 	public KeyedProperty(K key) {
 		this(key, null);
 	}
+
+	@Override
+	public String toString() {
+		return "KeyedProperty [key=" + key + ", value=" + value + "]";
+	}
 }

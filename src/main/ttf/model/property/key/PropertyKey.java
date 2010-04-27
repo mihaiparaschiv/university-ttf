@@ -3,11 +3,11 @@ package ttf.model.property.key;
 import ttf.model.property.PropertyGroup;
 
 /**
- * A key specifies how the property's unique name in a {@link PropertyGroup}.
+ * A key specifies the property's unique name in a {@link PropertyGroup}.
  * 
  * @author Mihai Paraschiv
  */
-public class PropertyKey<K> {
+public abstract class PropertyKey<K> {
 	protected final K key;
 
 	public PropertyKey(K key) {

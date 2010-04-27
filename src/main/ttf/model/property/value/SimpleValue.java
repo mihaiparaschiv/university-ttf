@@ -10,4 +10,9 @@ public class SimpleValue<V> implements PropertyValue {
 	public V get() {
 		return value;
 	}
+
+	@Override
+	public String toString() {
+		return "SimpleValue [value=" + value + "]";
+	}
 }

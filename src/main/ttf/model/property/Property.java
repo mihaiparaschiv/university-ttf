@@ -30,4 +30,9 @@ public class Property<V extends PropertyValue> {
 	public V getValue() {
 		return value;
 	}
+
+	@Override
+	public String toString() {
+		return "Property [value=" + value + "]";
+	}
 }

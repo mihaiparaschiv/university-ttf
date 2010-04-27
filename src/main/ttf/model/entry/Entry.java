@@ -85,4 +85,13 @@ public class Entry extends Model<EntryId> {
 	public PropertyGroup<StringKey, DoubleValue> getTermGroup() {
 		return termGroup;
 	}
+
+	@Override
+	public String toString() {
+		return "Entry [address=" + address + ", author=" + author
+				+ ", content=" + content + ", discoveredAt=" + discoveredAt
+				+ ", name=" + name + ", publishedAt=" + publishedAt
+				+ ", score=" + score + ", tags=" + tags + ", termGroup="
+				+ termGroup + ", topic=" + topic + "]";
+	}
 }
