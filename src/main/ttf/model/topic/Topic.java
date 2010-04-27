@@ -26,8 +26,8 @@ import ttf.model.property.value.DoubleValue;
  * @author Mihai Paraschiv
  */
 public class Topic extends Model<TopicId> {
-	private PropertyGroup<EntryKey, DoubleValue> entries;
-	private PropertyGroup<TopicKey, DoubleValue> topics;
+	protected PropertyGroup<EntryKey, DoubleValue> entries;
+	protected PropertyGroup<TopicKey, DoubleValue> topics;
 
 	protected Topic(TopicId id) {
 		super(id);

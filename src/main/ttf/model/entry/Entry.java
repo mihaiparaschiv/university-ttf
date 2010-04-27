@@ -32,15 +32,15 @@ import ttf.model.topic.TopicValue;
  * @author Mihai Paraschiv
  */
 public class Entry extends Model<EntryId> {
-	private Property<AddressValue> address;
-	private Property<TextValue> name;
-	private Property<TextValue> author;
-	private Property<DateValue> publishedAt;
-	private Property<DateValue> discoveredAt;
-	private Property<TextValue> content;
-	private Property<DoubleValue> score;
-	private Property<TopicValue> topic;
-	private Property<SetValue<String>> tags;
+	protected Property<AddressValue> address;
+	protected Property<TextValue> name;
+	protected Property<TextValue> author;
+	protected Property<DateValue> publishedAt;
+	protected Property<DateValue> discoveredAt;
+	protected Property<TextValue> content;
+	protected Property<DoubleValue> score;
+	protected Property<TopicValue> topic;
+	protected Property<SetValue<String>> tags;
 
 	private PropertyGroup<StringKey, DoubleValue> termGroup;
 

@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.persistence;
+package ttf.persistence.query;
 
 import ttf.model.Model;
 
-public abstract class Query<E extends Model> {
+public interface ModelQuery<M extends Model<?>> {
 	
 }

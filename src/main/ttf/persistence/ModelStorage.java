@@ -15,6 +15,32 @@
  */
 package ttf.persistence;
 
-public class TopicQuery {
+import ttf.model.Model;
+import ttf.model.ModelId;
+import ttf.persistence.query.IdQuery;
+import ttf.persistence.query.ModelQuery;
 
+public interface ModelStorage<M extends Model<I>, I extends ModelId> {
+	/**
+	 * Loads a model by id.
+	 * 
+	 * @param query
+	 * @return model with specified id or null
+	 */
+	public M load(IdQuery<I> query);
+
+	/**
+	 * Applies the query and loads a set of models.
+	 * 
+	 * @param query
+	 * @return models
+	 */
+	public Iterable<M> load(ModelQuery<M> query);
+	
+	/**
+	 * Saves the model.
+	 * 
+	 * @param model
+	 */
+	public void persist(M model);
 }
