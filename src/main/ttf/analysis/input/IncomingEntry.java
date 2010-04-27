@@ -1,8 +1,14 @@
-package ttf.analysis.incoming;
+package ttf.analysis.input;
 
 import java.util.Date;
 import java.util.Set;
 
+/**
+ * Keeps all the information necessary for processing new entries.
+ * 
+ * @author Mihai Paraschiv
+ *
+ */
 public class IncomingEntry {
 	protected String name;
 	protected String author;

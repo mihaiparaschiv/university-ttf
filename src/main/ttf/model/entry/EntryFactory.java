@@ -1,9 +1,9 @@
 package ttf.model.entry;
 
-import ttf.analysis.incoming.IncomingEntry;
-import ttf.model.store.property.value.DateValue;
-import ttf.model.store.property.value.SetValue;
-import ttf.model.store.property.value.TextValue;
+import ttf.analysis.input.IncomingEntry;
+import ttf.model.property.value.DateValue;
+import ttf.model.property.value.SetValue;
+import ttf.model.property.value.TextValue;
 
 public class EntryFactory {
 	public Entry buildFromIncoming(IncomingEntry incomingEntry) {

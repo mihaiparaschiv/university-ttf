@@ -1,6 +1,6 @@
-package ttf.model.store.property.key;
+package ttf.model.property.key;
 
-import ttf.model.store.property.PropertyGroup;
+import ttf.model.property.PropertyGroup;
 
 /**
  * A key specifies how the property's unique name in a {@link PropertyGroup}.

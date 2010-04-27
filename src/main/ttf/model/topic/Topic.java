@@ -2,8 +2,8 @@ package ttf.model.topic;
 
 import ttf.model.Model;
 import ttf.model.entry.EntryKey;
-import ttf.model.store.property.PropertyGroup;
-import ttf.model.store.property.value.DoubleValue;
+import ttf.model.property.PropertyGroup;
+import ttf.model.property.value.DoubleValue;
 
 /**
  * A topic contains entries and subtopics.

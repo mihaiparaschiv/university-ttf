@@ -2,8 +2,8 @@ package ttf.model.topic;
 
 import ttf.model.ModelId;
 import ttf.model.entry.EntryKey;
-import ttf.model.store.property.PropertyGroup;
-import ttf.model.store.property.value.DoubleValue;
+import ttf.model.property.PropertyGroup;
+import ttf.model.property.value.DoubleValue;
 
 public class TopicId extends ModelId {
 	private PropertyGroup<EntryKey, DoubleValue> entries;

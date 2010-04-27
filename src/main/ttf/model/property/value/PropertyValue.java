@@ -1,6 +1,6 @@
-package ttf.model.store.property.value;
+package ttf.model.property.value;
 
-import ttf.model.store.property.KeyedProperty;
+import ttf.model.property.KeyedProperty;
 
 /**
  * A property value is non-modifiable. All value changes should be delegated to

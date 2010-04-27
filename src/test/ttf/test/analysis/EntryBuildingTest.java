@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.junit.Test;
 
-import ttf.analysis.incoming.IncomingEntry;
+import ttf.analysis.input.IncomingEntry;
 import ttf.model.entry.Entry;
 import ttf.model.entry.EntryFactory;
 

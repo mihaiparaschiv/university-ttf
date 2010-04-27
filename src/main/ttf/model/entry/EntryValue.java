@@ -1,6 +1,6 @@
 package ttf.model.entry;
 
-import ttf.model.store.property.value.SimpleValue;
+import ttf.model.property.value.SimpleValue;
 
 public class EntryValue extends SimpleValue<Entry> {
 	public EntryValue(Entry value) {

@@ -1,14 +1,11 @@
 package ttf.test.analysis;
 
-import ttf.analysis.EntryProvider;
-import ttf.model.entry.Entry;
+import java.util.LinkedList;
 
-public class EntryQueue implements EntryProvider {
+import ttf.analysis.input.EntryProvider;
+import ttf.analysis.input.IncomingEntry;
 
-	@Override
-	public Entry poll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+public class EntryQueue extends LinkedList<IncomingEntry> implements EntryProvider {
+	private static final long serialVersionUID = 59413491220119509L;
+	
 }

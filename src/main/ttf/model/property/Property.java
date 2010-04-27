@@ -1,6 +1,6 @@
-package ttf.model.store.property;
+package ttf.model.property;
 
-import ttf.model.store.property.value.PropertyValue;
+import ttf.model.property.value.PropertyValue;
 
 /**
  * An attribute of a model. Properties can be attached directly or they can be

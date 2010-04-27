@@ -1,4 +1,4 @@
-package ttf.analysis.task;
+package ttf.analysis.processing.task;
 
 import java.util.Queue;
 

@@ -1,4 +1,4 @@
-package ttf.model.store.property;
+package ttf.model.property;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.apache.commons.collections15.collection.UnmodifiableCollection;
 
-import ttf.model.store.property.key.PropertyKey;
-import ttf.model.store.property.value.PropertyValue;
+import ttf.model.property.key.PropertyKey;
+import ttf.model.property.value.PropertyValue;
 
 /**
  * Groups model properties.

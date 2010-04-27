@@ -1,7 +1,7 @@
-package ttf.model.store.property;
+package ttf.model.property;
 
-import ttf.model.store.property.key.PropertyKey;
-import ttf.model.store.property.value.PropertyValue;
+import ttf.model.property.key.PropertyKey;
+import ttf.model.property.value.PropertyValue;
 
 /**
  * This class is used with {@link PropertyGroup}.

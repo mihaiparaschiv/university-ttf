@@ -1,4 +1,4 @@
-package ttf.model.store.property.value;
+package ttf.model.property.value;
 
 import java.util.Date;
 
