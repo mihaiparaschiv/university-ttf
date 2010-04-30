@@ -15,24 +15,24 @@
  */
 package ttf.analysis;
 
-import ttf.analysis.input.EntryProvider;
+import ttf.analysis.input.ArticleProvider;
 import ttf.analysis.processor.Processor;
-import ttf.model.entry.Entry;
+import ttf.model.article.Article;
 
 public class AnalysisController {
-	private final EntryProvider entryProvider;
+	private final ArticleProvider articleProvider;
 	private final Processor processor;
 
-	public AnalysisController(EntryProvider entryProvider,
+	public AnalysisController(ArticleProvider articleProvider,
 			Processor processor) {
-		this.entryProvider = entryProvider;
+		this.articleProvider = articleProvider;
 		this.processor = processor;
 	}
 
 	public void run() {
-		Entry entry = null;
-		while ((entry = entryProvider.poll()) != null) {
-			processor.process(entry);
+		Article article = null;
+		while ((article = articleProvider.poll()) != null) {
+			processor.process(article);
 		}
 	}
 }

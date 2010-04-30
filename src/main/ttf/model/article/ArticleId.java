@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.entry;
+package ttf.model.article;
 
-public class EntryFactory {
-	public Entry build() {
-		return new Entry();
+import ttf.model.ModelId;
+
+public class ArticleId extends ModelId {
+	public ArticleId(String id) {
+		super(id);
 	}
 }

@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.entry;
+package ttf.model.article;
 
-import ttf.model.property.value.SimpleValue;
-
-public class EntryValue extends SimpleValue<Entry> {
-	public EntryValue(Entry value) {
-		super(value);
+public class ArticleFactory {
+	public Article build() {
+		return new Article();
 	}
 }

@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.entry;
+package ttf.analysis.input;
 
-import ttf.model.ModelId;
+import ttf.model.article.Article;
 
-public class EntryId extends ModelId {
-	public EntryId(String id) {
-		super(id);
-	}
+/**
+ * Provides new articles.
+ * 
+ * @author Mihai Paraschiv
+ * 
+ */
+public interface ArticleProvider {
+	public Article poll();
 }

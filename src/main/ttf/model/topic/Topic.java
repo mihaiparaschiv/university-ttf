@@ -16,22 +16,22 @@
 package ttf.model.topic;
 
 import ttf.model.Model;
-import ttf.model.entry.EntryKey;
+import ttf.model.article.ArticleKey;
 import ttf.model.property.PropertyGroup;
 import ttf.model.property.value.DoubleValue;
 
 /**
- * A topic contains entries and subtopics.
+ * A topic contains articles and subtopics.
  * 
  * @author Mihai Paraschiv
  */
 public class Topic extends Model<TopicId> {
-	protected PropertyGroup<EntryKey, DoubleValue> entries;
+	protected PropertyGroup<ArticleKey, DoubleValue> articles;
 	protected PropertyGroup<TopicKey, DoubleValue> topics;
 
 	protected Topic(TopicId id) {
 		super(id);
-		this.entries = new PropertyGroup<EntryKey, DoubleValue>();
+		this.articles = new PropertyGroup<ArticleKey, DoubleValue>();
 		this.topics = new PropertyGroup<TopicKey, DoubleValue>();
 	}
 
@@ -39,8 +39,8 @@ public class Topic extends Model<TopicId> {
 		this(null);
 	}
 
-	public PropertyGroup<EntryKey, DoubleValue> getEntries() {
-		return entries;
+	public PropertyGroup<ArticleKey, DoubleValue> getArticles() {
+		return articles;
 	}
 
 	public PropertyGroup<TopicKey, DoubleValue> getTopics() {

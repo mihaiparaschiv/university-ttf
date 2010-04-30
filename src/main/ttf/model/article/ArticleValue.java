@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.entry;
+package ttf.model.article;
 
-import ttf.model.property.key.AbstractPropertyKey;
+import ttf.model.property.value.SimpleValue;
 
-public class EntryKey extends AbstractPropertyKey<Entry> {
-	public EntryKey(Entry key) {
-		super(key);
+public class ArticleValue extends SimpleValue<Article> {
+	public ArticleValue(Article value) {
+		super(value);
 	}
 }

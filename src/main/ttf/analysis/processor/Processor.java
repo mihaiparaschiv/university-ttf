@@ -15,8 +15,8 @@
  */
 package ttf.analysis.processor;
 
-import ttf.model.entry.Entry;
+import ttf.model.article.Article;
 
 public interface Processor {
-	public void process(Entry entry);
+	public void process(Article article);
 }

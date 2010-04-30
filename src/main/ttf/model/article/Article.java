@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.entry;
+package ttf.model.article;
 
 import ttf.model.Model;
 import ttf.model.property.Property;
@@ -31,7 +31,7 @@ import ttf.model.topic.TopicValue;
  * 
  * @author Mihai Paraschiv
  */
-public class Entry extends Model<EntryId> {
+public class Article extends Model<ArticleId> {
 	protected Property<AddressValue> address;
 	protected Property<TextValue> name;
 	protected Property<TextValue> author;
@@ -44,7 +44,7 @@ public class Entry extends Model<EntryId> {
 
 	private PropertyGroup<StringKey, DoubleValue> termGroup;
 
-	protected Entry(EntryId id) {
+	protected Article(ArticleId id) {
 		super(id);
 		address = new Property<AddressValue>(null);
 		name = new Property<TextValue>(null);
@@ -57,7 +57,7 @@ public class Entry extends Model<EntryId> {
 		topic = new Property<TopicValue>(null);
 	}
 
-	protected Entry() {
+	protected Article() {
 		this(null);
 	}
 
@@ -103,7 +103,7 @@ public class Entry extends Model<EntryId> {
 
 	@Override
 	public String toString() {
-		return "Entry [address=" + address + ", author=" + author
+		return "Article [address=" + address + ", author=" + author
 				+ ", content=" + content + ", discoveredAt=" + discoveredAt
 				+ ", name=" + name + ", publishedAt=" + publishedAt
 				+ ", score=" + score + ", tags=" + tags + ", termGroup="

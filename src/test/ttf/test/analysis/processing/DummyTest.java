@@ -26,8 +26,8 @@ import org.junit.Test;
 
 import ttf.analysis.AnalysisController;
 import ttf.analysis.processor.Processor;
-import ttf.model.entry.Entry;
-import ttf.model.entry.EntryFactory;
+import ttf.model.article.Article;
+import ttf.model.article.ArticleFactory;
 import ttf.model.property.value.AddressValue;
 import ttf.model.property.value.DateValue;
 import ttf.model.property.value.TextValue;
@@ -38,49 +38,52 @@ public class DummyTest extends TestCase {
 
 	@Test
 	public void testDummyTask() {
-		EntryFactory factory = new EntryFactory();
-		Entry entry = factory.build();
-		entry.getAddress().setValue(new AddressValue("http://..."));
-		entry.getName().setValue(new TextValue("A news article"));
-		entry.getContent().setValue(new TextValue("News content"));
-		entry.getDiscoveredAt().setValue(new DateValue(new Date()));
+		ArticleFactory factory = new ArticleFactory();
+		Article article = factory.build();
+		article.getAddress().setValue(new AddressValue("http://..."));
+		article.getName().setValue(new TextValue("A news article"));
+		article.getContent().setValue(new TextValue("News content"));
+		article.getDiscoveredAt().setValue(new DateValue(new Date()));
 
-		LinkedListProvider entryProvider = new LinkedListProvider();
-		entryProvider.add(entry);
+		LinkedListProvider articleProvider = new LinkedListProvider();
+		articleProvider.add(article);
 		Processor processor = new DummyProcessor();
-		AnalysisController controller = new AnalysisController(entryProvider,
+		AnalysisController controller = new AnalysisController(articleProvider,
 				processor);
 		controller.run();
-		assertEquals(NEW_NAME, entry.getName().getValue().get());
+		assertEquals(NEW_NAME, article.getName().getValue().get());
 	}
 
 	private class DummyCommand implements Command {
 		@Override
 		public boolean execute(Context context) {
-//			Entry entry = ((DummyContext) context).getEntry();
-//			System.out.println(entry);
-//			entry.getName().setValue(new TextValue(NEW_NAME));
+			Article article = ((DummyContext) context).getArticle();
+			System.out.println(article);
+			article.getName().setValue(new TextValue(NEW_NAME));
 			return false;
 		}
 	}
 
 	private class DummyContext extends ContextBase {
-		private Entry entry;
+		private static final long serialVersionUID = -651154027320406482L;
+		private Article article;
 
-		public void setEntry(Entry entry) {
-			this.entry = entry;
+		public void setArticle(Article article) {
+			this.article = article;
 		}
 
-		public Entry getEntry() {
-			return entry;
+		public Article getArticle() {
+			return article;
 		}
 	}
 
 	private class DummyProcessor implements Processor {
 		@Override
-		public void process(Entry entry) {
+		public void process(Article article) {
 			DummyContext context = new DummyContext();
-//			context.setEntry(entry);
+			context.setArticle(article);
+			DummyCommand command = new DummyCommand();
+			command.execute(context);
 		}
 	}
 }

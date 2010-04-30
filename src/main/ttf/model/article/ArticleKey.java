@@ -13,16 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.analysis.input;
+package ttf.model.article;
 
-import ttf.model.entry.Entry;
+import ttf.model.property.key.AbstractPropertyKey;
 
-/**
- * Provides new entries.
- * 
- * @author Mihai Paraschiv
- * 
- */
-public interface EntryProvider {
-	public Entry poll();
+public class ArticleKey extends AbstractPropertyKey<Article> {
+	public ArticleKey(Article key) {
+		super(key);
+	}
 }

@@ -17,9 +17,9 @@ package ttf.test.analysis;
 
 import java.util.LinkedList;
 
-import ttf.analysis.input.EntryProvider;
-import ttf.model.entry.Entry;
+import ttf.analysis.input.ArticleProvider;
+import ttf.model.article.Article;
 
-public class LinkedListProvider extends LinkedList<Entry> implements EntryProvider {
+public class LinkedListProvider extends LinkedList<Article> implements ArticleProvider {
 	private static final long serialVersionUID = 59413491220119509L;
 }
