@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.test.analysis.processing;
+package ttf.test.analysis;
 
 import java.util.Date;
 
@@ -31,7 +31,6 @@ import ttf.model.article.ArticleFactory;
 import ttf.model.property.value.AddressValue;
 import ttf.model.property.value.DateValue;
 import ttf.model.property.value.TextValue;
-import ttf.test.analysis.LinkedListProvider;
 
 public class DummyTest extends TestCase {
 	private static final String NEW_NAME = "new name";
