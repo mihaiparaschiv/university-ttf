@@ -64,7 +64,7 @@ public class PropertyGroup<K extends PropertyKey, V extends PropertyValue> {
 	public boolean contains(K key) {
 		return map.containsKey(key);
 	}
-	
+
 	public Collection<KeyedProperty<K, V>> getProperties() {
 		return UnmodifiableCollection.decorate(map.values());
 	}

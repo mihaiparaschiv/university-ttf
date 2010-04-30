@@ -23,5 +23,5 @@ import ttf.model.property.PropertyGroup;
  * @author Mihai Paraschiv
  */
 public interface PropertyKey {
-	
+
 }

@@ -18,5 +18,5 @@ package ttf.persistence.query;
 import ttf.model.Model;
 
 public interface ModelQuery<M extends Model<?>> {
-	
+
 }

@@ -36,7 +36,7 @@ public interface ModelStorage<M extends Model<I>, I extends ModelId> {
 	 * @return models
 	 */
 	public Iterable<M> load(ModelQuery<M> query);
-	
+
 	/**
 	 * Saves the model.
 	 * 

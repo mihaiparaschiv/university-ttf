@@ -19,8 +19,9 @@ package ttf.model;
  * Base class for all models.
  * 
  * @author Mihai Paraschiv
- *
- * @param <I> model id
+ * 
+ * @param <I>
+ *            model id
  */
 public abstract class Model<I extends ModelId> {
 	protected I id;

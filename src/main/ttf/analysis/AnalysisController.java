@@ -23,12 +23,13 @@ import ttf.model.entry.Entry;
 public class AnalysisController {
 	private final EntryProvider entryProvider;
 	private final ProcessorFactory<?> processorFactory;
-	
-	public AnalysisController(EntryProvider entryProvider, ProcessorFactory<?> processorFactory) {
+
+	public AnalysisController(EntryProvider entryProvider,
+			ProcessorFactory<?> processorFactory) {
 		this.entryProvider = entryProvider;
 		this.processorFactory = processorFactory;
 	}
-	
+
 	public void execute() {
 		Entry entry = null;
 		while ((entry = entryProvider.poll()) != null) {

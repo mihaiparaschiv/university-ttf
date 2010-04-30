@@ -21,7 +21,7 @@ public abstract class AbstractPropertyKey<K> implements PropertyKey {
 	public AbstractPropertyKey(K key) {
 		this.key = key;
 	}
-	
+
 	public K get() {
 		return key;
 	}
