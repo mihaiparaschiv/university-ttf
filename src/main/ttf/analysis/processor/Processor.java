@@ -13,14 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.analysis.processing.store;
+package ttf.analysis.processor;
 
-/**
- * Repository of information accumulated by the processing tasks.
- * 
- * @author Mihai Paraschiv
- * 
- */
-public interface ProcessingStore {
+import ttf.model.entry.Entry;
 
+public interface Processor {
+	public void process(Entry entry);
 }

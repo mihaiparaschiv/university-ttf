@@ -15,17 +15,17 @@
  */
 package ttf.test.analysis.processing;
 
-import static junit.framework.Assert.assertEquals;
-
 import java.util.Date;
 
+import junit.framework.TestCase;
+
+import org.apache.commons.chain.Command;
+import org.apache.commons.chain.Context;
+import org.apache.commons.chain.impl.ContextBase;
 import org.junit.Test;
 
 import ttf.analysis.AnalysisController;
-import ttf.analysis.processing.Processor;
-import ttf.analysis.processing.ProcessorFactory;
-import ttf.analysis.processing.store.SimpleStore;
-import ttf.analysis.processing.task.Task;
+import ttf.analysis.processor.Processor;
 import ttf.model.entry.Entry;
 import ttf.model.entry.EntryFactory;
 import ttf.model.property.value.AddressValue;
@@ -33,7 +33,7 @@ import ttf.model.property.value.DateValue;
 import ttf.model.property.value.TextValue;
 import ttf.test.analysis.LinkedListProvider;
 
-public class DummyTest {
+public class DummyTest extends TestCase {
 	private static final String NEW_NAME = "new name";
 
 	@Test
@@ -47,34 +47,40 @@ public class DummyTest {
 
 		LinkedListProvider entryProvider = new LinkedListProvider();
 		entryProvider.add(entry);
-		ProcessorFactory<?> processorFactory = new DummyProcessorFactory();
+		Processor processor = new DummyProcessor();
 		AnalysisController controller = new AnalysisController(entryProvider,
-				processorFactory);
-		controller.execute();
+				processor);
+		controller.run();
 		assertEquals(NEW_NAME, entry.getName().getValue().get());
 	}
 
-	private class DummyTask extends Task<SimpleStore> {
-		public DummyTask(Processor<SimpleStore> processor) {
-			super(processor);
-		}
-
+	private class DummyCommand implements Command {
 		@Override
-		public void execute() {
-			Entry entry = processor.getStore().getEntry();
-			System.out.println(entry);
-			entry.getName().setValue(new TextValue(NEW_NAME));
+		public boolean execute(Context context) {
+//			Entry entry = ((DummyContext) context).getEntry();
+//			System.out.println(entry);
+//			entry.getName().setValue(new TextValue(NEW_NAME));
+			return false;
 		}
 	}
 
-	private class DummyProcessorFactory implements ProcessorFactory<SimpleStore> {
+	private class DummyContext extends ContextBase {
+		private Entry entry;
+
+		public void setEntry(Entry entry) {
+			this.entry = entry;
+		}
+
+		public Entry getEntry() {
+			return entry;
+		}
+	}
+
+	private class DummyProcessor implements Processor {
 		@Override
-		public Processor<SimpleStore> build(Entry entry) {
-			SimpleStore store = new SimpleStore();
-			store.setEntry(entry);
-			Processor<SimpleStore> processor = new Processor<SimpleStore>(store);
-			processor.addTask(new DummyTask(processor));
-			return processor;
+		public void process(Entry entry) {
+			DummyContext context = new DummyContext();
+//			context.setEntry(entry);
 		}
 	}
 }
