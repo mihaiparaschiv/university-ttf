@@ -23,8 +23,8 @@ import org.apache.commons.configuration.HierarchicalINIConfiguration;
 import org.junit.Test;
 
 public class ConfigurationTest extends TestCase {
-	private static final String FILE_NAME = "config.ini";
-	private static final String TEST_NAME = "test-value";
+	private static final String FILE_NAME = "files/test-config.ini";
+	private static final String TEST_NAME = "test-variable";
 	private static final int TEST_VALUE = 1;
 
 	@Test
