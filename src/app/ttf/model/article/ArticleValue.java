@@ -15,9 +15,9 @@
  */
 package ttf.model.article;
 
-import ttf.model.property.value.SimpleValue;
+import ttf.model.property.value.ScalarValue;
 
-public class ArticleValue extends SimpleValue<Article> {
+public class ArticleValue extends ScalarValue<Article> {
 	public ArticleValue(Article value) {
 		super(value);
 	}

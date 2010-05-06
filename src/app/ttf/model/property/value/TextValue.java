@@ -15,7 +15,7 @@
  */
 package ttf.model.property.value;
 
-public class TextValue extends SimpleValue<String> {
+public class TextValue extends ScalarValue<String> {
 	public TextValue(String value) {
 		super(value);
 	}

@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf;
+package ttf.analysis.input;
 
-public class ConfigurationNames {
-	public static final String ALCHEMY_API = "alchemy-api";
-	public static final String ALCHEMY_API_KEY = "key";
+import java.util.LinkedList;
+
+import ttf.model.article.Article;
+
+public class InternalProvider extends LinkedList<Article> implements ArticleProvider {
+	private static final long serialVersionUID = 59413491220119509L;
 }

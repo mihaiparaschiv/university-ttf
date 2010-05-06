@@ -25,6 +25,7 @@ import org.apache.commons.chain.impl.ContextBase;
 import org.junit.Test;
 
 import ttf.analysis.AnalysisController;
+import ttf.analysis.input.InternalProvider;
 import ttf.analysis.processor.Processor;
 import ttf.model.article.Article;
 import ttf.model.article.ArticleFactory;
@@ -44,7 +45,7 @@ public class DummyTest {
 		article.getContent().setValue(new TextValue("News content"));
 		article.getDiscoveredAt().setValue(new DateValue(new Date()));
 
-		LinkedListProvider articleProvider = new LinkedListProvider();
+		InternalProvider articleProvider = new InternalProvider();
 		articleProvider.add(article);
 		Processor processor = new DummyProcessor();
 		AnalysisController controller = new AnalysisController(articleProvider,

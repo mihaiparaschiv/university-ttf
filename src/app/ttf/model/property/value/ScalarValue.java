@@ -13,13 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.test.analysis;
+package ttf.model.property.value;
 
-import java.util.LinkedList;
+public abstract class ScalarValue<V> implements PropertyValue {
+	private final V value;
 
-import ttf.analysis.input.ArticleProvider;
-import ttf.model.article.Article;
+	public ScalarValue(V value) {
+		this.value = value;
+	}
 
-public class LinkedListProvider extends LinkedList<Article> implements ArticleProvider {
-	private static final long serialVersionUID = 59413491220119509L;
+	public V get() {
+		return value;
+	}
+
+	@Override
+	public String toString() {
+		return "SimpleValue [value=" + value + "]";
+	}
 }

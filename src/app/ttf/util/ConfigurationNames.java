@@ -13,21 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.property.value;
+package ttf.util;
 
-public abstract class SimpleValue<V> implements PropertyValue {
-	private final V value;
-
-	public SimpleValue(V value) {
-		this.value = value;
-	}
-
-	public V get() {
-		return value;
-	}
-
-	@Override
-	public String toString() {
-		return "SimpleValue [value=" + value + "]";
-	}
+public class ConfigurationNames {
+	public static final String ALCHEMY_API = "alchemy-api";
+	public static final String ALCHEMY_API_KEY = "key";
 }

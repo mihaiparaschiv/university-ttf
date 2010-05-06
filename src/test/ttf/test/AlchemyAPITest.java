@@ -27,7 +27,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import ttf.ConfigurationNames;
+import ttf.util.ConfigurationNames;
 import ttf.util.alchemyapi.AlchemyEntity;
 import ttf.util.alchemyapi.EntityProvider;
 
