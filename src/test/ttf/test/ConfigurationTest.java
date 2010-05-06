@@ -15,21 +15,22 @@
  */
 package ttf.test;
 
-import junit.framework.TestCase;
+import static junit.framework.Assert.assertEquals;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.HierarchicalINIConfiguration;
 import org.junit.Test;
 
-public class ConfigurationTest extends TestCase {
-	private static final String FILE_NAME = "files/test-config.ini";
+public class ConfigurationTest {
+	private static final String CONFIG_FILE = "files/test-config.ini";
 	private static final String TEST_NAME = "test-variable";
 	private static final int TEST_VALUE = 1;
 
 	@Test
-	public void testConfigurationLoadingFromFile() throws ConfigurationException {
-		Configuration config = new HierarchicalINIConfiguration(FILE_NAME);
+	public void configurationLoadingFromFile()
+			throws ConfigurationException {
+		Configuration config = new HierarchicalINIConfiguration(CONFIG_FILE);
 		assertEquals(TEST_VALUE, config.getInt(TEST_NAME));
 	}
 }

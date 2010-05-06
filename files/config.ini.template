@@ -1,0 +1,3 @@
+; fill this template with necessary information and rename it to config.ini
+[alchemy-api]
+key = ...

@@ -15,9 +15,9 @@
  */
 package ttf.test.analysis;
 
-import java.util.Date;
+import static org.junit.Assert.assertEquals;
 
-import junit.framework.TestCase;
+import java.util.Date;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
@@ -32,11 +32,11 @@ import ttf.model.property.value.AddressValue;
 import ttf.model.property.value.DateValue;
 import ttf.model.property.value.TextValue;
 
-public class DummyTest extends TestCase {
+public class DummyTest {
 	private static final String NEW_NAME = "new name";
 
 	@Test
-	public void testDummyTask() {
+	public void dummyTaskExecution() {
 		ArticleFactory factory = new ArticleFactory();
 		Article article = factory.build();
 		article.getAddress().setValue(new AddressValue("http://..."));
