@@ -13,12 +13,34 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.article;
+package ttf.persistence;
 
-import ttf.model.ModelId;
+import ttf.model.article.Article;
+import ttf.persistence.query.IdQuery;
+import ttf.persistence.query.ModelQuery;
 
-public class ArticleId extends ModelId {
-	public ArticleId(String id) {
-		super(id);
-	}
+public interface ArticleStorage {
+	
+	/**
+	 * Loads an article by id.
+	 * 
+	 * @param query
+	 * @return article with specified id or null
+	 */
+	public Article loadArticleById(IdQuery query);
+
+	/**
+	 * Loads a set of articles.
+	 * 
+	 * @param query
+	 * @return models
+	 */
+	public Iterable<Article> loadArticles(ModelQuery query);
+
+	/**
+	 * Saves the model.
+	 * 
+	 * @param model
+	 */
+	public void persist(Article model);
 }

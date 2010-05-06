@@ -16,6 +16,7 @@
 package ttf.model.article;
 
 import ttf.model.Model;
+import ttf.model.StringId;
 import ttf.model.property.Property;
 import ttf.model.property.PropertyGroup;
 import ttf.model.property.key.StringKey;
@@ -31,7 +32,7 @@ import ttf.model.topic.TopicValue;
  * 
  * @author Mihai Paraschiv
  */
-public class Article extends Model<ArticleId> {
+public class Article extends Model {
 	protected Property<AddressValue> address;
 	protected Property<TextValue> name;
 	protected Property<TextValue> author;
@@ -44,7 +45,7 @@ public class Article extends Model<ArticleId> {
 
 	private PropertyGroup<StringKey, DoubleValue> termGroup;
 
-	protected Article(ArticleId id) {
+	protected Article(StringId id) {
 		super(id);
 		address = new Property<AddressValue>(null);
 		name = new Property<TextValue>(null);

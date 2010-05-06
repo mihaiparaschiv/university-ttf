@@ -16,6 +16,7 @@
 package ttf.model.topic;
 
 import ttf.model.Model;
+import ttf.model.ModelId;
 import ttf.model.article.ArticleKey;
 import ttf.model.property.PropertyGroup;
 import ttf.model.property.value.DoubleValue;
@@ -25,11 +26,11 @@ import ttf.model.property.value.DoubleValue;
  * 
  * @author Mihai Paraschiv
  */
-public class Topic extends Model<TopicId> {
+public class Topic extends Model {
 	protected PropertyGroup<ArticleKey, DoubleValue> articles;
 	protected PropertyGroup<TopicKey, DoubleValue> topics;
 
-	protected Topic(TopicId id) {
+	protected Topic(ModelId id) {
 		super(id);
 		this.articles = new PropertyGroup<ArticleKey, DoubleValue>();
 		this.topics = new PropertyGroup<TopicKey, DoubleValue>();

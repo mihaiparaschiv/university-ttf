@@ -13,12 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.topic;
+package ttf.persistence;
 
-import ttf.model.ModelId;
+import ttf.model.topic.Topic;
+import ttf.persistence.query.IdQuery;
+import ttf.persistence.query.ModelQuery;
 
-public class TopicId extends ModelId {
-	public TopicId(String id) {
-		super(id);
-	}
+public interface TopicStorage {
+	/**
+	 * Loads a topic by id.
+	 * 
+	 * @param query
+	 * @return topic with specified id or null
+	 */
+	public Topic loadTopicById(IdQuery query);
+
+	/**
+	 * Loads a set of topics.
+	 * 
+	 * @param query
+	 * @return models
+	 */
+	public Iterable<Topic> loadTopics(ModelQuery query);
+
+	/**
+	 * Saves the model.
+	 * 
+	 * @param model
+	 */
+	public void persist(Topic model);
 }

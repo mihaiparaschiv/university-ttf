@@ -65,6 +65,9 @@ public class PropertyGroup<K extends PropertyKey, V extends PropertyValue> {
 		return map.containsKey(key);
 	}
 
+	/**
+	 * @return an unmodifiable collection
+	 */
 	public Collection<KeyedProperty<K, V>> getProperties() {
 		return UnmodifiableCollection.decorate(map.values());
 	}

@@ -15,24 +15,21 @@
  */
 package ttf.model;
 
-/**
- * Base class for all models.
- * 
- * @author Mihai Paraschiv
- */
-public abstract class Model {
-	protected ModelId id;
+public class StringId implements ModelId {
+	protected final String id;
+	protected final String prefix;
 
-	public Model(ModelId id) {
+	public StringId(String id, String prefix) {
 		this.id = id;
+		this.prefix = prefix;
 	}
 
-	public void setId(ModelId id) {
-		this.id = id;
-	}
-
-	public ModelId getId() {
+	public String getValue() {
 		return id;
+	}
+
+	public String getPrefix() {
+		return prefix;
 	}
 
 	@Override
@@ -40,6 +37,7 @@ public abstract class Model {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((prefix == null) ? 0 : prefix.hashCode());
 		return result;
 	}
 
@@ -51,12 +49,22 @@ public abstract class Model {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Model other = (Model) obj;
+		StringId other = (StringId) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (prefix == null) {
+			if (other.prefix != null)
+				return false;
+		} else if (!prefix.equals(other.prefix))
+			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "StringModelId [id=" + id + ", prefix=" + prefix + "]";
 	}
 }
