@@ -28,8 +28,8 @@ import org.junit.Test;
 import org.xml.sax.SAXException;
 
 import ttf.ConfigurationNames;
-import ttf.alchemyapi.AlchemyEntity;
-import ttf.alchemyapi.EntityProvider;
+import ttf.util.alchemyapi.AlchemyEntity;
+import ttf.util.alchemyapi.EntityProvider;
 
 import com.orchestr8.api.AlchemyAPI;
 
