@@ -13,24 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.test;
+package ttf.util;
 
-import static junit.framework.Assert.assertEquals;
+import javax.sql.DataSource;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
-import org.junit.Test;
+import org.apache.commons.dbcp.BasicDataSource;
 
-public class ConfigurationTest {
-	private static final String CONFIG_FILE = "resources/test.properties";
-	private static final String TEST_NAME = "testVariable";
-	private static final int TEST_VALUE = 1;
+public class DataSourceProvider {
+	private static BasicDataSource dataSource;
 
-	@Test
-	public void configurationLoadingFromFile()
-			throws ConfigurationException {
-		Configuration config = new PropertiesConfiguration(CONFIG_FILE);
-		assertEquals(TEST_VALUE, config.getInt(TEST_NAME));
+	public static DataSource getDefault() {
+		if (dataSource == null) {
+			Configuration c = ConfigurationProvider.getDefault();
+			dataSource = new BasicDataSource();
+			dataSource.setDriverClassName(c.getString("db.driverClassName"));
+			dataSource.setUsername(c.getString("db.username"));
+			dataSource.setPassword(c.getString("db.password"));
+			dataSource.setUrl(c.getString("db.uri"));
+		}
+		return dataSource;
 	}
 }

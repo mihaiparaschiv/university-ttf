@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.test;
-
-import static junit.framework.Assert.assertEquals;
+package ttf.util;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.junit.Test;
 
-public class ConfigurationTest {
-	private static final String CONFIG_FILE = "resources/test.properties";
-	private static final String TEST_NAME = "testVariable";
-	private static final int TEST_VALUE = 1;
+public class ConfigurationProvider {
+	private static final String CONFIG_FILE = "resources/base.properties";
+	private static PropertiesConfiguration defaultConfiguration;
 
-	@Test
-	public void configurationLoadingFromFile()
-			throws ConfigurationException {
-		Configuration config = new PropertiesConfiguration(CONFIG_FILE);
-		assertEquals(TEST_VALUE, config.getInt(TEST_NAME));
+	public static Configuration getDefault() {
+		if (defaultConfiguration == null) {
+			try {
+				defaultConfiguration = new PropertiesConfiguration(CONFIG_FILE);
+			} catch (ConfigurationException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return defaultConfiguration;
 	}
 }

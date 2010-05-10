@@ -1,0 +1,7 @@
+; fill this template with necessary information and rename it to base.properties
+alchemy.key = ...
+
+db.driverClassName = com.mysql.jdbc.Driver
+db.username = root
+db.password = mysql
+db.uri = jdbc:mysql://localhost/ttf

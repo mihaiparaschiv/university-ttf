@@ -34,14 +34,14 @@ import ttf.model.property.value.DateValue;
 import ttf.model.property.value.TextValue;
 
 public class DummyTest {
-	private static final String NEW_NAME = "new name";
+	private static final String NEW_TITLE = "new title";
 
 	@Test
 	public void dummyTaskExecution() {
 		ArticleFactory factory = new ArticleFactory();
 		Article article = factory.build();
 		article.getAddress().setValue(new AddressValue("http://..."));
-		article.getName().setValue(new TextValue("A news article"));
+		article.getTitle().setValue(new TextValue("A news article"));
 		article.getContent().setValue(new TextValue("News content"));
 		article.getDiscoveredAt().setValue(new DateValue(new Date()));
 
@@ -51,7 +51,7 @@ public class DummyTest {
 		AnalysisController controller = new AnalysisController(articleProvider,
 				processor);
 		controller.run();
-		assertEquals(NEW_NAME, article.getName().getValue().get());
+		assertEquals(NEW_TITLE, article.getTitle().getValue().get());
 	}
 
 	private class DummyCommand implements Command {
@@ -59,7 +59,7 @@ public class DummyTest {
 		public boolean execute(Context context) {
 			Article article = ((DummyContext) context).getArticle();
 			System.out.println(article);
-			article.getName().setValue(new TextValue(NEW_NAME));
+			article.getTitle().setValue(new TextValue(NEW_TITLE));
 			return false;
 		}
 	}

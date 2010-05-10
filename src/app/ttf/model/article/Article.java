@@ -34,7 +34,7 @@ import ttf.model.topic.TopicValue;
  */
 public class Article extends Model {
 	protected Property<AddressValue> address;
-	protected Property<TextValue> name;
+	protected Property<TextValue> title;
 	protected Property<TextValue> author;
 	protected Property<DateValue> publishedAt;
 	protected Property<DateValue> discoveredAt;
@@ -49,7 +49,7 @@ public class Article extends Model {
 	protected Article(StringId id) {
 		super(id);
 		address = new Property<AddressValue>(null);
-		name = new Property<TextValue>(null);
+		title = new Property<TextValue>(null);
 		author = new Property<TextValue>(null);
 		publishedAt = new Property<DateValue>(null);
 		discoveredAt = new Property<DateValue>(null);
@@ -67,8 +67,8 @@ public class Article extends Model {
 		return address;
 	}
 
-	public Property<TextValue> getName() {
-		return name;
+	public Property<TextValue> getTitle() {
+		return title;
 	}
 
 	public Property<TextValue> getAuthor() {
@@ -111,7 +111,7 @@ public class Article extends Model {
 	public String toString() {
 		return "Article [address=" + address + ", author=" + author
 				+ ", content=" + content + ", discoveredAt=" + discoveredAt
-				+ ", entityGroup=" + entityGroup + ", name=" + name
+				+ ", entityGroup=" + entityGroup + ", name=" + title
 				+ ", publishedAt=" + publishedAt + ", score=" + score
 				+ ", tags=" + tags + ", termGroup=" + termGroup + ", topic="
 				+ topic + "]";
