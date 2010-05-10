@@ -48,6 +48,7 @@ public class Article extends Model {
 
 	protected Article(StringId id) {
 		super(id);
+		
 		address = new Property<AddressValue>(null);
 		title = new Property<TextValue>(null);
 		author = new Property<TextValue>(null);
@@ -57,6 +58,8 @@ public class Article extends Model {
 		score = new Property<DoubleValue>(null);
 		tags = new Property<SetValue<String>>(null);
 		topic = new Property<TopicValue>(null);
+		
+		entityGroup = new PropertyGroup<StringKey, DoubleValue>();
 	}
 
 	protected Article() {

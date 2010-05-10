@@ -72,4 +72,9 @@ public class PropertyGroup<K extends PropertyKey, V extends PropertyValue> {
 	public Collection<KeyedProperty<K, V>> getProperties() {
 		return UnmodifiableCollection.decorate(map.values());
 	}
+
+	@Override
+	public String toString() {
+		return "PropertyGroup [map=" + map + "]";
+	}
 }

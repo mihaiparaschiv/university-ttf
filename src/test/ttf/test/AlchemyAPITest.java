@@ -35,21 +35,22 @@ import com.orchestr8.api.AlchemyAPI;
 
 public class AlchemyAPITest {
 	private static final String TEST_URL = "http://techcrunch.com";
-
-	private AlchemyAPI alchemyAPI;
+	private EntityProvider entityProvider;
 
 	@Before
-	public void initialize() throws ConfigurationException {
+	public void initialize() throws ConfigurationException,
+			XPathExpressionException {
 		Configuration config = ConfigurationProvider.getDefault();
 		String key = config.getString("alchemy.key");
-		alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
+		AlchemyAPI alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
+		entityProvider = new EntityProvider(alchemyAPI);
 	}
 
 	@Test
 	public void namedEntityDetection() throws XPathExpressionException,
 			IOException, SAXException, ParserConfigurationException {
-		EntityProvider provider = new EntityProvider(alchemyAPI);
-		Collection<AlchemyEntity> es = provider.getEntitiesForURL(TEST_URL);
+		Collection<AlchemyEntity> es = entityProvider
+				.getEntitiesForURL(TEST_URL);
 		System.out.println(es);
 	}
 }

@@ -35,19 +35,28 @@ public class EntityDetectionCommand implements Command {
 		EntityProvider provider = ((SimpleContext) context).getEntityProvider();
 		Article article = ((SimpleContext) context).getArticle();
 
-		String content = article.getContent().getValue().get();
+		String address = article.getAddress().getValue().get();
+
 		Collection<AlchemyEntity> entities = provider
-				.getEntitiesForURL(content);
+				.getEntitiesForURL(address);
 
 		PropertyGroup<StringKey, DoubleValue> entityGroup;
 		entityGroup = article.getEntityGroup();
 
 		for (AlchemyEntity entity : entities) {
 			KeyedProperty<StringKey, DoubleValue> p;
+			KeyedProperty<StringKey, DoubleValue> old;
 			p = new KeyedProperty<StringKey, DoubleValue>( //
 					new StringKey(entity.getText()), //
 					new DoubleValue(entity.getRelevance()));
-			entityGroup.put(p);
+
+			old = entityGroup.get(p.getKey());
+			if (old == null) {
+				entityGroup.put(p);
+			} else {
+				double max = Math.max(p.getValue().get(), old.getValue().get());
+				p.setValue(new DoubleValue(max));
+			}
 		}
 
 		return false;

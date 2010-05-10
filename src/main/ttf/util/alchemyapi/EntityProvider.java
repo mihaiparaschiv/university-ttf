@@ -62,17 +62,17 @@ public class EntityProvider {
 		return extractEntities(doc);
 	}
 
-	public Collection<AlchemyEntity> getEntitiesForHTML(String html)
+	public Collection<AlchemyEntity> getEntitiesForHTML(String html, String url)
 			throws XPathExpressionException, IOException, SAXException,
 			ParserConfigurationException {
-		Document doc = alchemyAPI.HTMLGetRankedNamedEntities(html, "");
+		Document doc = alchemyAPI.HTMLGetRankedNamedEntities(html, url);
 		return extractEntities(doc);
 	}
 
-	public Collection<AlchemyEntity> getEntitiesForText(String text)
+	public Collection<AlchemyEntity> getEntitiesForText(String text, String url)
 			throws XPathExpressionException, IOException, SAXException,
 			ParserConfigurationException {
-		Document doc = alchemyAPI.HTMLGetRankedNamedEntities(text, "");
+		Document doc = alchemyAPI.HTMLGetRankedNamedEntities(text, url);
 		return extractEntities(doc);
 	}
 

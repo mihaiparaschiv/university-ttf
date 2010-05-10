@@ -18,17 +18,16 @@ package ttf.tools;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
 
 import javax.sql.DataSource;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.dbutils.QueryRunner;
 
+import ttf.incoming.FeedEntryParser;
+import ttf.model.article.Article;
 import ttf.util.DataSourceProvider;
 
-import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
@@ -53,6 +52,12 @@ public class ArticleBootstraper {
 	public void fill(String[] feedAddresses) throws IllegalArgumentException,
 			FeedException, IOException, SQLException {
 		QueryRunner run = new QueryRunner(dataSource);
+		FeedEntryParser entryParser = new FeedEntryParser();
+
+		String sql = "INSERT INTO "
+				+ TABLE
+				+ " (address, title, author, publishedAt, discoveredAt, content)"
+				+ " VALUES (?, ?, ?, ?, ?, ?)";
 
 		for (String feedAddress : feedAddresses) {
 			URL feedSource = new URL(feedAddress);
@@ -60,30 +65,17 @@ public class ArticleBootstraper {
 			SyndFeed feed = input.build(new XmlReader(feedSource));
 
 			for (Object e : feed.getEntries()) {
-				SyndEntry entry = (SyndEntry) e;
-				String address = entry.getUri();
-				String title = entry.getTitle();
-				String author = entry.getAuthor();
-				Date publishedAt = entry.getPublishedDate();
-				Date discoveredAt = new Date();
+				Article article = entryParser.parse((SyndEntry) e);
 
-				List<?> cList = entry.getContents();
-				SyndContent c = null;
-				if (cList.size() > 0) {
-					c = (SyndContent) entry.getContents().get(0);
-				} else {
-					c = entry.getDescription();
-				}
-				String content = (c != null) ? c.getValue() : null;
-
-				String sql = "INSERT INTO "
-						+ TABLE
-						+ " (address, title, author, publishedAt, discoveredAt, content)"
-						+ " VALUES (?, ?, ?, ?, ?, ?)";
-				run.update(sql, address, title, author, publishedAt,
-						discoveredAt, content);
+				run.update(sql, //
+						article.getAddress().getValue().get(), //
+						article.getTitle().getValue().get(), //
+						article.getAuthor().getValue().get(), //
+						article.getDiscoveredAt().getValue().get(), //
+						article.getDiscoveredAt().getValue().get(), //
+						article.getContent().getValue().get());
 			}
-			
+
 			System.out.println("Ready: " + feedAddress);
 		}
 	}

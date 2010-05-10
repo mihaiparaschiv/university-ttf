@@ -27,24 +27,25 @@ import ttf.model.property.value.DoubleValue;
  * @author Mihai Paraschiv
  */
 public class Topic extends Model {
-	protected PropertyGroup<ArticleKey, DoubleValue> articles;
-	protected PropertyGroup<TopicKey, DoubleValue> topics;
+	protected PropertyGroup<ArticleKey, DoubleValue> articleGroup;
+	protected PropertyGroup<TopicKey, DoubleValue> topicGroup;
 
 	protected Topic(ModelId id) {
 		super(id);
-		this.articles = new PropertyGroup<ArticleKey, DoubleValue>();
-		this.topics = new PropertyGroup<TopicKey, DoubleValue>();
+		
+		articleGroup = new PropertyGroup<ArticleKey, DoubleValue>();
+		topicGroup = new PropertyGroup<TopicKey, DoubleValue>();
 	}
 
 	protected Topic() {
 		this(null);
 	}
-
-	public PropertyGroup<ArticleKey, DoubleValue> getArticles() {
-		return articles;
+	
+	public PropertyGroup<ArticleKey, DoubleValue> getArticleGroup() {
+		return articleGroup;
 	}
-
-	public PropertyGroup<TopicKey, DoubleValue> getTopics() {
-		return topics;
+	
+	public PropertyGroup<TopicKey, DoubleValue> getTopicGroup() {
+		return topicGroup;
 	}
 }
