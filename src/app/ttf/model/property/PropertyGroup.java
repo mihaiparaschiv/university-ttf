@@ -47,10 +47,11 @@ public class PropertyGroup<K extends PropertyKey, V extends PropertyValue> {
 		this(null);
 	}
 
-	public KeyedProperty<K, V> create(K key) {
-		KeyedProperty<K, V> property = new KeyedProperty<K, V>(key);
-		map.put(key, property);
-		return property;
+	public void put(KeyedProperty<K, V> property) {
+		if (map.get(property.getKey()) != null) {
+			throw new IllegalArgumentException("Property already in the group.");
+		}
+		map.put(property.getKey(), property);
 	}
 
 	public KeyedProperty<K, V> get(K key) {

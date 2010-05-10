@@ -43,7 +43,8 @@ public class Article extends Model {
 	protected Property<TopicValue> topic;
 	protected Property<SetValue<String>> tags;
 
-	private PropertyGroup<StringKey, DoubleValue> termGroup;
+	protected PropertyGroup<StringKey, DoubleValue> termGroup;
+	protected PropertyGroup<StringKey, DoubleValue> entityGroup;
 
 	protected Article(StringId id) {
 		super(id);
@@ -102,12 +103,17 @@ public class Article extends Model {
 		return termGroup;
 	}
 
+	public PropertyGroup<StringKey, DoubleValue> getEntityGroup() {
+		return entityGroup;
+	}
+
 	@Override
 	public String toString() {
 		return "Article [address=" + address + ", author=" + author
 				+ ", content=" + content + ", discoveredAt=" + discoveredAt
-				+ ", name=" + name + ", publishedAt=" + publishedAt
-				+ ", score=" + score + ", tags=" + tags + ", termGroup="
-				+ termGroup + ", topic=" + topic + "]";
+				+ ", entityGroup=" + entityGroup + ", name=" + name
+				+ ", publishedAt=" + publishedAt + ", score=" + score
+				+ ", tags=" + tags + ", termGroup=" + termGroup + ", topic="
+				+ topic + "]";
 	}
 }

@@ -23,7 +23,7 @@ import org.apache.commons.configuration.HierarchicalINIConfiguration;
 import org.junit.Test;
 
 public class ConfigurationTest {
-	private static final String CONFIG_FILE = "files/test-config.ini";
+	private static final String CONFIG_FILE = "resources/test-config.ini";
 	private static final String TEST_NAME = "test-variable";
 	private static final int TEST_VALUE = 1;
 

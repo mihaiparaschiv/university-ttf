@@ -40,6 +40,10 @@ public class KeyedProperty<K extends PropertyKey, V extends PropertyValue>
 	public KeyedProperty(K key) {
 		this(key, null);
 	}
+	
+	public K getKey() {
+		return key;
+	}
 
 	@Override
 	public String toString() {

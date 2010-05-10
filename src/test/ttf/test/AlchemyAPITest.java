@@ -34,7 +34,7 @@ import ttf.util.alchemyapi.EntityProvider;
 import com.orchestr8.api.AlchemyAPI;
 
 public class AlchemyAPITest {
-	private static final String CONFIG_FILE = "files/config.ini";
+	private static final String CONFIG_FILE = "resources/config.ini";
 	private static final String TEST_URL = "http://techcrunch.com";
 	
 	private HierarchicalINIConfiguration config;

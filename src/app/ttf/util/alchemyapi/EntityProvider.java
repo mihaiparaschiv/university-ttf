@@ -62,6 +62,20 @@ public class EntityProvider {
 		return extractEntities(doc);
 	}
 
+	public Collection<AlchemyEntity> getEntitiesForHTML(String html)
+			throws XPathExpressionException, IOException, SAXException,
+			ParserConfigurationException {
+		Document doc = alchemyAPI.HTMLGetRankedNamedEntities(html, "");
+		return extractEntities(doc);
+	}
+
+	public Collection<AlchemyEntity> getEntitiesForText(String text)
+			throws XPathExpressionException, IOException, SAXException,
+			ParserConfigurationException {
+		Document doc = alchemyAPI.HTMLGetRankedNamedEntities(text, "");
+		return extractEntities(doc);
+	}
+
 	private Collection<AlchemyEntity> extractEntities(Document doc)
 			throws XPathExpressionException {
 		Collection<AlchemyEntity> entities = new LinkedList<AlchemyEntity>();
