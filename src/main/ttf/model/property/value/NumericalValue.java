@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.article;
+package ttf.model.property.value;
 
-import ttf.model.property.key.AbstractPropertyKey;
+public class NumericalValue {
+	private double value;
 
-public class ArticleKey extends AbstractPropertyKey<Article> {
-	public ArticleKey(Article key) {
-		super(key);
+	public NumericalValue(double value) {
+		this.value = value;
+	}
+	
+	public double getDouble() {
+		return value;
 	}
 }

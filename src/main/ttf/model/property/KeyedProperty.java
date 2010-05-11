@@ -15,9 +15,6 @@
  */
 package ttf.model.property;
 
-import ttf.model.property.key.PropertyKey;
-import ttf.model.property.value.PropertyValue;
-
 /**
  * This class is used with {@link PropertyGroup}.
  * 
@@ -28,7 +25,7 @@ import ttf.model.property.value.PropertyValue;
  * @param <V>
  *            property value
  */
-public class KeyedProperty<K extends PropertyKey, V extends PropertyValue>
+public class KeyedProperty<K, V>
 		extends Property<V> {
 	protected final K key;
 

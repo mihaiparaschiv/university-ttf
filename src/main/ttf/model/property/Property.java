@@ -15,8 +15,6 @@
  */
 package ttf.model.property;
 
-import ttf.model.property.value.PropertyValue;
-
 /**
  * An attribute of a model. Properties can be attached directly or they can be
  * bundled in a {@link PropertyGroup}.
@@ -31,7 +29,7 @@ import ttf.model.property.value.PropertyValue;
  * @param <V>
  *            property value
  */
-public class Property<V extends PropertyValue> {
+public class Property<V> {
 	protected V value;
 
 	public Property(V value) {

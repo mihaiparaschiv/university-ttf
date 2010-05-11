@@ -17,12 +17,10 @@ package ttf.model.topic;
 
 import ttf.model.Model;
 import ttf.model.ModelId;
-import ttf.model.article.ArticleKey;
+import ttf.model.article.Article;
 import ttf.model.property.Property;
 import ttf.model.property.PropertyGroup;
-import ttf.model.property.key.StringKey;
-import ttf.model.property.value.DoubleValue;
-import ttf.model.property.value.TextValue;
+import ttf.model.property.value.NumericalValue;
 
 /**
  * A topic contains articles and subtopics.
@@ -30,16 +28,16 @@ import ttf.model.property.value.TextValue;
  * @author Mihai Paraschiv
  */
 public class Topic extends Model {
-	protected final Property<TextValue> title;
+	protected final Property<String> title;
 	
-	protected final PropertyGroup<ArticleKey, DoubleValue> articleGroup;
-	protected final PropertyGroup<StringKey, DoubleValue> termGroup;
-	protected final PropertyGroup<StringKey, DoubleValue> entityGroup;
+	protected final PropertyGroup<Article, NumericalValue> articleGroup;
+	protected final PropertyGroup<String, NumericalValue> termGroup;
+	protected final PropertyGroup<String, NumericalValue> entityGroup;
 
-	protected Topic(ModelId id, Property<TextValue> title,
-			PropertyGroup<ArticleKey, DoubleValue> articleGroup,
-			PropertyGroup<StringKey, DoubleValue> termGroup,
-			PropertyGroup<StringKey, DoubleValue> entityGroup) {
+	protected Topic(ModelId id, Property<String> title,
+			PropertyGroup<Article, NumericalValue> articleGroup,
+			PropertyGroup<String, NumericalValue> termGroup,
+			PropertyGroup<String, NumericalValue> entityGroup) {
 		super(id);
 		this.title = title;
 		this.articleGroup = articleGroup;
@@ -47,19 +45,19 @@ public class Topic extends Model {
 		this.entityGroup = entityGroup;
 	}
 
-	public Property<TextValue> getTitle() {
+	public Property<String> getTitle() {
 		return title;
 	}
 
-	public PropertyGroup<ArticleKey, DoubleValue> getArticleGroup() {
+	public PropertyGroup<Article, NumericalValue> getArticleGroup() {
 		return articleGroup;
 	}
 	
-	public PropertyGroup<StringKey, DoubleValue> getTermGroup() {
+	public PropertyGroup<String, NumericalValue> getTermGroup() {
 		return termGroup;
 	}
 	
-	public PropertyGroup<StringKey, DoubleValue> getEntityGroup() {
+	public PropertyGroup<String, NumericalValue> getEntityGroup() {
 		return entityGroup;
 	}
 }

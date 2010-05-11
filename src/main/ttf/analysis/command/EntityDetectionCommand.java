@@ -24,8 +24,7 @@ import ttf.analysis.context.SimpleContext;
 import ttf.model.article.Article;
 import ttf.model.property.KeyedProperty;
 import ttf.model.property.PropertyGroup;
-import ttf.model.property.key.StringKey;
-import ttf.model.property.value.DoubleValue;
+import ttf.model.property.value.NumericalValue;
 import ttf.util.alchemyapi.AlchemyEntity;
 import ttf.util.alchemyapi.EntityProvider;
 
@@ -35,27 +34,27 @@ public class EntityDetectionCommand implements Command {
 		EntityProvider provider = ((SimpleContext) context).getEntityProvider();
 		Article article = ((SimpleContext) context).getArticle();
 
-		String address = article.getAddress().getValue().get();
+		String address = article.getAddress().getValue();
 
 		Collection<AlchemyEntity> entities = provider
 				.getEntitiesForURL(address);
 
-		PropertyGroup<StringKey, DoubleValue> entityGroup;
+		PropertyGroup<String, NumericalValue> entityGroup;
 		entityGroup = article.getEntityGroup();
 
 		for (AlchemyEntity entity : entities) {
-			KeyedProperty<StringKey, DoubleValue> p;
-			KeyedProperty<StringKey, DoubleValue> old;
-			p = new KeyedProperty<StringKey, DoubleValue>( //
-					new StringKey(entity.getText()), //
-					new DoubleValue(entity.getRelevance()));
+			KeyedProperty<String, NumericalValue> p;
+			KeyedProperty<String, NumericalValue> old;
+			p = new KeyedProperty<String, NumericalValue>( //
+					entity.getText(), //
+					new NumericalValue(entity.getRelevance()));
 
 			old = entityGroup.get(p.getKey());
 			if (old == null) {
 				entityGroup.put(p);
 			} else {
-				double max = Math.max(p.getValue().get(), old.getValue().get());
-				p.setValue(new DoubleValue(max));
+				double max = Math.max(p.getValue().getDouble(), old.getValue().getDouble());
+				p.setValue(new NumericalValue(max));
 			}
 		}
 

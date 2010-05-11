@@ -29,9 +29,6 @@ import ttf.analysis.input.InternalProvider;
 import ttf.analysis.processor.Processor;
 import ttf.model.article.Article;
 import ttf.model.article.ArticleFactory;
-import ttf.model.property.value.AddressValue;
-import ttf.model.property.value.DateValue;
-import ttf.model.property.value.TextValue;
 import ttf.util.AppContext;
 
 public class DummyTest {
@@ -41,10 +38,10 @@ public class DummyTest {
 	public void dummyTaskExecution() {
 		ArticleFactory factory = AppContext.getInstance().getArticleFactory();
 		Article article = factory.build();
-		article.getAddress().setValue(new AddressValue("http://..."));
-		article.getTitle().setValue(new TextValue("A news article"));
-		article.getContent().setValue(new TextValue("News content"));
-		article.getDiscoveredAt().setValue(new DateValue(new Date()));
+		article.getAddress().setValue("http://...");
+		article.getTitle().setValue("A news article");
+		article.getContent().setValue("News content");
+		article.getDiscoveredAt().setValue(new Date());
 
 		InternalProvider articleProvider = new InternalProvider();
 		articleProvider.add(article);
@@ -52,7 +49,7 @@ public class DummyTest {
 		AnalysisController controller = new AnalysisController(articleProvider,
 				processor);
 		controller.run();
-		assertEquals(NEW_TITLE, article.getTitle().getValue().get());
+		assertEquals(NEW_TITLE, article.getTitle().getValue());
 	}
 
 	private class DummyCommand implements Command {
@@ -60,7 +57,7 @@ public class DummyTest {
 		public boolean execute(Context context) {
 			Article article = ((DummyContext) context).getArticle();
 			System.out.println(article);
-			article.getTitle().setValue(new TextValue(NEW_TITLE));
+			article.getTitle().setValue(NEW_TITLE);
 			return false;
 		}
 	}

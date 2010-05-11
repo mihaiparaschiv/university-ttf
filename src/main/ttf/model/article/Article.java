@@ -15,17 +15,15 @@
  */
 package ttf.model.article;
 
+import java.util.Date;
+import java.util.Set;
+
 import ttf.model.Model;
 import ttf.model.ModelId;
 import ttf.model.property.Property;
 import ttf.model.property.PropertyGroup;
-import ttf.model.property.key.StringKey;
-import ttf.model.property.value.AddressValue;
-import ttf.model.property.value.DateValue;
-import ttf.model.property.value.DoubleValue;
-import ttf.model.property.value.SetValue;
-import ttf.model.property.value.TextValue;
-import ttf.model.topic.TopicValue;
+import ttf.model.property.value.NumericalValue;
+import ttf.model.topic.Topic;
 
 /**
  * Provides access to information pertaining to a story.
@@ -33,26 +31,26 @@ import ttf.model.topic.TopicValue;
  * @author Mihai Paraschiv
  */
 public class Article extends Model {
-	protected final Property<AddressValue> address;
-	protected final Property<TextValue> title;
-	protected final Property<TextValue> author;
-	protected final Property<DateValue> publishedAt;
-	protected final Property<DateValue> discoveredAt;
-	protected final Property<TextValue> content;
-	protected final Property<DoubleValue> score;
-	protected final Property<TopicValue> topic;
-	protected final Property<SetValue<String>> tags;
+	protected final Property<String> address;
+	protected final Property<String> title;
+	protected final Property<String> author;
+	protected final Property<Date> publishedAt;
+	protected final Property<Date> discoveredAt;
+	protected final Property<String> content;
+	protected final Property<NumericalValue> score;
+	protected final Property<Topic> topic;
+	protected final Property<Set<String>> tags;
 
-	protected final PropertyGroup<StringKey, DoubleValue> termGroup;
-	protected final PropertyGroup<StringKey, DoubleValue> entityGroup;
+	protected final PropertyGroup<String, NumericalValue> termGroup;
+	protected final PropertyGroup<String, NumericalValue> entityGroup;
 
-	protected Article(ModelId id, Property<AddressValue> address,
-			Property<TextValue> title, Property<TextValue> author,
-			Property<DateValue> publishedAt, Property<DateValue> discoveredAt,
-			Property<TextValue> content, Property<DoubleValue> score,
-			Property<TopicValue> topic, Property<SetValue<String>> tags,
-			PropertyGroup<StringKey, DoubleValue> termGroup,
-			PropertyGroup<StringKey, DoubleValue> entityGroup) {
+	protected Article(ModelId id, Property<String> address,
+			Property<String> title, Property<String> author,
+			Property<Date> publishedAt, Property<Date> discoveredAt,
+			Property<String> content, Property<NumericalValue> score,
+			Property<Topic> topic, Property<Set<String>> tags,
+			PropertyGroup<String, NumericalValue> termGroup,
+			PropertyGroup<String, NumericalValue> entityGroup) {
 		super(id);
 		this.address = address;
 		this.title = title;
@@ -67,47 +65,47 @@ public class Article extends Model {
 		this.entityGroup = entityGroup;
 	}
 
-	public Property<AddressValue> getAddress() {
+	public Property<String> getAddress() {
 		return address;
 	}
 
-	public Property<TextValue> getTitle() {
+	public Property<String> getTitle() {
 		return title;
 	}
 
-	public Property<TextValue> getAuthor() {
+	public Property<String> getAuthor() {
 		return author;
 	}
 
-	public Property<DateValue> getPublishedAt() {
+	public Property<Date> getPublishedAt() {
 		return publishedAt;
 	}
 
-	public Property<DateValue> getDiscoveredAt() {
+	public Property<Date> getDiscoveredAt() {
 		return discoveredAt;
 	}
 
-	public Property<TextValue> getContent() {
+	public Property<String> getContent() {
 		return content;
 	}
 
-	public Property<DoubleValue> getScore() {
+	public Property<NumericalValue> getScore() {
 		return score;
 	}
 
-	public Property<TopicValue> getTopic() {
+	public Property<Topic> getTopic() {
 		return topic;
 	}
 
-	public Property<SetValue<String>> getTags() {
+	public Property<Set<String>> getTags() {
 		return tags;
 	}
 
-	public PropertyGroup<StringKey, DoubleValue> getTermGroup() {
+	public PropertyGroup<String, NumericalValue> getTermGroup() {
 		return termGroup;
 	}
 
-	public PropertyGroup<StringKey, DoubleValue> getEntityGroup() {
+	public PropertyGroup<String, NumericalValue> getEntityGroup() {
 		return entityGroup;
 	}
 

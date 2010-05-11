@@ -74,12 +74,12 @@ public class ArticleBootstraper {
 				Article article = entryParser.parse((SyndEntry) e);
 
 				run.update(sql, //
-						article.getAddress().getValue().get(), //
-						article.getTitle().getValue().get(), //
-						article.getAuthor().getValue().get(), //
-						article.getDiscoveredAt().getValue().get(), //
-						article.getDiscoveredAt().getValue().get(), //
-						article.getContent().getValue().get());
+						article.getAddress().getValue(), //
+						article.getTitle().getValue(), //
+						article.getAuthor().getValue(), //
+						article.getDiscoveredAt().getValue(), //
+						article.getDiscoveredAt().getValue(), //
+						article.getContent().getValue());
 			}
 
 			System.out.println("Ready: " + feedAddress);

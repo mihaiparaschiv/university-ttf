@@ -15,22 +15,20 @@
  */
 package ttf.model.topic;
 
-import ttf.model.article.ArticleKey;
+import ttf.model.article.Article;
 import ttf.model.property.Property;
 import ttf.model.property.PropertyGroup;
-import ttf.model.property.key.StringKey;
-import ttf.model.property.value.DoubleValue;
-import ttf.model.property.value.TextValue;
+import ttf.model.property.value.NumericalValue;
 
 public class TopicFactory {
 	public Topic build() {
 		// properties
-		Property<TextValue> title = new Property<TextValue>(null);
+		Property<String> title = new Property<String>(null);
 
 		// groups
-		PropertyGroup<ArticleKey, DoubleValue> articleGroup = new PropertyGroup<ArticleKey, DoubleValue>();
-		PropertyGroup<StringKey, DoubleValue> termGroup = new PropertyGroup<StringKey, DoubleValue>();
-		PropertyGroup<StringKey, DoubleValue> entityGroup = new PropertyGroup<StringKey, DoubleValue>();
+		PropertyGroup<Article, NumericalValue> articleGroup = new PropertyGroup<Article, NumericalValue>();
+		PropertyGroup<String, NumericalValue> termGroup = new PropertyGroup<String, NumericalValue>();
+		PropertyGroup<String, NumericalValue> entityGroup = new PropertyGroup<String, NumericalValue>();
 
 		// build
 		return new Topic(null, //

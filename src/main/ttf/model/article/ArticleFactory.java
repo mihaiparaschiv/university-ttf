@@ -15,32 +15,30 @@
  */
 package ttf.model.article;
 
+import java.util.Date;
+import java.util.Set;
+
 import ttf.model.property.Property;
 import ttf.model.property.PropertyGroup;
-import ttf.model.property.key.StringKey;
-import ttf.model.property.value.AddressValue;
-import ttf.model.property.value.DateValue;
-import ttf.model.property.value.DoubleValue;
-import ttf.model.property.value.SetValue;
-import ttf.model.property.value.TextValue;
-import ttf.model.topic.TopicValue;
+import ttf.model.property.value.NumericalValue;
+import ttf.model.topic.Topic;
 
 public class ArticleFactory {
 	public Article build() {
 		// properties
-		Property<AddressValue> address = new Property<AddressValue>(null);
-		Property<TextValue> title = new Property<TextValue>(null);
-		Property<TextValue> author = new Property<TextValue>(null);
-		Property<DateValue> publishedAt = new Property<DateValue>(null);
-		Property<DateValue> discoveredAt = new Property<DateValue>(null);
-		Property<TextValue> content = new Property<TextValue>(null);
-		Property<DoubleValue> score = new Property<DoubleValue>(null);
-		Property<SetValue<String>> tags = new Property<SetValue<String>>(null);
-		Property<TopicValue> topic = new Property<TopicValue>(null);
+		Property<String> address = new Property<String>(null);
+		Property<String> title = new Property<String>(null);
+		Property<String> author = new Property<String>(null);
+		Property<Date> publishedAt = new Property<Date>(null);
+		Property<Date> discoveredAt = new Property<Date>(null);
+		Property<String> content = new Property<String>(null);
+		Property<NumericalValue> score = new Property<NumericalValue>(null);
+		Property<Set<String>> tags = new Property<Set<String>>(null);
+		Property<Topic> topic = new Property<Topic>(null);
 
 		// groups
-		PropertyGroup<StringKey, DoubleValue> termGroup = new PropertyGroup<StringKey, DoubleValue>();
-		PropertyGroup<StringKey, DoubleValue> entityGroup = new PropertyGroup<StringKey, DoubleValue>();
+		PropertyGroup<String, NumericalValue> termGroup = new PropertyGroup<String, NumericalValue>();
+		PropertyGroup<String, NumericalValue> entityGroup = new PropertyGroup<String, NumericalValue>();
 
 		// build
 		return new Article(null, //

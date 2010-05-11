@@ -20,9 +20,6 @@ import java.util.List;
 
 import ttf.model.article.Article;
 import ttf.model.article.ArticleFactory;
-import ttf.model.property.value.AddressValue;
-import ttf.model.property.value.DateValue;
-import ttf.model.property.value.TextValue;
 import ttf.util.AppContext;
 
 import com.sun.syndication.feed.synd.SyndContent;
@@ -43,20 +40,15 @@ public class FeedEntryParser {
 	public Article parse(SyndEntry entry) {
 		Article article = factory.build();
 
-		article.getAddress().setValue( //
-				new AddressValue(entry.getUri()));
+		article.getAddress().setValue(entry.getUri());
 
-		article.getTitle().setValue( //
-				new TextValue(entry.getTitle()));
+		article.getTitle().setValue(entry.getTitle());
 
-		article.getAuthor().setValue( //
-				new TextValue(entry.getAuthor()));
+		article.getAuthor().setValue(entry.getAuthor());
 
-		article.getPublishedAt().setValue( //
-				new DateValue(entry.getPublishedDate()));
+		article.getPublishedAt().setValue(entry.getPublishedDate());
 
-		article.getDiscoveredAt().setValue( //
-				new DateValue(new Date()));
+		article.getDiscoveredAt().setValue(new Date());
 
 		List<?> cList = entry.getContents();
 		SyndContent c = null;
@@ -65,8 +57,7 @@ public class FeedEntryParser {
 		} else {
 			c = entry.getDescription();
 		}
-		article.getContent().setValue( //
-				new TextValue((c != null) ? c.getValue() : null));
+		article.getContent().setValue((c != null) ? c.getValue() : null);
 
 		return article;
 	}

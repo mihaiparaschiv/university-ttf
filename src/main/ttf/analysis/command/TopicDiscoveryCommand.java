@@ -33,9 +33,7 @@ import ttf.model.IdFactory;
 import ttf.model.article.Article;
 import ttf.model.property.KeyedProperty;
 import ttf.model.property.Property;
-import ttf.model.property.key.StringKey;
-import ttf.model.property.value.DoubleValue;
-import ttf.model.property.value.TextValue;
+import ttf.model.property.value.NumericalValue;
 import ttf.model.topic.Topic;
 import ttf.model.topic.TopicFactory;
 import ttf.util.AppContext;
@@ -51,7 +49,7 @@ import ttf.util.AppContext;
 public class TopicDiscoveryCommand implements Command {
 	@Override
 	public boolean execute(Context context) throws Exception {
-		Article article = ((SimpleContext)context).getArticle();
+		Article article = ((SimpleContext) context).getArticle();
 		DataSource dataSource = AppContext.getInstance().getDataSource();
 		QueryRunner run = new QueryRunner(dataSource);
 
@@ -59,9 +57,9 @@ public class TopicDiscoveryCommand implements Command {
 		String sql = "SELECT (id, title) FROM Topics";
 		ResultSetHandler<List<Topic>> rsh = new TopicListRSH();
 		List<Topic> topics = run.query(sql, rsh);
-		
+
 		for (Topic topic : topics) {
-			
+
 		}
 
 		return false;
@@ -82,7 +80,7 @@ public class TopicDiscoveryCommand implements Command {
 
 				// properties
 				topic.setId(idFactory.build(Topic.class, rs.getString(0)));
-				topic.getTitle().setValue(new TextValue(rs.getString(1)));
+				topic.getTitle().setValue(rs.getString(1));
 
 				// features
 				String sql = "SELECT (type, name, score) FROM TopicFeatures WHERE topicId = ?";
@@ -94,10 +92,9 @@ public class TopicDiscoveryCommand implements Command {
 					String name = (String) o[1];
 					Double score = (Double) o[2];
 					if (type == "entity") {
-						KeyedProperty<StringKey, DoubleValue> property;
-						property = new KeyedProperty<StringKey, DoubleValue>(
-								new StringKey(name));
-						property.setValue(new DoubleValue(score));
+						KeyedProperty<String, NumericalValue> property;
+						property = new KeyedProperty<String, NumericalValue>(name);
+						property.setValue(new NumericalValue(score));
 						topic.getEntityGroup().put(property);
 					}
 				}

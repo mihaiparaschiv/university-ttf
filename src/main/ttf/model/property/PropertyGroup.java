@@ -21,9 +21,6 @@ import java.util.Map;
 
 import org.apache.commons.collections15.collection.UnmodifiableCollection;
 
-import ttf.model.property.key.PropertyKey;
-import ttf.model.property.value.PropertyValue;
-
 /**
  * Groups model properties.
  * 
@@ -34,7 +31,7 @@ import ttf.model.property.value.PropertyValue;
  * @param <V>
  *            the type of value managed by the store
  */
-public class PropertyGroup<K extends PropertyKey, V extends PropertyValue> {
+public class PropertyGroup<K, V> {
 
 	private final Map<K, KeyedProperty<K, V>> map;
 
