@@ -22,7 +22,6 @@ import org.apache.commons.chain.Context;
 
 import ttf.analysis.context.SimpleContext;
 import ttf.model.article.Article;
-import ttf.model.property.KeyedProperty;
 import ttf.model.property.PropertyGroup;
 import ttf.model.property.value.NumericalValue;
 import ttf.util.alchemyapi.AlchemyEntity;
@@ -34,7 +33,7 @@ public class EntityDetectionCommand implements Command {
 		EntityProvider provider = ((SimpleContext) context).getEntityProvider();
 		Article article = ((SimpleContext) context).getArticle();
 
-		String address = article.getAddress().getValue();
+		String address = article.getAddress();
 
 		Collection<AlchemyEntity> entities = provider
 				.getEntitiesForURL(address);
@@ -43,19 +42,9 @@ public class EntityDetectionCommand implements Command {
 		entityGroup = article.getEntityGroup();
 
 		for (AlchemyEntity entity : entities) {
-			KeyedProperty<String, NumericalValue> p;
-			KeyedProperty<String, NumericalValue> old;
-			p = new KeyedProperty<String, NumericalValue>( //
-					entity.getText(), //
-					new NumericalValue(entity.getRelevance()));
-
-			old = entityGroup.get(p.getKey());
-			if (old == null) {
-				entityGroup.put(p);
-			} else {
-				double max = Math.max(p.getValue().getDouble(), old.getValue().getDouble());
-				p.setValue(new NumericalValue(max));
-			}
+			String key = entity.getText();
+			NumericalValue value = new NumericalValue(entity.getRelevance());
+			entityGroup.put(key , value);
 		}
 
 		return false;

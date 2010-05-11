@@ -15,35 +15,9 @@
  */
 package ttf.model.article;
 
-import java.util.Date;
-import java.util.Set;
-
-import ttf.model.property.Property;
-import ttf.model.property.PropertyGroup;
-import ttf.model.property.value.NumericalValue;
-import ttf.model.topic.Topic;
 
 public class ArticleFactory {
 	public Article build() {
-		// properties
-		Property<String> address = new Property<String>(null);
-		Property<String> title = new Property<String>(null);
-		Property<String> author = new Property<String>(null);
-		Property<Date> publishedAt = new Property<Date>(null);
-		Property<Date> discoveredAt = new Property<Date>(null);
-		Property<String> content = new Property<String>(null);
-		Property<NumericalValue> score = new Property<NumericalValue>(null);
-		Property<Set<String>> tags = new Property<Set<String>>(null);
-		Property<Topic> topic = new Property<Topic>(null);
-
-		// groups
-		PropertyGroup<String, NumericalValue> termGroup = new PropertyGroup<String, NumericalValue>();
-		PropertyGroup<String, NumericalValue> entityGroup = new PropertyGroup<String, NumericalValue>();
-
-		// build
-		return new Article(null, //
-				address, title, author, publishedAt, //
-				discoveredAt, content, score, topic, tags, //
-				termGroup, entityGroup);
+		return new Article();
 	}
 }

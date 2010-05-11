@@ -18,7 +18,6 @@ package ttf.model.topic;
 import ttf.model.Model;
 import ttf.model.ModelId;
 import ttf.model.article.Article;
-import ttf.model.property.Property;
 import ttf.model.property.PropertyGroup;
 import ttf.model.property.value.NumericalValue;
 
@@ -28,36 +27,47 @@ import ttf.model.property.value.NumericalValue;
  * @author Mihai Paraschiv
  */
 public class Topic extends Model {
-	protected final Property<String> title;
-	
+	protected String title;
+
 	protected final PropertyGroup<Article, NumericalValue> articleGroup;
 	protected final PropertyGroup<String, NumericalValue> termGroup;
 	protected final PropertyGroup<String, NumericalValue> entityGroup;
 
-	protected Topic(ModelId id, Property<String> title,
-			PropertyGroup<Article, NumericalValue> articleGroup,
-			PropertyGroup<String, NumericalValue> termGroup,
-			PropertyGroup<String, NumericalValue> entityGroup) {
+	protected Topic(ModelId id) {
 		super(id);
-		this.title = title;
-		this.articleGroup = articleGroup;
-		this.termGroup = termGroup;
-		this.entityGroup = entityGroup;
+		articleGroup = new PropertyGroup<Article, NumericalValue>();
+		termGroup = new PropertyGroup<String, NumericalValue>();
+		entityGroup = new PropertyGroup<String, NumericalValue>();
 	}
 
-	public Property<String> getTitle() {
+	protected Topic() {
+		this(null);
+	}
+
+	public String getTitle() {
 		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public PropertyGroup<Article, NumericalValue> getArticleGroup() {
 		return articleGroup;
 	}
-	
+
 	public PropertyGroup<String, NumericalValue> getTermGroup() {
 		return termGroup;
 	}
-	
+
 	public PropertyGroup<String, NumericalValue> getEntityGroup() {
 		return entityGroup;
+	}
+
+	@Override
+	public String toString() {
+		return "Topic [articleGroup=" + articleGroup + ", entityGroup="
+				+ entityGroup + ", termGroup=" + termGroup + ", title=" + title
+				+ "]";
 	}
 }

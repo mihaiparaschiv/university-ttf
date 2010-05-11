@@ -31,8 +31,6 @@ import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import ttf.analysis.context.SimpleContext;
 import ttf.model.IdFactory;
 import ttf.model.article.Article;
-import ttf.model.property.KeyedProperty;
-import ttf.model.property.Property;
 import ttf.model.property.value.NumericalValue;
 import ttf.model.topic.Topic;
 import ttf.model.topic.TopicFactory;
@@ -41,8 +39,7 @@ import ttf.util.AppContext;
 /**
  * This class handles the routing of the article to its most similar topic.
  * 
- * The code is very inefficient. It is also conceptually wrong, because it
- * contradicts the {@link Property} model.
+ * The code is very inefficient.
  * 
  * @author Mihai Paraschiv
  */
@@ -80,7 +77,7 @@ public class TopicDiscoveryCommand implements Command {
 
 				// properties
 				topic.setId(idFactory.build(Topic.class, rs.getString(0)));
-				topic.getTitle().setValue(rs.getString(1));
+				topic.setTitle(rs.getString(1));
 
 				// features
 				String sql = "SELECT (type, name, score) FROM TopicFeatures WHERE topicId = ?";
@@ -92,10 +89,8 @@ public class TopicDiscoveryCommand implements Command {
 					String name = (String) o[1];
 					Double score = (Double) o[2];
 					if (type == "entity") {
-						KeyedProperty<String, NumericalValue> property;
-						property = new KeyedProperty<String, NumericalValue>(name);
-						property.setValue(new NumericalValue(score));
-						topic.getEntityGroup().put(property);
+						topic.getEntityGroup().put(name,
+								new NumericalValue(score));
 					}
 				}
 

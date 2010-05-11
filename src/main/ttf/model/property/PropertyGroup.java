@@ -15,11 +15,8 @@
  */
 package ttf.model.property;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.commons.collections15.collection.UnmodifiableCollection;
 
 /**
  * Groups model properties.
@@ -33,25 +30,21 @@ import org.apache.commons.collections15.collection.UnmodifiableCollection;
  */
 public class PropertyGroup<K, V> {
 
-	private final Map<K, KeyedProperty<K, V>> map;
+	private final Map<K, V> map;
 
-	public PropertyGroup(Map<K, KeyedProperty<K, V>> map) {
-		this.map = (map == null) ? new HashMap<K, KeyedProperty<K, V>>() : //
-				new HashMap<K, KeyedProperty<K, V>>(map);
+	public PropertyGroup(Map<K, V> map) {
+		this.map = (map == null) ? new HashMap<K, V>() : new HashMap<K, V>(map);
 	}
 
 	public PropertyGroup() {
 		this(null);
 	}
 
-	public void put(KeyedProperty<K, V> property) {
-		if (map.get(property.getKey()) != null) {
-			throw new IllegalArgumentException("Property already in the group.");
-		}
-		map.put(property.getKey(), property);
+	public void put(K key, V value) {
+		map.put(key, value);
 	}
 
-	public KeyedProperty<K, V> get(K key) {
+	public V get(K key) {
 		return map.get(key);
 	}
 
@@ -61,13 +54,6 @@ public class PropertyGroup<K, V> {
 
 	public boolean contains(K key) {
 		return map.containsKey(key);
-	}
-
-	/**
-	 * @return an unmodifiable collection
-	 */
-	public Collection<KeyedProperty<K, V>> getProperties() {
-		return UnmodifiableCollection.decorate(map.values());
 	}
 
 	@Override

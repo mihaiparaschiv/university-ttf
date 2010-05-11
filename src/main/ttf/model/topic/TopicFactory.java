@@ -15,24 +15,8 @@
  */
 package ttf.model.topic;
 
-import ttf.model.article.Article;
-import ttf.model.property.Property;
-import ttf.model.property.PropertyGroup;
-import ttf.model.property.value.NumericalValue;
-
 public class TopicFactory {
 	public Topic build() {
-		// properties
-		Property<String> title = new Property<String>(null);
-
-		// groups
-		PropertyGroup<Article, NumericalValue> articleGroup = new PropertyGroup<Article, NumericalValue>();
-		PropertyGroup<String, NumericalValue> termGroup = new PropertyGroup<String, NumericalValue>();
-		PropertyGroup<String, NumericalValue> entityGroup = new PropertyGroup<String, NumericalValue>();
-
-		// build
-		return new Topic(null, //
-				title, //
-				articleGroup, termGroup, entityGroup);
+		return new Topic();
 	}
 }

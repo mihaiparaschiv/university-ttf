@@ -38,10 +38,10 @@ public class DummyTest {
 	public void dummyTaskExecution() {
 		ArticleFactory factory = AppContext.getInstance().getArticleFactory();
 		Article article = factory.build();
-		article.getAddress().setValue("http://...");
-		article.getTitle().setValue("A news article");
-		article.getContent().setValue("News content");
-		article.getDiscoveredAt().setValue(new Date());
+		article.setAddress("http://...");
+		article.setTitle("A news article");
+		article.setContent("News content");
+		article.setDiscoveredAt(new Date());
 
 		InternalProvider articleProvider = new InternalProvider();
 		articleProvider.add(article);
@@ -49,7 +49,7 @@ public class DummyTest {
 		AnalysisController controller = new AnalysisController(articleProvider,
 				processor);
 		controller.run();
-		assertEquals(NEW_TITLE, article.getTitle().getValue());
+		assertEquals(NEW_TITLE, article.getTitle());
 	}
 
 	private class DummyCommand implements Command {
@@ -57,7 +57,7 @@ public class DummyTest {
 		public boolean execute(Context context) {
 			Article article = ((DummyContext) context).getArticle();
 			System.out.println(article);
-			article.getTitle().setValue(NEW_TITLE);
+			article.setTitle(NEW_TITLE);
 			return false;
 		}
 	}

@@ -20,7 +20,6 @@ import java.util.Set;
 
 import ttf.model.Model;
 import ttf.model.ModelId;
-import ttf.model.property.Property;
 import ttf.model.property.PropertyGroup;
 import ttf.model.property.value.NumericalValue;
 import ttf.model.topic.Topic;
@@ -31,74 +30,99 @@ import ttf.model.topic.Topic;
  * @author Mihai Paraschiv
  */
 public class Article extends Model {
-	protected final Property<String> address;
-	protected final Property<String> title;
-	protected final Property<String> author;
-	protected final Property<Date> publishedAt;
-	protected final Property<Date> discoveredAt;
-	protected final Property<String> content;
-	protected final Property<NumericalValue> score;
-	protected final Property<Topic> topic;
-	protected final Property<Set<String>> tags;
+	private String address;
+	private String title;
+	private String author;
+	private Date publishedAt;
+	private Date discoveredAt;
+	private String content;
+	private NumericalValue score;
+	private Topic topic;
+	private Set<String> tags;
 
-	protected final PropertyGroup<String, NumericalValue> termGroup;
-	protected final PropertyGroup<String, NumericalValue> entityGroup;
+	private final PropertyGroup<String, NumericalValue> termGroup;
+	private final PropertyGroup<String, NumericalValue> entityGroup;
 
-	protected Article(ModelId id, Property<String> address,
-			Property<String> title, Property<String> author,
-			Property<Date> publishedAt, Property<Date> discoveredAt,
-			Property<String> content, Property<NumericalValue> score,
-			Property<Topic> topic, Property<Set<String>> tags,
-			PropertyGroup<String, NumericalValue> termGroup,
-			PropertyGroup<String, NumericalValue> entityGroup) {
+	protected Article(ModelId id) {
 		super(id);
-		this.address = address;
-		this.title = title;
-		this.author = author;
-		this.publishedAt = publishedAt;
-		this.discoveredAt = discoveredAt;
-		this.content = content;
-		this.score = score;
-		this.topic = topic;
-		this.tags = tags;
-		this.termGroup = termGroup;
-		this.entityGroup = entityGroup;
+		termGroup = new PropertyGroup<String, NumericalValue>();
+		entityGroup = new PropertyGroup<String, NumericalValue>();
 	}
 
-	public Property<String> getAddress() {
+	protected Article() {
+		this(null);
+	}
+
+	public String getAddress() {
 		return address;
 	}
 
-	public Property<String> getTitle() {
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getTitle() {
 		return title;
 	}
 
-	public Property<String> getAuthor() {
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getAuthor() {
 		return author;
 	}
 
-	public Property<Date> getPublishedAt() {
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public Date getPublishedAt() {
 		return publishedAt;
 	}
 
-	public Property<Date> getDiscoveredAt() {
+	public void setPublishedAt(Date publishedAt) {
+		this.publishedAt = publishedAt;
+	}
+
+	public Date getDiscoveredAt() {
 		return discoveredAt;
 	}
 
-	public Property<String> getContent() {
+	public void setDiscoveredAt(Date discoveredAt) {
+		this.discoveredAt = discoveredAt;
+	}
+
+	public String getContent() {
 		return content;
 	}
 
-	public Property<NumericalValue> getScore() {
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public NumericalValue getScore() {
 		return score;
 	}
 
-	public Property<Topic> getTopic() {
+	public void setScore(NumericalValue score) {
+		this.score = score;
+	}
+
+	public Topic getTopic() {
 		return topic;
 	}
 
-	public Property<Set<String>> getTags() {
+	public void setTopic(Topic topic) {
+		this.topic = topic;
+	}
+
+	public Set<String> getTags() {
 		return tags;
+	}
+
+	public void setTags(Set<String> tags) {
+		this.tags = tags;
 	}
 
 	public PropertyGroup<String, NumericalValue> getTermGroup() {

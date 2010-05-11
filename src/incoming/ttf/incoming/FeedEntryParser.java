@@ -40,15 +40,11 @@ public class FeedEntryParser {
 	public Article parse(SyndEntry entry) {
 		Article article = factory.build();
 
-		article.getAddress().setValue(entry.getUri());
-
-		article.getTitle().setValue(entry.getTitle());
-
-		article.getAuthor().setValue(entry.getAuthor());
-
-		article.getPublishedAt().setValue(entry.getPublishedDate());
-
-		article.getDiscoveredAt().setValue(new Date());
+		article.setAddress(entry.getUri());
+		article.setTitle(entry.getTitle());
+		article.setAuthor(entry.getAuthor());
+		article.setPublishedAt(entry.getPublishedDate());
+		article.setDiscoveredAt(new Date());
 
 		List<?> cList = entry.getContents();
 		SyndContent c = null;
@@ -57,7 +53,7 @@ public class FeedEntryParser {
 		} else {
 			c = entry.getDescription();
 		}
-		article.getContent().setValue((c != null) ? c.getValue() : null);
+		article.setContent((c != null) ? c.getValue() : null);
 
 		return article;
 	}
