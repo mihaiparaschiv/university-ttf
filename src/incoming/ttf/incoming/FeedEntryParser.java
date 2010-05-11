@@ -27,6 +27,11 @@ import ttf.model.property.value.TextValue;
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 
+/**
+ * This class builds {@link Article} objects from {@link SyndEntry}.
+ * 
+ * @author Mihai Paraschiv
+ */
 public class FeedEntryParser {
 	private ArticleFactory factory;
 

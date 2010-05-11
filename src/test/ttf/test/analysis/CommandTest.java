@@ -21,7 +21,6 @@ import java.net.URL;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.chain.Command;
-import org.apache.commons.configuration.Configuration;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -29,7 +28,7 @@ import ttf.analysis.command.EntityDetectionCommand;
 import ttf.analysis.context.SimpleContext;
 import ttf.incoming.FeedEntryParser;
 import ttf.model.article.Article;
-import ttf.util.ConfigurationProvider;
+import ttf.util.AppContext;
 import ttf.util.alchemyapi.EntityProvider;
 
 import com.orchestr8.api.AlchemyAPI;
@@ -48,9 +47,7 @@ public class CommandTest {
 	public static void beforeClass() throws IllegalArgumentException,
 			FeedException, IOException, XPathExpressionException {
 		// Alchemy API
-		Configuration config = ConfigurationProvider.getDefault();
-		String key = config.getString("alchemy.key");
-		AlchemyAPI alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
+		AlchemyAPI alchemyAPI = AppContext.getInstance().getAlchemyAPI();
 		entityProvider = new EntityProvider(alchemyAPI);
 
 		// Load the feed

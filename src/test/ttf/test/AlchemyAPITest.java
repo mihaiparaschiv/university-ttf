@@ -21,13 +21,12 @@ import java.util.Collection;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import ttf.util.ConfigurationProvider;
+import ttf.util.AppContext;
 import ttf.util.alchemyapi.AlchemyEntity;
 import ttf.util.alchemyapi.EntityProvider;
 
@@ -40,9 +39,7 @@ public class AlchemyAPITest {
 	@Before
 	public void initialize() throws ConfigurationException,
 			XPathExpressionException {
-		Configuration config = ConfigurationProvider.getDefault();
-		String key = config.getString("alchemy.key");
-		AlchemyAPI alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
+		AlchemyAPI alchemyAPI = AppContext.getInstance().getAlchemyAPI();
 		entityProvider = new EntityProvider(alchemyAPI);
 	}
 

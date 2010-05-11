@@ -26,7 +26,7 @@ import org.apache.commons.dbutils.QueryRunner;
 
 import ttf.incoming.FeedEntryParser;
 import ttf.model.article.Article;
-import ttf.util.DataSourceProvider;
+import ttf.util.AppContext;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -34,12 +34,18 @@ import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
+/**
+ * This class should can be used to build an initial collections of Articles for
+ * testing purposes.
+ * 
+ * @author Mihai Paraschiv
+ */
 public class ArticleBootstraper {
 	private static final String TABLE = "IncomingArticles";
 	private final DataSource dataSource;
 
 	public ArticleBootstraper() {
-		dataSource = DataSourceProvider.getDefault();
+		dataSource = AppContext.getInstance().getDataSource();
 	}
 
 	public static void main(String[] args) throws IllegalArgumentException,
