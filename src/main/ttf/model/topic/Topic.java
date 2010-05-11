@@ -18,8 +18,11 @@ package ttf.model.topic;
 import ttf.model.Model;
 import ttf.model.ModelId;
 import ttf.model.article.ArticleKey;
+import ttf.model.property.Property;
 import ttf.model.property.PropertyGroup;
+import ttf.model.property.key.StringKey;
 import ttf.model.property.value.DoubleValue;
+import ttf.model.property.value.TextValue;
 
 /**
  * A topic contains articles and subtopics.
@@ -27,25 +30,36 @@ import ttf.model.property.value.DoubleValue;
  * @author Mihai Paraschiv
  */
 public class Topic extends Model {
-	protected PropertyGroup<ArticleKey, DoubleValue> articleGroup;
-	protected PropertyGroup<TopicKey, DoubleValue> topicGroup;
-
-	protected Topic(ModelId id) {
-		super(id);
-		
-		articleGroup = new PropertyGroup<ArticleKey, DoubleValue>();
-		topicGroup = new PropertyGroup<TopicKey, DoubleValue>();
-	}
-
-	protected Topic() {
-		this(null);
-	}
+	protected final Property<TextValue> title;
 	
+	protected final PropertyGroup<ArticleKey, DoubleValue> articleGroup;
+	protected final PropertyGroup<StringKey, DoubleValue> termGroup;
+	protected final PropertyGroup<StringKey, DoubleValue> entityGroup;
+
+	protected Topic(ModelId id, Property<TextValue> title,
+			PropertyGroup<ArticleKey, DoubleValue> articleGroup,
+			PropertyGroup<StringKey, DoubleValue> termGroup,
+			PropertyGroup<StringKey, DoubleValue> entityGroup) {
+		super(id);
+		this.title = title;
+		this.articleGroup = articleGroup;
+		this.termGroup = termGroup;
+		this.entityGroup = entityGroup;
+	}
+
+	public Property<TextValue> getTitle() {
+		return title;
+	}
+
 	public PropertyGroup<ArticleKey, DoubleValue> getArticleGroup() {
 		return articleGroup;
 	}
 	
-	public PropertyGroup<TopicKey, DoubleValue> getTopicGroup() {
-		return topicGroup;
+	public PropertyGroup<StringKey, DoubleValue> getTermGroup() {
+		return termGroup;
+	}
+	
+	public PropertyGroup<StringKey, DoubleValue> getEntityGroup() {
+		return entityGroup;
 	}
 }

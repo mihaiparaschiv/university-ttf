@@ -15,10 +15,56 @@
  */
 package ttf.model;
 
-public interface ModelId {
-	@Override
-	public int hashCode();
+public class ModelId {
+	protected final String prefix;
+	protected final String value;
+
+	protected ModelId(String prefix, String value) {
+		this.prefix = prefix;
+		this.value = value;
+	}
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public String getValue() {
+		return value;
+	}
 
 	@Override
-	public boolean equals(Object obj);
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((prefix == null) ? 0 : prefix.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ModelId other = (ModelId) obj;
+		if (prefix == null) {
+			if (other.prefix != null)
+				return false;
+		} else if (!prefix.equals(other.prefix))
+			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ModelId [prefix=" + prefix + ", value=" + value + "]";
+	}
 }

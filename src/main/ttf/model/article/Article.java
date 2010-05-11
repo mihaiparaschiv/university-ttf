@@ -16,7 +16,7 @@
 package ttf.model.article;
 
 import ttf.model.Model;
-import ttf.model.StringId;
+import ttf.model.ModelId;
 import ttf.model.property.Property;
 import ttf.model.property.PropertyGroup;
 import ttf.model.property.key.StringKey;
@@ -33,37 +33,38 @@ import ttf.model.topic.TopicValue;
  * @author Mihai Paraschiv
  */
 public class Article extends Model {
-	protected Property<AddressValue> address;
-	protected Property<TextValue> title;
-	protected Property<TextValue> author;
-	protected Property<DateValue> publishedAt;
-	protected Property<DateValue> discoveredAt;
-	protected Property<TextValue> content;
-	protected Property<DoubleValue> score;
-	protected Property<TopicValue> topic;
-	protected Property<SetValue<String>> tags;
+	protected final Property<AddressValue> address;
+	protected final Property<TextValue> title;
+	protected final Property<TextValue> author;
+	protected final Property<DateValue> publishedAt;
+	protected final Property<DateValue> discoveredAt;
+	protected final Property<TextValue> content;
+	protected final Property<DoubleValue> score;
+	protected final Property<TopicValue> topic;
+	protected final Property<SetValue<String>> tags;
 
-	protected PropertyGroup<StringKey, DoubleValue> termGroup;
-	protected PropertyGroup<StringKey, DoubleValue> entityGroup;
+	protected final PropertyGroup<StringKey, DoubleValue> termGroup;
+	protected final PropertyGroup<StringKey, DoubleValue> entityGroup;
 
-	protected Article(StringId id) {
+	protected Article(ModelId id, Property<AddressValue> address,
+			Property<TextValue> title, Property<TextValue> author,
+			Property<DateValue> publishedAt, Property<DateValue> discoveredAt,
+			Property<TextValue> content, Property<DoubleValue> score,
+			Property<TopicValue> topic, Property<SetValue<String>> tags,
+			PropertyGroup<StringKey, DoubleValue> termGroup,
+			PropertyGroup<StringKey, DoubleValue> entityGroup) {
 		super(id);
-		
-		address = new Property<AddressValue>(null);
-		title = new Property<TextValue>(null);
-		author = new Property<TextValue>(null);
-		publishedAt = new Property<DateValue>(null);
-		discoveredAt = new Property<DateValue>(null);
-		content = new Property<TextValue>(null);
-		score = new Property<DoubleValue>(null);
-		tags = new Property<SetValue<String>>(null);
-		topic = new Property<TopicValue>(null);
-		
-		entityGroup = new PropertyGroup<StringKey, DoubleValue>();
-	}
-
-	protected Article() {
-		this(null);
+		this.address = address;
+		this.title = title;
+		this.author = author;
+		this.publishedAt = publishedAt;
+		this.discoveredAt = discoveredAt;
+		this.content = content;
+		this.score = score;
+		this.topic = topic;
+		this.tags = tags;
+		this.termGroup = termGroup;
+		this.entityGroup = entityGroup;
 	}
 
 	public Property<AddressValue> getAddress() {

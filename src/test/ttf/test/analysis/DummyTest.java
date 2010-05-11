@@ -32,13 +32,14 @@ import ttf.model.article.ArticleFactory;
 import ttf.model.property.value.AddressValue;
 import ttf.model.property.value.DateValue;
 import ttf.model.property.value.TextValue;
+import ttf.util.AppContext;
 
 public class DummyTest {
 	private static final String NEW_TITLE = "new title";
 
 	@Test
 	public void dummyTaskExecution() {
-		ArticleFactory factory = new ArticleFactory();
+		ArticleFactory factory = AppContext.getInstance().getArticleFactory();
 		Article article = factory.build();
 		article.getAddress().setValue(new AddressValue("http://..."));
 		article.getTitle().setValue(new TextValue("A news article"));

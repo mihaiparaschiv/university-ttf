@@ -22,10 +22,14 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.dbcp.BasicDataSource;
 
+import ttf.model.IdFactory;
+import ttf.model.article.ArticleFactory;
+import ttf.model.topic.TopicFactory;
+
 import com.orchestr8.api.AlchemyAPI;
 
 /**
- * Singleton for application context. The instance has to be initialized.
+ * Singleton for application context.
  * 
  * @author Mihai Paraschiv
  * 
@@ -36,6 +40,9 @@ public class AppContext {
 
 	private DataSource dataSource;
 	private AlchemyAPI alchemyAPI;
+	private ArticleFactory articleFactory;
+	private TopicFactory topicFactory;
+	private IdFactory idFactory;
 
 	private AppContext(Configuration c) {
 		// DataSource
@@ -45,32 +52,29 @@ public class AppContext {
 		dataSource.setPassword(c.getString("db.password"));
 		dataSource.setUrl(c.getString("db.uri"));
 		this.dataSource = dataSource;
-		
+
 		// Alchemy API
 		String key = c.getString("alchemy.key");
 		this.alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
+		
+		// factories
+		this.articleFactory = new ArticleFactory();
+		this.topicFactory = new TopicFactory();
+		this.idFactory = new IdFactory();
 	}
 
-	public static void setDefault() {
+	private static AppContext getDefault() {
 		try {
-			setFromConfiguration(new PropertiesConfiguration(
-					DEFAULT_CONFIG_FILE));
+			Configuration c = new PropertiesConfiguration(DEFAULT_CONFIG_FILE);
+			return new AppContext(c);
 		} catch (ConfigurationException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public static void setFromConfiguration(
-			PropertiesConfiguration configuration) {
-		if (instance != null) {
-			throw new RuntimeException("AppContext already set!");
-		}
-		instance = new AppContext(configuration);
-	}
-
 	public static AppContext getInstance() {
 		if (instance == null) {
-			setDefault();
+			instance = getDefault();
 		}
 		return instance;
 	}
@@ -78,8 +82,20 @@ public class AppContext {
 	public DataSource getDataSource() {
 		return dataSource;
 	}
-	
+
 	public AlchemyAPI getAlchemyAPI() {
 		return alchemyAPI;
+	}
+	
+	public ArticleFactory getArticleFactory() {
+		return articleFactory;
+	}
+	
+	public TopicFactory getTopicFactory() {
+		return topicFactory;
+	}
+	
+	public IdFactory getIdFactory() {
+		return idFactory;
 	}
 }

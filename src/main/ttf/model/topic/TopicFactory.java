@@ -13,39 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.article;
+package ttf.model.topic;
 
+import ttf.model.article.ArticleKey;
 import ttf.model.property.Property;
 import ttf.model.property.PropertyGroup;
 import ttf.model.property.key.StringKey;
-import ttf.model.property.value.AddressValue;
-import ttf.model.property.value.DateValue;
 import ttf.model.property.value.DoubleValue;
-import ttf.model.property.value.SetValue;
 import ttf.model.property.value.TextValue;
-import ttf.model.topic.TopicValue;
 
-public class ArticleFactory {
-	public Article build() {
+public class TopicFactory {
+	public Topic build() {
 		// properties
-		Property<AddressValue> address = new Property<AddressValue>(null);
 		Property<TextValue> title = new Property<TextValue>(null);
-		Property<TextValue> author = new Property<TextValue>(null);
-		Property<DateValue> publishedAt = new Property<DateValue>(null);
-		Property<DateValue> discoveredAt = new Property<DateValue>(null);
-		Property<TextValue> content = new Property<TextValue>(null);
-		Property<DoubleValue> score = new Property<DoubleValue>(null);
-		Property<SetValue<String>> tags = new Property<SetValue<String>>(null);
-		Property<TopicValue> topic = new Property<TopicValue>(null);
 
 		// groups
+		PropertyGroup<ArticleKey, DoubleValue> articleGroup = new PropertyGroup<ArticleKey, DoubleValue>();
 		PropertyGroup<StringKey, DoubleValue> termGroup = new PropertyGroup<StringKey, DoubleValue>();
 		PropertyGroup<StringKey, DoubleValue> entityGroup = new PropertyGroup<StringKey, DoubleValue>();
 
 		// build
-		return new Article(null, //
-				address, title, author, publishedAt, //
-				discoveredAt, content, score, topic, tags, //
-				termGroup, entityGroup);
+		return new Topic(null, //
+				title, //
+				articleGroup, termGroup, entityGroup);
 	}
 }

@@ -23,6 +23,7 @@ import ttf.model.article.ArticleFactory;
 import ttf.model.property.value.AddressValue;
 import ttf.model.property.value.DateValue;
 import ttf.model.property.value.TextValue;
+import ttf.util.AppContext;
 
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -36,7 +37,7 @@ public class FeedEntryParser {
 	private ArticleFactory factory;
 
 	public FeedEntryParser() {
-		factory = new ArticleFactory();
+		factory = AppContext.getInstance().getArticleFactory();
 	}
 
 	public Article parse(SyndEntry entry) {
