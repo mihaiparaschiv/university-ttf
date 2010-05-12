@@ -20,8 +20,8 @@ import java.util.Set;
 
 import ttf.model.Model;
 import ttf.model.ModelId;
+import ttf.model.property.NumericalValue;
 import ttf.model.property.PropertyGroup;
-import ttf.model.property.value.NumericalValue;
 import ttf.model.topic.Topic;
 
 /**

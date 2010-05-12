@@ -20,7 +20,7 @@ import org.apache.commons.chain.impl.ContextBase;
 import ttf.model.article.Article;
 import ttf.util.alchemyapi.EntityProvider;
 
-public class SimpleContext extends ContextBase {
+public class BasicContext extends ContextBase {
 	private static final long serialVersionUID = -1884835131118409894L;
 
 	private Article article;

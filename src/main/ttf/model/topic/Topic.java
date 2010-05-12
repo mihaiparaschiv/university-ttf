@@ -18,8 +18,8 @@ package ttf.model.topic;
 import ttf.model.Model;
 import ttf.model.ModelId;
 import ttf.model.article.Article;
+import ttf.model.property.NumericalValue;
 import ttf.model.property.PropertyGroup;
-import ttf.model.property.value.NumericalValue;
 
 /**
  * A topic contains articles and subtopics.

@@ -25,7 +25,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ttf.analysis.command.EntityDetectionCommand;
-import ttf.analysis.context.SimpleContext;
+import ttf.analysis.context.BasicContext;
 import ttf.incoming.FeedEntryParser;
 import ttf.model.article.Article;
 import ttf.util.AppContext;
@@ -63,7 +63,7 @@ public class CommandTest {
 
 	@Test
 	public void entityDetection() throws Exception {
-		SimpleContext context = new SimpleContext();
+		BasicContext context = new BasicContext();
 		context.setArticle(article);
 		context.setEntityProvider(entityProvider);
 		Command command = new EntityDetectionCommand();

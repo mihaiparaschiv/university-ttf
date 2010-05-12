@@ -28,10 +28,10 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
-import ttf.analysis.context.SimpleContext;
+import ttf.analysis.context.BasicContext;
 import ttf.model.IdFactory;
 import ttf.model.article.Article;
-import ttf.model.property.value.NumericalValue;
+import ttf.model.property.NumericalValue;
 import ttf.model.topic.Topic;
 import ttf.model.topic.TopicFactory;
 import ttf.util.AppContext;
@@ -46,7 +46,7 @@ import ttf.util.AppContext;
 public class TopicDiscoveryCommand implements Command {
 	@Override
 	public boolean execute(Context context) throws Exception {
-		Article article = ((SimpleContext) context).getArticle();
+		Article article = ((BasicContext) context).getArticle();
 		DataSource dataSource = AppContext.getInstance().getDataSource();
 		QueryRunner run = new QueryRunner(dataSource);
 

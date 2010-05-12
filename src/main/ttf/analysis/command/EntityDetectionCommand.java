@@ -20,18 +20,18 @@ import java.util.Collection;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 
-import ttf.analysis.context.SimpleContext;
+import ttf.analysis.context.BasicContext;
 import ttf.model.article.Article;
+import ttf.model.property.NumericalValue;
 import ttf.model.property.PropertyGroup;
-import ttf.model.property.value.NumericalValue;
 import ttf.util.alchemyapi.AlchemyEntity;
 import ttf.util.alchemyapi.EntityProvider;
 
 public class EntityDetectionCommand implements Command {
 	@Override
 	public boolean execute(Context context) throws Exception {
-		EntityProvider provider = ((SimpleContext) context).getEntityProvider();
-		Article article = ((SimpleContext) context).getArticle();
+		EntityProvider provider = ((BasicContext) context).getEntityProvider();
+		Article article = ((BasicContext) context).getArticle();
 
 		String address = article.getAddress();
 

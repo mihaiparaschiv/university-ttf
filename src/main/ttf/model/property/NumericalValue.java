@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.property.value;
+package ttf.model.property;
 
 public class NumericalValue {
 	private double value;
