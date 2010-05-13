@@ -19,6 +19,7 @@ import java.util.LinkedList;
 
 import ttf.model.article.Article;
 
-public class InternalProvider extends LinkedList<Article> implements ArticleProvider {
+public class InternalProvider extends LinkedList<Article> implements
+		ArticleProvider {
 	private static final long serialVersionUID = 59413491220119509L;
 }

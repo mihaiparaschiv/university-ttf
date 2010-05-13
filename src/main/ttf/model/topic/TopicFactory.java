@@ -15,12 +15,8 @@
  */
 package ttf.model.topic;
 
-public class TopicFactory {
-	public Topic build() {
-		return new Topic();
-	}
-	
-	public Topic build(String id) {
-		return new Topic(id);
-	}
+public interface TopicFactory {
+	public Topic build();
+
+	public Topic build(String id);
 }

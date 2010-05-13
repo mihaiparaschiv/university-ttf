@@ -58,12 +58,14 @@ public class TopicSaver {
 		List<Object[]> rows = new LinkedList<Object[]>();
 
 		for (Entry<String, NumericalValue> entry : terms) {
-			Object[] row = { "term", entry.getKey(), topic.getId(), entry.getValue() };
+			Object[] row = { "term", entry.getKey(), topic.getId(),
+					entry.getValue() };
 			rows.add(row);
 		}
 
 		for (Entry<String, NumericalValue> entry : entities) {
-			Object[] row = { "entity", entry.getKey(), topic.getId(), entry.getValue() };
+			Object[] row = { "entity", entry.getKey(), topic.getId(),
+					entry.getValue() };
 			rows.add(row);
 		}
 
@@ -76,7 +78,7 @@ public class TopicSaver {
 			throws SQLException {
 		GenKeyQueryRunner<String> run;
 		run = new GenKeyQueryRunner<String>(dataSource, new IdResultHandler());
-		
+
 		String sql = "INSERT INTO Topics (title) VALUES (?)";
 		run.update(sql, topic.getTitle());
 		String id = run.getGeneratedKeys();

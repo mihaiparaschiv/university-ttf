@@ -15,10 +15,9 @@
  */
 package ttf.persistence;
 
-
 public class PersistenceException extends Exception {
 	private static final long serialVersionUID = 629078826143657114L;
-	
+
 	public PersistenceException(Exception e) {
 		super(e);
 	}

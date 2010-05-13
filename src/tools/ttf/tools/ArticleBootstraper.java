@@ -28,7 +28,7 @@ import org.apache.commons.dbutils.QueryRunner;
 
 import ttf.incoming.FeedEntryParser;
 import ttf.incoming.IncomingArticle;
-import ttf.util.FactoryUtil;
+import ttf.util.AppContext;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -54,7 +54,7 @@ public class ArticleBootstraper {
 	public static void main(String[] args) throws IllegalArgumentException,
 			FeedException, IOException, ConfigurationException, SQLException {
 		Configuration config = new PropertiesConfiguration(CONFIG_FILE);
-		DataSource dataSource = FactoryUtil.buildDataSource(config);
+		DataSource dataSource = AppContext.build(config).getDataSource();
 		ArticleBootstraper bs = new ArticleBootstraper(dataSource);
 		bs.clear();
 		bs.fill(args);

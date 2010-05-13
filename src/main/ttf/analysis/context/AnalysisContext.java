@@ -21,7 +21,9 @@ import org.apache.commons.chain.impl.ContextBase;
 
 import ttf.analysis.SimilarityComputer;
 import ttf.model.article.Article;
+import ttf.model.article.ArticleFactory;
 import ttf.model.topic.Topic;
+import ttf.model.topic.TopicFactory;
 import ttf.persistence.ModelStore;
 import ttf.util.alchemyapi.EntityDetector;
 
@@ -31,6 +33,8 @@ public class AnalysisContext extends ContextBase {
 	private static final long serialVersionUID = -1884835131118409894L;
 
 	// general - assigned by a factory
+	private ArticleFactory articleFactory;
+	private TopicFactory topicFactory;
 	private ModelStore modelStore;
 	private AlchemyAPI alchemyAPI;
 	private EntityDetector entityDetector;
@@ -42,6 +46,22 @@ public class AnalysisContext extends ContextBase {
 	private Topic selectedTopic;
 
 	protected AnalysisContext() {
+	}
+
+	public ArticleFactory getArticleFactory() {
+		return articleFactory;
+	}
+
+	public void setArticleFactory(ArticleFactory articleFactory) {
+		this.articleFactory = articleFactory;
+	}
+
+	public TopicFactory getTopicFactory() {
+		return topicFactory;
+	}
+
+	public void setTopicFactory(TopicFactory topicFactory) {
+		this.topicFactory = topicFactory;
 	}
 
 	public ModelStore getModelStore() {

@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.property;
+package ttf.incoming;
 
-public class NumericalValue {
-	private double value;
+import ttf.model.article.Article;
 
-	public NumericalValue(double value) {
-		this.value = value;
-	}
-
-	public double getDouble() {
-		return value;
-	}
+/**
+ * Creates an {@link Article} from an {@link IncomingArticle}.
+ * 
+ * @author Mihai Paraschiv
+ */
+public interface Transformer {
+	public Article transform(IncomingArticle incomingArticle);
 }

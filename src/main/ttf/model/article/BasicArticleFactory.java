@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.property;
+package ttf.model.article;
 
-public class NumericalValue {
-	private double value;
-
-	public NumericalValue(double value) {
-		this.value = value;
+public class BasicArticleFactory implements ArticleFactory {
+	@Override
+	public Article build() {
+		return new Article();
 	}
 
-	public double getDouble() {
-		return value;
+	@Override
+	public Article build(String id) {
+		return new Article(id);
 	}
 }

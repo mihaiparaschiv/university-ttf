@@ -13,16 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.property;
+package ttf.model.topic;
 
-public class NumericalValue {
-	private double value;
+public class BasicTopicFactory implements TopicFactory {
 
-	public NumericalValue(double value) {
-		this.value = value;
+	@Override
+	public Topic build() {
+		return new Topic();
 	}
 
-	public double getDouble() {
-		return value;
+	@Override
+	public Topic build(String id) {
+		return new Topic(id);
 	}
 }

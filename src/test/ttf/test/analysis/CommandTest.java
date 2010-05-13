@@ -28,11 +28,14 @@ import org.junit.Test;
 import ttf.analysis.command.EntityDetectionCommand;
 import ttf.analysis.context.AnalysisContext;
 import ttf.analysis.context.ContextFactory;
+import ttf.incoming.BasicTransformer;
 import ttf.incoming.FeedEntryParser;
+import ttf.incoming.IncomingArticle;
+import ttf.incoming.Transformer;
 import ttf.model.article.Article;
 import ttf.model.article.ArticleFactory;
 import ttf.test.TestUtil;
-import ttf.util.FactoryUtil;
+import ttf.util.AppContext;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -50,7 +53,9 @@ public class CommandTest {
 	public void before() throws IllegalArgumentException, FeedException,
 			IOException, XPathExpressionException {
 		Configuration config = TestUtil.getDefaultConfiguration();
-		contextFactory = FactoryUtil.buildContextFactory(config);
+		AppContext appContext = AppContext.build(config);
+		contextFactory = appContext.getContextFactory();
+		ArticleFactory articleFactory = appContext.getArticleFactory();
 
 		// Load the feed
 		URL feedSource = new URL(FEED);
@@ -60,7 +65,9 @@ public class CommandTest {
 		// Build an article from the first entry of the feed
 		FeedEntryParser entryParser = new FeedEntryParser();
 		Object e = feed.getEntries().get(0);
-		//article = entryParser.parse((SyndEntry) e);
+		IncomingArticle incomingArticle = entryParser.parse((SyndEntry) e);
+		Transformer transformer = new BasicTransformer(articleFactory);
+		article = transformer.transform(incomingArticle);
 	}
 
 	@Test

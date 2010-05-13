@@ -49,11 +49,6 @@ public class SQLStore implements ModelStore {
 	}
 
 	@Override
-	public Article buildArticle() {
-		return articleFactory.build();
-	};
-
-	@Override
 	public Collection<Article> loadArticles(Query query)
 			throws PersistenceException {
 		throw new NotImplementedException();
@@ -67,11 +62,6 @@ public class SQLStore implements ModelStore {
 			throw new PersistenceException(e);
 		}
 	}
-
-	@Override
-	public Topic buildTopic() {
-		return topicFactory.build();
-	};
 
 	@Override
 	public Collection<Topic> loadTopics(Query query)

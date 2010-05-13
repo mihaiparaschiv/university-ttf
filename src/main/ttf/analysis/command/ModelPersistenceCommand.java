@@ -21,6 +21,7 @@ import org.apache.commons.chain.Context;
 import ttf.analysis.context.AnalysisContext;
 import ttf.model.article.Article;
 import ttf.model.topic.Topic;
+import ttf.model.topic.TopicFactory;
 import ttf.persistence.ModelStore;
 
 /**
@@ -32,16 +33,17 @@ public class ModelPersistenceCommand implements Command {
 	@Override
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
+		TopicFactory topicFactory = ctx.getTopicFactory();
 		ModelStore modelStore = ctx.getModelStore();
 
 		Article article = ctx.getIncomingArticle();
 		Topic topic = ctx.getSelectedTopic();
 
 		if (topic == null) {
-			topic = modelStore.buildTopic();
+			topic = topicFactory.build();
 			topic.setTitle(article.getTitle());
 		}
-		
+
 		modelStore.persistTopic(topic);
 		modelStore.persistArticle(article);
 

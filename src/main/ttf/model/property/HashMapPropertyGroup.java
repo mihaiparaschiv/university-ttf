@@ -17,7 +17,7 @@ package ttf.model.property;
 
 import java.util.HashMap;
 
-public class HashMapPropertyGroup<K,V> extends HashMap<K,V> implements
+public class HashMapPropertyGroup<K, V> extends HashMap<K, V> implements
 		PropertyGroup<K, V> {
 	private static final long serialVersionUID = -6977690802286509530L;
 }

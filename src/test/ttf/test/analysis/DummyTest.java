@@ -29,13 +29,14 @@ import ttf.analysis.input.InternalProvider;
 import ttf.analysis.processor.Processor;
 import ttf.model.article.Article;
 import ttf.model.article.ArticleFactory;
+import ttf.model.article.BasicArticleFactory;
 
 public class DummyTest {
 	private static final String NEW_TITLE = "new title";
 
 	@Test
 	public void dummyTaskExecution() {
-		ArticleFactory factory = new ArticleFactory();
+		ArticleFactory factory = new BasicArticleFactory();
 		Article article = factory.build();
 		article.setAddress("http://...");
 		article.setTitle("A news article");

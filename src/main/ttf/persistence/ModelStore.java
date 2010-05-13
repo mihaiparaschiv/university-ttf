@@ -22,15 +22,11 @@ import ttf.model.topic.Topic;
 import ttf.persistence.query.Query;
 
 public interface ModelStore {
-	
-	public Article buildArticle();
-	
+
 	public Collection<Article> loadArticles(Query query)
 			throws PersistenceException;
 
 	public void persistArticle(Article article) throws PersistenceException;
-	
-	public Topic buildTopic();
 
 	public Collection<Topic> loadTopics(Query query)
 			throws PersistenceException;

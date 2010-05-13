@@ -37,7 +37,7 @@ public class TopicLoadingCommand implements Command {
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
 		ModelStore store = ctx.getModelStore();
-		
+
 		Collection<Topic> topics = store.loadTopics(null);
 		ctx.setLoadedTopics(topics);
 

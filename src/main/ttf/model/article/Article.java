@@ -36,9 +36,10 @@ public class Article extends Model {
 	private Date publishedAt;
 	private Date discoveredAt;
 	private String content;
-	private NumericalValue score;
-	private Topic topic;
 	private Set<String> tags;
+	private NumericalValue score;
+
+	private Topic topic;
 
 	private final PropertyGroup<String, NumericalValue> termGroup;
 	private final PropertyGroup<String, NumericalValue> entityGroup;
@@ -109,20 +110,20 @@ public class Article extends Model {
 		this.score = score;
 	}
 
-	public Topic getTopic() {
-		return topic;
-	}
-
-	public void setTopic(Topic topic) {
-		this.topic = topic;
-	}
-
 	public Set<String> getTags() {
 		return tags;
 	}
 
 	public void setTags(Set<String> tags) {
 		this.tags = tags;
+	}
+
+	public Topic getTopic() {
+		return topic;
+	}
+
+	public void setTopic(Topic topic) {
+		this.topic = topic;
 	}
 
 	public PropertyGroup<String, NumericalValue> getTermGroup() {

@@ -54,7 +54,7 @@ public class TopicListRSH implements ResultSetHandler<Collection<Topic>> {
 			String sql = "SELECT (type, name, score) FROM TopicFeatures WHERE topicId = ?";
 			ArrayListHandler h = new ArrayListHandler();
 			List<Object[]> features = run.query(sql, h, topic.getId());
-			
+
 			// parse features
 			for (Object[] o : features) {
 				String type = (String) o[0];
