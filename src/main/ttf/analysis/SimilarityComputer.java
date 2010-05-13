@@ -22,6 +22,12 @@ import ttf.model.property.NumericalValue;
 import ttf.model.property.PropertyGroup;
 import ttf.model.topic.Topic;
 
+/**
+ * This class will be changed in order to use a custom set of metrics.
+ * 
+ * @author Mihai Paraschiv
+ * 
+ */
 public class SimilarityComputer {
 	public double compute(Article article, Topic topic) {
 		double result = 0;

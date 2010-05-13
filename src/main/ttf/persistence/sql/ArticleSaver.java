@@ -13,11 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model;
+package ttf.persistence.sql;
 
-public class IdFactory {
-	public ModelId build(Class<?> type, String value) {
-		String prefix = type.getCanonicalName();
-		return new ModelId(prefix, value);
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
+import ttf.model.article.Article;
+
+public class ArticleSaver {
+	private final DataSource dataSource;
+
+	protected ArticleSaver(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+
+	protected void save(Article topic) throws SQLException {
+
 	}
 }

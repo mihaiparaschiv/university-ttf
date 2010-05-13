@@ -13,14 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.topic;
+package ttf.persistence.sql;
 
-public class TopicFactory {
-	public Topic build() {
-		return new Topic();
-	}
-	
-	public Topic build(String id) {
-		return new Topic(id);
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.apache.commons.dbutils.ResultSetHandler;
+
+public class IdResultHandler implements ResultSetHandler<String> {
+
+	@Override
+	public String handle(ResultSet rs) throws SQLException {
+		if (rs.next()) {
+			return rs.getString(0);
+		} else {
+			return null;
+		}
 	}
 }

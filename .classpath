@@ -15,7 +15,7 @@
 	<classpathentry kind="lib" path="lib/rome-1.0.jar" sourcepath="C:/lib/java/rome/rome-1.0-sources.jar"/>
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
 	<classpathentry kind="lib" path="lib/commons-dbcp-1.4.jar" sourcepath="C:/lib/apache commons/commons-dbcp-1.4/commons-dbcp-1.4-sources.jar"/>
-	<classpathentry kind="lib" path="lib/commons-pool-1.5.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-pool-1.5.4.jar" sourcepath="C:/lib/apache commons/commons-pool-1.5.4/commons-pool-1.5.4-sources.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.12-bin.jar"/>
 	<classpathentry kind="lib" path="lib/commons-math-2.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>

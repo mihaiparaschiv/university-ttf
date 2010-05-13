@@ -26,7 +26,11 @@ import ttf.model.article.Article;
 import ttf.model.topic.Topic;
 
 /**
- * This class handles the routing of the article to its most similar topic.
+ * This class handles the routing of the incoming article. At most one topic is
+ * selected as parent.
+ * 
+ * The code needs to be changed because the selected topic is added to the
+ * context and not to the article.
  * 
  * @author Mihai Paraschiv
  */
@@ -34,7 +38,7 @@ public class TopicDiscoveryCommand implements Command {
 	@Override
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
-		Article article = ctx.getCurrentArticle();
+		Article article = ctx.getIncomingArticle();
 		SimilarityComputer computer = ctx.getSimilarityComputer();
 
 		Collection<Topic> topics = ctx.getLoadedTopics();

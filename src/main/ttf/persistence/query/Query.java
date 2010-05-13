@@ -13,14 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.topic;
+package ttf.persistence.query;
 
-public class TopicFactory {
-	public Topic build() {
-		return new Topic();
-	}
-	
-	public Topic build(String id) {
-		return new Topic(id);
-	}
+public interface Query {
+
 }

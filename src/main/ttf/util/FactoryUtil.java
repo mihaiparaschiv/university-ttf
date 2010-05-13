@@ -22,9 +22,10 @@ import org.apache.commons.dbcp.BasicDataSource;
 
 import ttf.analysis.SimilarityComputer;
 import ttf.analysis.context.ContextFactory;
-import ttf.model.IdFactory;
 import ttf.model.article.ArticleFactory;
 import ttf.model.topic.TopicFactory;
+import ttf.persistence.ModelStore;
+import ttf.persistence.sql.SQLStore;
 import ttf.util.alchemyapi.EntityDetector;
 
 import com.orchestr8.api.AlchemyAPI;
@@ -36,24 +37,21 @@ import com.orchestr8.api.AlchemyAPI;
  */
 public class FactoryUtil {
 	public static ContextFactory buildContextFactory(Configuration c) {
-		// DataSource
-		DataSource dataSource = buildDataSource(c);
+		// mode store
+		ModelStore modelStore = buildModelStore(c);
 
 		// Alchemy API
 		String key = c.getString("alchemy.key");
 		AlchemyAPI alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
 
-		// factories
-		ArticleFactory articleFactory = new ArticleFactory();
-		TopicFactory topicFactory = new TopicFactory();
-		IdFactory idFactory = new IdFactory();
-
 		// processing
 		EntityDetector entityDetector = new EntityDetector(alchemyAPI);
 		SimilarityComputer similarityComputer = new SimilarityComputer();
 
-		return new ContextFactory(dataSource, alchemyAPI, articleFactory,
-				topicFactory, idFactory, entityDetector, similarityComputer);
+		return new ContextFactory(modelStore, //
+				alchemyAPI, //
+				entityDetector, //
+				similarityComputer);
 	}
 
 	public static DataSource buildDataSource(Configuration c) {
@@ -63,5 +61,13 @@ public class FactoryUtil {
 		dataSource.setPassword(c.getString("db.password"));
 		dataSource.setUrl(c.getString("db.uri"));
 		return dataSource;
+	}
+
+	public static ModelStore buildModelStore(Configuration c) {
+		DataSource dataSource = buildDataSource(c);
+		ArticleFactory articleFactory = new ArticleFactory();
+		TopicFactory topicFactory = new TopicFactory();
+
+		return new SQLStore(dataSource, articleFactory, topicFactory);
 	}
 }

@@ -15,35 +15,22 @@
  */
 package ttf.analysis.context;
 
-import javax.sql.DataSource;
-
 import ttf.analysis.SimilarityComputer;
-import ttf.model.IdFactory;
-import ttf.model.article.ArticleFactory;
-import ttf.model.topic.TopicFactory;
+import ttf.persistence.ModelStore;
 import ttf.util.alchemyapi.EntityDetector;
 
 import com.orchestr8.api.AlchemyAPI;
 
 public class ContextFactory {
-	private final DataSource dataSource;
+	private final ModelStore modelStore;
 	private final AlchemyAPI alchemyAPI;
-	private final ArticleFactory articleFactory;
-	private final TopicFactory topicFactory;
-	private final IdFactory idFactory;
 	private final EntityDetector entityDetector;
 	private final SimilarityComputer similarityComputer;
 
-	public ContextFactory(DataSource dataSource, AlchemyAPI alchemyAPI,
-			ArticleFactory articleFactory, TopicFactory topicFactory,
-			IdFactory idFactory, EntityDetector entityDetector,
+	public ContextFactory(ModelStore modelStore, AlchemyAPI alchemyAPI, EntityDetector entityDetector,
 			SimilarityComputer similarityComputer) {
-		super();
-		this.dataSource = dataSource;
+		this.modelStore = modelStore;
 		this.alchemyAPI = alchemyAPI;
-		this.articleFactory = articleFactory;
-		this.topicFactory = topicFactory;
-		this.idFactory = idFactory;
 		this.entityDetector = entityDetector;
 		this.similarityComputer = similarityComputer;
 	}
@@ -51,11 +38,8 @@ public class ContextFactory {
 	public AnalysisContext build() {
 		AnalysisContext context = new AnalysisContext();
 
-		context.setDataSource(dataSource);
+		context.setModelStore(modelStore);
 		context.setAlchemyAPI(alchemyAPI);
-		context.setArticleFactory(articleFactory);
-		context.setTopicFactory(topicFactory);
-		context.setIdFactory(idFactory);
 		context.setEntityDetector(entityDetector);
 		context.setSimilarityComputer(similarityComputer);
 

@@ -13,23 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.article;
+package ttf.incoming;
 
 import java.util.Date;
 import java.util.Set;
 
-import ttf.model.Model;
-import ttf.model.property.HashMapPropertyGroup;
 import ttf.model.property.NumericalValue;
-import ttf.model.property.PropertyGroup;
 import ttf.model.topic.Topic;
 
-/**
- * Provides access to information pertaining to a story.
- * 
- * @author Mihai Paraschiv
- */
-public class Article extends Model {
+public class IncomingArticle {
 	private String address;
 	private String title;
 	private String author;
@@ -39,19 +31,6 @@ public class Article extends Model {
 	private NumericalValue score;
 	private Topic topic;
 	private Set<String> tags;
-
-	private final PropertyGroup<String, NumericalValue> termGroup;
-	private final PropertyGroup<String, NumericalValue> entityGroup;
-
-	protected Article(String id) {
-		super(id);
-		termGroup = new HashMapPropertyGroup<String, NumericalValue>();
-		entityGroup = new HashMapPropertyGroup<String, NumericalValue>();
-	}
-
-	protected Article() {
-		this(null);
-	}
 
 	public String getAddress() {
 		return address;
@@ -123,23 +102,5 @@ public class Article extends Model {
 
 	public void setTags(Set<String> tags) {
 		this.tags = tags;
-	}
-
-	public PropertyGroup<String, NumericalValue> getTermGroup() {
-		return termGroup;
-	}
-
-	public PropertyGroup<String, NumericalValue> getEntityGroup() {
-		return entityGroup;
-	}
-
-	@Override
-	public String toString() {
-		return "Article [address=" + address + ", author=" + author
-				+ ", content=" + content + ", discoveredAt=" + discoveredAt
-				+ ", entityGroup=" + entityGroup + ", name=" + title
-				+ ", publishedAt=" + publishedAt + ", score=" + score
-				+ ", tags=" + tags + ", termGroup=" + termGroup + ", topic="
-				+ topic + "]";
 	}
 }

@@ -13,14 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.model.topic;
+package ttf.persistence;
 
-public class TopicFactory {
-	public Topic build() {
-		return new Topic();
-	}
+import java.util.Collection;
+
+import ttf.model.article.Article;
+import ttf.model.topic.Topic;
+import ttf.persistence.query.Query;
+
+public interface ModelStore {
 	
-	public Topic build(String id) {
-		return new Topic(id);
-	}
+	public Article buildArticle();
+	
+	public Collection<Article> loadArticles(Query query)
+			throws PersistenceException;
+
+	public void persistArticle(Article article) throws PersistenceException;
+	
+	public Topic buildTopic();
+
+	public Collection<Topic> loadTopics(Query query)
+			throws PersistenceException;
+
+	public void persistTopic(Topic topic) throws PersistenceException;
 }

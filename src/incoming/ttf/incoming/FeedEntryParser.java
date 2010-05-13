@@ -18,26 +18,20 @@ package ttf.incoming;
 import java.util.Date;
 import java.util.List;
 
-import ttf.model.article.Article;
-import ttf.model.article.ArticleFactory;
-
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
 
 /**
- * This class builds {@link Article} objects from {@link SyndEntry}.
+ * This class builds {@link IncomingArticle} objects from {@link SyndEntry}.
  * 
  * @author Mihai Paraschiv
  */
 public class FeedEntryParser {
-	private final ArticleFactory articleFactory;
-
-	public FeedEntryParser(ArticleFactory articleFactory) {
-		this.articleFactory = articleFactory;
+	public FeedEntryParser() {
 	}
 
-	public Article parse(SyndEntry entry) {
-		Article article = articleFactory.build();
+	public IncomingArticle parse(SyndEntry entry) {
+		IncomingArticle article = new IncomingArticle();
 
 		article.setAddress(entry.getUri());
 		article.setTitle(entry.getTitle());

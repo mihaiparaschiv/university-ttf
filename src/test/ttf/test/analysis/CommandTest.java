@@ -58,15 +58,15 @@ public class CommandTest {
 		SyndFeed feed = input.build(new XmlReader(feedSource));
 
 		// Build an article from the first entry of the feed
-		FeedEntryParser entryParser = new FeedEntryParser(new ArticleFactory());
+		FeedEntryParser entryParser = new FeedEntryParser();
 		Object e = feed.getEntries().get(0);
-		article = entryParser.parse((SyndEntry) e);
+		//article = entryParser.parse((SyndEntry) e);
 	}
 
 	@Test
 	public void entityDetection() throws Exception {
 		AnalysisContext context = contextFactory.build();
-		context.setCurrentArticle(article);
+		context.setIncomingArticle(article);
 		Command command = new EntityDetectionCommand();
 		command.execute(context);
 		System.out.println(article.getEntityGroup());

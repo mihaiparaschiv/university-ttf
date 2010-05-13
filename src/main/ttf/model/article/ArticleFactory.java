@@ -15,9 +15,13 @@
  */
 package ttf.model.article;
 
-
 public class ArticleFactory {
+	
 	public Article build() {
 		return new Article();
+	}
+	
+	public Article build(String id) {
+		return new Article(id);
 	}
 }

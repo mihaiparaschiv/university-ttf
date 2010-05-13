@@ -21,17 +21,17 @@ package ttf.model;
  * @author Mihai Paraschiv
  */
 public abstract class Model {
-	protected ModelId id;
+	protected String id;
 
-	public Model(ModelId id) {
+	public Model(String id) {
 		this.id = id;
 	}
 
-	public void setId(ModelId id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public ModelId getId() {
+	public String getId() {
 		return id;
 	}
 

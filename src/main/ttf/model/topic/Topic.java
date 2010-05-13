@@ -16,7 +16,6 @@
 package ttf.model.topic;
 
 import ttf.model.Model;
-import ttf.model.ModelId;
 import ttf.model.article.Article;
 import ttf.model.property.HashMapPropertyGroup;
 import ttf.model.property.NumericalValue;
@@ -34,7 +33,7 @@ public class Topic extends Model {
 	protected final PropertyGroup<String, NumericalValue> termGroup;
 	protected final PropertyGroup<String, NumericalValue> entityGroup;
 
-	protected Topic(ModelId id) {
+	protected Topic(String id) {
 		super(id);
 		articleGroup = new HashMapPropertyGroup<Article, NumericalValue>();
 		termGroup = new HashMapPropertyGroup<String, NumericalValue>();

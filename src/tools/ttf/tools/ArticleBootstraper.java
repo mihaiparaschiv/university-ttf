@@ -27,8 +27,7 @@ import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.dbutils.QueryRunner;
 
 import ttf.incoming.FeedEntryParser;
-import ttf.model.article.Article;
-import ttf.model.article.ArticleFactory;
+import ttf.incoming.IncomingArticle;
 import ttf.util.FactoryUtil;
 
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -64,7 +63,7 @@ public class ArticleBootstraper {
 	public void fill(String[] feedAddresses) throws IllegalArgumentException,
 			FeedException, IOException, SQLException {
 		QueryRunner run = new QueryRunner(dataSource);
-		FeedEntryParser entryParser = new FeedEntryParser(new ArticleFactory());
+		FeedEntryParser entryParser = new FeedEntryParser();
 
 		String sql = "INSERT INTO "
 				+ TABLE
@@ -77,7 +76,7 @@ public class ArticleBootstraper {
 			SyndFeed feed = input.build(new XmlReader(feedSource));
 
 			for (Object e : feed.getEntries()) {
-				Article article = entryParser.parse((SyndEntry) e);
+				IncomingArticle article = entryParser.parse((SyndEntry) e);
 
 				run.update(sql, //
 						article.getAddress(), //

@@ -15,45 +15,35 @@
  */
 package ttf.analysis.command;
 
-import java.util.Collection;
-
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 
 import ttf.analysis.context.AnalysisContext;
 import ttf.model.article.Article;
-import ttf.model.property.NumericalValue;
-import ttf.model.property.PropertyGroup;
-import ttf.util.alchemyapi.AlchemyEntity;
-import ttf.util.alchemyapi.EntityDetector;
-
-import com.orchestr8.api.AlchemyAPI;
+import ttf.model.topic.Topic;
+import ttf.persistence.ModelStore;
 
 /**
- * Detects topics using {@link AlchemyAPI}.
+ * This {@link Command} saves the article and creates a topic if needed.
  * 
  * @author Mihai Paraschiv
  */
-public class EntityDetectionCommand implements Command {
+public class ModelPersistenceCommand implements Command {
 	@Override
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
-		EntityDetector detector = ctx.getEntityDetector();
-		Article article = ((AnalysisContext) context).getIncomingArticle();
+		ModelStore modelStore = ctx.getModelStore();
 
-		String address = article.getAddress();
+		Article article = ctx.getIncomingArticle();
+		Topic topic = ctx.getSelectedTopic();
 
-		Collection<AlchemyEntity> entities = detector
-				.getEntitiesForURL(address);
-
-		PropertyGroup<String, NumericalValue> entityGroup;
-		entityGroup = article.getEntityGroup();
-
-		for (AlchemyEntity entity : entities) {
-			String key = entity.getText();
-			NumericalValue value = new NumericalValue(entity.getRelevance());
-			entityGroup.put(key, value);
+		if (topic == null) {
+			topic = modelStore.buildTopic();
+			topic.setTitle(article.getTitle());
 		}
+		
+		modelStore.persistTopic(topic);
+		modelStore.persistArticle(article);
 
 		return false;
 	}
