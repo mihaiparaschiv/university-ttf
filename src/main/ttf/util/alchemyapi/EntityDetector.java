@@ -43,16 +43,19 @@ public class EntityDetector {
 	private final XPathExpression xRelevance;
 	private final XPathExpression xCount;
 
-	public EntityDetector(AlchemyAPI alchemyAPI)
-			throws XPathExpressionException {
+	public EntityDetector(AlchemyAPI alchemyAPI) {
 		this.alchemyAPI = alchemyAPI;
 
 		XPath xpath = XPathFactory.newInstance().newXPath();
-		xEntities = xpath.compile("//entity");
-		xText = xpath.compile("text");
-		xType = xpath.compile("type");
-		xRelevance = xpath.compile("relevance");
-		xCount = xpath.compile("count");
+		try {
+			xEntities = xpath.compile("//entity");
+			xText = xpath.compile("text");
+			xType = xpath.compile("type");
+			xRelevance = xpath.compile("relevance");
+			xCount = xpath.compile("count");
+		} catch (XPathExpressionException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	public Collection<AlchemyEntity> getEntitiesForURL(String url)

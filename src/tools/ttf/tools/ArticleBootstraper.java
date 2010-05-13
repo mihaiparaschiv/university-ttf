@@ -21,12 +21,15 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.commons.dbutils.QueryRunner;
 
 import ttf.incoming.FeedEntryParser;
 import ttf.model.article.Article;
-import ttf.util.AppContext;
+import ttf.model.article.ArticleFactory;
+import ttf.util.FactoryUtil;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -41,16 +44,19 @@ import com.sun.syndication.io.XmlReader;
  * @author Mihai Paraschiv
  */
 public class ArticleBootstraper {
+	private static final String CONFIG_FILE = "resources/base.properties";
 	private static final String TABLE = "IncomingArticles";
 	private final DataSource dataSource;
 
-	public ArticleBootstraper() {
-		dataSource = AppContext.getInstance().getDataSource();
+	public ArticleBootstraper(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	public static void main(String[] args) throws IllegalArgumentException,
 			FeedException, IOException, ConfigurationException, SQLException {
-		ArticleBootstraper bs = new ArticleBootstraper();
+		Configuration config = new PropertiesConfiguration(CONFIG_FILE);
+		DataSource dataSource = FactoryUtil.buildDataSource(config);
+		ArticleBootstraper bs = new ArticleBootstraper(dataSource);
 		bs.clear();
 		bs.fill(args);
 	}
@@ -58,7 +64,7 @@ public class ArticleBootstraper {
 	public void fill(String[] feedAddresses) throws IllegalArgumentException,
 			FeedException, IOException, SQLException {
 		QueryRunner run = new QueryRunner(dataSource);
-		FeedEntryParser entryParser = new FeedEntryParser();
+		FeedEntryParser entryParser = new FeedEntryParser(new ArticleFactory());
 
 		String sql = "INSERT INTO "
 				+ TABLE

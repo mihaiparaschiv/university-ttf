@@ -24,14 +24,14 @@ import ttf.analysis.context.AnalysisContext;
 import ttf.model.article.Article;
 import ttf.model.property.NumericalValue;
 import ttf.model.property.PropertyGroup;
-import ttf.util.AppContext;
 import ttf.util.alchemyapi.AlchemyEntity;
 import ttf.util.alchemyapi.EntityDetector;
 
 public class EntityDetectionCommand implements Command {
 	@Override
 	public boolean execute(Context context) throws Exception {
-		EntityDetector detector = AppContext.getInstance().getEntityDetector();
+		AnalysisContext ctx = (AnalysisContext) context;
+		EntityDetector detector = ctx.getEntityDetector();
 		Article article = ((AnalysisContext) context).getCurrentArticle();
 
 		String address = article.getAddress();
@@ -45,7 +45,7 @@ public class EntityDetectionCommand implements Command {
 		for (AlchemyEntity entity : entities) {
 			String key = entity.getText();
 			NumericalValue value = new NumericalValue(entity.getRelevance());
-			entityGroup.put(key , value);
+			entityGroup.put(key, value);
 		}
 
 		return false;

@@ -21,13 +21,19 @@ import java.net.URL;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.chain.Command;
-import org.junit.BeforeClass;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
+import org.junit.Before;
 import org.junit.Test;
 
 import ttf.analysis.command.EntityDetectionCommand;
 import ttf.analysis.context.AnalysisContext;
+import ttf.analysis.context.ContextFactory;
 import ttf.incoming.FeedEntryParser;
 import ttf.model.article.Article;
+import ttf.model.article.ArticleFactory;
+import ttf.util.FactoryUtil;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -36,26 +42,32 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
 public class CommandTest {
+	private static final String CONFIG_FILE = "resources/base.properties";
 	private static final String FEED = "http://feeds.feedburner.com/TechCrunch";
-	private static Article article;
 
-	@BeforeClass
-	public static void beforeClass() throws IllegalArgumentException,
-			FeedException, IOException, XPathExpressionException {
+	private ContextFactory contextFactory;
+	private Article article;
+
+	@Before
+	public void before() throws IllegalArgumentException, FeedException,
+			IOException, XPathExpressionException, ConfigurationException {
+		Configuration config = new PropertiesConfiguration(CONFIG_FILE);
+		contextFactory = FactoryUtil.buildContextFactory(config);
+
 		// Load the feed
 		URL feedSource = new URL(FEED);
 		SyndFeedInput input = new SyndFeedInput();
 		SyndFeed feed = input.build(new XmlReader(feedSource));
 
 		// Build an article from the first entry of the feed
-		FeedEntryParser entryParser = new FeedEntryParser();
+		FeedEntryParser entryParser = new FeedEntryParser(new ArticleFactory());
 		Object e = feed.getEntries().get(0);
 		article = entryParser.parse((SyndEntry) e);
 	}
 
 	@Test
 	public void entityDetection() throws Exception {
-		AnalysisContext context = new AnalysisContext();
+		AnalysisContext context = contextFactory.build();
 		context.setCurrentArticle(article);
 		Command command = new EntityDetectionCommand();
 		command.execute(context);

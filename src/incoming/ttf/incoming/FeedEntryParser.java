@@ -20,7 +20,6 @@ import java.util.List;
 
 import ttf.model.article.Article;
 import ttf.model.article.ArticleFactory;
-import ttf.util.AppContext;
 
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -31,14 +30,14 @@ import com.sun.syndication.feed.synd.SyndEntry;
  * @author Mihai Paraschiv
  */
 public class FeedEntryParser {
-	private ArticleFactory factory;
+	private final ArticleFactory articleFactory;
 
-	public FeedEntryParser() {
-		factory = AppContext.getInstance().getArticleFactory();
+	public FeedEntryParser(ArticleFactory articleFactory) {
+		this.articleFactory = articleFactory;
 	}
 
 	public Article parse(SyndEntry entry) {
-		Article article = factory.build();
+		Article article = articleFactory.build();
 
 		article.setAddress(entry.getUri());
 		article.setTitle(entry.getTitle());

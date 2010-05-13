@@ -21,33 +21,36 @@ import java.util.Collection;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
+import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
-import ttf.util.AppContext;
 import ttf.util.alchemyapi.AlchemyEntity;
 import ttf.util.alchemyapi.EntityDetector;
 
 import com.orchestr8.api.AlchemyAPI;
 
 public class AlchemyAPITest {
+	private static final String CONFIG_FILE = "resources/base.properties";
 	private static final String TEST_URL = "http://techcrunch.com";
-	private EntityDetector entityDetector;
+	
+	private AlchemyAPI alchemyAPI;
 
 	@Before
-	public void initialize() throws ConfigurationException,
-			XPathExpressionException {
-		AlchemyAPI alchemyAPI = AppContext.getInstance().getAlchemyAPI();
-		entityDetector = new EntityDetector(alchemyAPI);
+	public void before() throws ConfigurationException {
+		Configuration config = new PropertiesConfiguration(CONFIG_FILE);
+		String key = config.getString("alchemy.key");
+		alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
 	}
 
 	@Test
 	public void namedEntityDetection() throws XPathExpressionException,
 			IOException, SAXException, ParserConfigurationException {
-		Collection<AlchemyEntity> es = entityDetector
-				.getEntitiesForURL(TEST_URL);
+		EntityDetector detector = new EntityDetector(alchemyAPI);
+		Collection<AlchemyEntity> es = detector.getEntitiesForURL(TEST_URL);
 		System.out.println(es);
 	}
 }

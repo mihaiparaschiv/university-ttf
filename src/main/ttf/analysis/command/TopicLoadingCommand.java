@@ -34,7 +34,6 @@ import ttf.model.IdFactory;
 import ttf.model.property.NumericalValue;
 import ttf.model.topic.Topic;
 import ttf.model.topic.TopicFactory;
-import ttf.util.AppContext;
 
 /**
  * This {@link Command} loads topics from the database.
@@ -52,26 +51,33 @@ public class TopicLoadingCommand implements Command {
 	@Override
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
-		DataSource dataSource = AppContext.getInstance().getDataSource();
-		QueryRunner run = new QueryRunner(dataSource);
+		DataSource dataSource = ctx.getDataSource();
 
+		QueryRunner run = new QueryRunner(dataSource);
 		String sql = "SELECT (id, title) FROM Topics";
-		ResultSetHandler<Collection<Topic>> rsh = new TopicListRSH();
+		ResultSetHandler<Collection<Topic>> rsh = new TopicListRSH(ctx);
 		Collection<Topic> topics = run.query(sql, rsh);
+
 		ctx.setLoadedTopics(topics);
 
 		return false;
 	}
 
 	private class TopicListRSH implements ResultSetHandler<Collection<Topic>> {
+		private AnalysisContext context;
+
+		public TopicListRSH(AnalysisContext context) {
+			this.context = context;
+		}
+
 		@Override
 		public Collection<Topic> handle(ResultSet rs) throws SQLException {
-			List<Topic> topics = new LinkedList<Topic>();
-			DataSource dataSource = AppContext.getInstance().getDataSource();
+			DataSource dataSource = context.getDataSource();
 			QueryRunner run = new QueryRunner(dataSource);
-			TopicFactory topicFactory = AppContext.getInstance()
-					.getTopicFactory();
-			IdFactory idFactory = AppContext.getInstance().getIdFactory();
+			TopicFactory topicFactory = context.getTopicFactory();
+			IdFactory idFactory = context.getIdFactory();
+
+			List<Topic> topics = new LinkedList<Topic>();
 
 			while (rs.next()) {
 				Topic topic = topicFactory.build();
