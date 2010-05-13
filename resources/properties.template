@@ -1,4 +1,5 @@
-; fill this template with necessary information and rename it to base.properties
+; fill this template with necessary information
+; files to be created: base.properties, test.properties
 alchemy.key = ...
 
 db.driverClassName = com.mysql.jdbc.Driver

@@ -22,8 +22,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.SAXException;
@@ -34,14 +32,13 @@ import ttf.util.alchemyapi.EntityDetector;
 import com.orchestr8.api.AlchemyAPI;
 
 public class AlchemyAPITest {
-	private static final String CONFIG_FILE = "resources/base.properties";
 	private static final String TEST_URL = "http://techcrunch.com";
-	
+
 	private AlchemyAPI alchemyAPI;
 
 	@Before
-	public void before() throws ConfigurationException {
-		Configuration config = new PropertiesConfiguration(CONFIG_FILE);
+	public void before() {
+		Configuration config = TestUtil.getDefaultConfiguration();
 		String key = config.getString("alchemy.key");
 		alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
 	}

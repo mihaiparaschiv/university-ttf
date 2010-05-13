@@ -22,8 +22,6 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.configuration.Configuration;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.PropertiesConfiguration;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,6 +31,7 @@ import ttf.analysis.context.ContextFactory;
 import ttf.incoming.FeedEntryParser;
 import ttf.model.article.Article;
 import ttf.model.article.ArticleFactory;
+import ttf.test.TestUtil;
 import ttf.util.FactoryUtil;
 
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -42,7 +41,6 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
 public class CommandTest {
-	private static final String CONFIG_FILE = "resources/base.properties";
 	private static final String FEED = "http://feeds.feedburner.com/TechCrunch";
 
 	private ContextFactory contextFactory;
@@ -50,8 +48,8 @@ public class CommandTest {
 
 	@Before
 	public void before() throws IllegalArgumentException, FeedException,
-			IOException, XPathExpressionException, ConfigurationException {
-		Configuration config = new PropertiesConfiguration(CONFIG_FILE);
+			IOException, XPathExpressionException {
+		Configuration config = TestUtil.getDefaultConfiguration();
 		contextFactory = FactoryUtil.buildContextFactory(config);
 
 		// Load the feed
