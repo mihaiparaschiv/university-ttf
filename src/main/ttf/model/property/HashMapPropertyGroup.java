@@ -15,17 +15,9 @@
  */
 package ttf.model.property;
 
-import java.util.Map;
+import java.util.HashMap;
 
-/**
- * Groups model properties.
- * 
- * @author Mihai Paraschiv
- * 
- * @param <K>
- *            the type of key managed by the store
- * @param <V>
- *            the type of value managed by the store
- */
-public interface PropertyGroup<K, V> extends Map<K, V> {
+public class HashMapPropertyGroup<K,V> extends HashMap<K,V> implements
+		PropertyGroup<K, V> {
+	private static final long serialVersionUID = -6977690802286509530L;
 }

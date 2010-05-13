@@ -28,25 +28,25 @@ import org.xml.sax.SAXException;
 
 import ttf.util.AppContext;
 import ttf.util.alchemyapi.AlchemyEntity;
-import ttf.util.alchemyapi.EntityProvider;
+import ttf.util.alchemyapi.EntityDetector;
 
 import com.orchestr8.api.AlchemyAPI;
 
 public class AlchemyAPITest {
 	private static final String TEST_URL = "http://techcrunch.com";
-	private EntityProvider entityProvider;
+	private EntityDetector entityDetector;
 
 	@Before
 	public void initialize() throws ConfigurationException,
 			XPathExpressionException {
 		AlchemyAPI alchemyAPI = AppContext.getInstance().getAlchemyAPI();
-		entityProvider = new EntityProvider(alchemyAPI);
+		entityDetector = new EntityDetector(alchemyAPI);
 	}
 
 	@Test
 	public void namedEntityDetection() throws XPathExpressionException,
 			IOException, SAXException, ParserConfigurationException {
-		Collection<AlchemyEntity> es = entityProvider
+		Collection<AlchemyEntity> es = entityDetector
 				.getEntitiesForURL(TEST_URL);
 		System.out.println(es);
 	}

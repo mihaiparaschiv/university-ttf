@@ -20,6 +20,7 @@ import java.util.Set;
 
 import ttf.model.Model;
 import ttf.model.ModelId;
+import ttf.model.property.HashMapPropertyGroup;
 import ttf.model.property.NumericalValue;
 import ttf.model.property.PropertyGroup;
 import ttf.model.topic.Topic;
@@ -45,8 +46,8 @@ public class Article extends Model {
 
 	protected Article(ModelId id) {
 		super(id);
-		termGroup = new PropertyGroup<String, NumericalValue>();
-		entityGroup = new PropertyGroup<String, NumericalValue>();
+		termGroup = new HashMapPropertyGroup<String, NumericalValue>();
+		entityGroup = new HashMapPropertyGroup<String, NumericalValue>();
 	}
 
 	protected Article() {

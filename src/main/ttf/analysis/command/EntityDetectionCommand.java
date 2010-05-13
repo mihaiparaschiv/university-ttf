@@ -20,22 +20,23 @@ import java.util.Collection;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 
-import ttf.analysis.context.BasicContext;
+import ttf.analysis.context.AnalysisContext;
 import ttf.model.article.Article;
 import ttf.model.property.NumericalValue;
 import ttf.model.property.PropertyGroup;
+import ttf.util.AppContext;
 import ttf.util.alchemyapi.AlchemyEntity;
-import ttf.util.alchemyapi.EntityProvider;
+import ttf.util.alchemyapi.EntityDetector;
 
 public class EntityDetectionCommand implements Command {
 	@Override
 	public boolean execute(Context context) throws Exception {
-		EntityProvider provider = ((BasicContext) context).getEntityProvider();
-		Article article = ((BasicContext) context).getArticle();
+		EntityDetector detector = AppContext.getInstance().getEntityDetector();
+		Article article = ((AnalysisContext) context).getCurrentArticle();
 
 		String address = article.getAddress();
 
-		Collection<AlchemyEntity> entities = provider
+		Collection<AlchemyEntity> entities = detector
 				.getEntitiesForURL(address);
 
 		PropertyGroup<String, NumericalValue> entityGroup;

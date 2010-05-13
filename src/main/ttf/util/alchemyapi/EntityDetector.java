@@ -34,7 +34,7 @@ import ttf.util.XPathUtil;
 
 import com.orchestr8.api.AlchemyAPI;
 
-public class EntityProvider {
+public class EntityDetector {
 	private final AlchemyAPI alchemyAPI;
 
 	private final XPathExpression xEntities;
@@ -43,7 +43,7 @@ public class EntityProvider {
 	private final XPathExpression xRelevance;
 	private final XPathExpression xCount;
 
-	public EntityProvider(AlchemyAPI alchemyAPI)
+	public EntityDetector(AlchemyAPI alchemyAPI)
 			throws XPathExpressionException {
 		this.alchemyAPI = alchemyAPI;
 

@@ -25,13 +25,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ttf.analysis.command.EntityDetectionCommand;
-import ttf.analysis.context.BasicContext;
+import ttf.analysis.context.AnalysisContext;
 import ttf.incoming.FeedEntryParser;
 import ttf.model.article.Article;
-import ttf.util.AppContext;
-import ttf.util.alchemyapi.EntityProvider;
 
-import com.orchestr8.api.AlchemyAPI;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
@@ -41,15 +38,10 @@ import com.sun.syndication.io.XmlReader;
 public class CommandTest {
 	private static final String FEED = "http://feeds.feedburner.com/TechCrunch";
 	private static Article article;
-	private static EntityProvider entityProvider;
 
 	@BeforeClass
 	public static void beforeClass() throws IllegalArgumentException,
 			FeedException, IOException, XPathExpressionException {
-		// Alchemy API
-		AlchemyAPI alchemyAPI = AppContext.getInstance().getAlchemyAPI();
-		entityProvider = new EntityProvider(alchemyAPI);
-
 		// Load the feed
 		URL feedSource = new URL(FEED);
 		SyndFeedInput input = new SyndFeedInput();
@@ -63,9 +55,8 @@ public class CommandTest {
 
 	@Test
 	public void entityDetection() throws Exception {
-		BasicContext context = new BasicContext();
-		context.setArticle(article);
-		context.setEntityProvider(entityProvider);
+		AnalysisContext context = new AnalysisContext();
+		context.setCurrentArticle(article);
 		Command command = new EntityDetectionCommand();
 		command.execute(context);
 		System.out.println(article.getEntityGroup());

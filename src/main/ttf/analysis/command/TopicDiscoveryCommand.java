@@ -15,89 +15,42 @@
  */
 package ttf.analysis.command;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
-
-import javax.sql.DataSource;
+import java.util.Collection;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
-import ttf.analysis.context.BasicContext;
-import ttf.model.IdFactory;
+import ttf.analysis.SimilarityComputer;
+import ttf.analysis.context.AnalysisContext;
 import ttf.model.article.Article;
-import ttf.model.property.NumericalValue;
 import ttf.model.topic.Topic;
-import ttf.model.topic.TopicFactory;
-import ttf.util.AppContext;
 
 /**
  * This class handles the routing of the article to its most similar topic.
- * 
- * The code is very inefficient.
  * 
  * @author Mihai Paraschiv
  */
 public class TopicDiscoveryCommand implements Command {
 	@Override
 	public boolean execute(Context context) throws Exception {
-		Article article = ((BasicContext) context).getArticle();
-		DataSource dataSource = AppContext.getInstance().getDataSource();
-		QueryRunner run = new QueryRunner(dataSource);
+		AnalysisContext ctx = (AnalysisContext) context;
+		Article article = ctx.getCurrentArticle();
+		SimilarityComputer computer = ctx.getSimilarityComputer();
 
-		// find all topics
-		String sql = "SELECT (id, title) FROM Topics";
-		ResultSetHandler<List<Topic>> rsh = new TopicListRSH();
-		List<Topic> topics = run.query(sql, rsh);
+		Collection<Topic> topics = ctx.getLoadedTopics();
 
+		Topic selectedTopic = null;
+		double maxSimilarity = 0;
 		for (Topic topic : topics) {
-
+			double sim = computer.compute(article, topic);
+			if (sim > maxSimilarity) {
+				selectedTopic = topic;
+				maxSimilarity = sim;
+			}
 		}
+
+		ctx.setSelectedTopic(selectedTopic);
 
 		return false;
-	}
-
-	private class TopicListRSH implements ResultSetHandler<List<Topic>> {
-		@Override
-		public List<Topic> handle(ResultSet rs) throws SQLException {
-			List<Topic> topics = new LinkedList<Topic>();
-			DataSource dataSource = AppContext.getInstance().getDataSource();
-			QueryRunner run = new QueryRunner(dataSource);
-			TopicFactory topicFactory = AppContext.getInstance()
-					.getTopicFactory();
-			IdFactory idFactory = AppContext.getInstance().getIdFactory();
-
-			while (rs.next()) {
-				Topic topic = topicFactory.build();
-
-				// properties
-				topic.setId(idFactory.build(Topic.class, rs.getString(0)));
-				topic.setTitle(rs.getString(1));
-
-				// features
-				String sql = "SELECT (type, name, score) FROM TopicFeatures WHERE topicId = ?";
-				ArrayListHandler h = new ArrayListHandler();
-				List<Object[]> features = run.query(sql, h, //
-						topic.getId().getValue());
-				for (Object[] o : features) {
-					String type = (String) o[0];
-					String name = (String) o[1];
-					Double score = (Double) o[2];
-					if (type == "entity") {
-						topic.getEntityGroup().put(name,
-								new NumericalValue(score));
-					}
-				}
-
-				topics.add(topic);
-			}
-
-			return topics;
-		}
 	}
 }

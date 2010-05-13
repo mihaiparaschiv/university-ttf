@@ -16,6 +16,7 @@
 package ttf.util;
 
 import javax.sql.DataSource;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
@@ -25,6 +26,7 @@ import org.apache.commons.dbcp.BasicDataSource;
 import ttf.model.IdFactory;
 import ttf.model.article.ArticleFactory;
 import ttf.model.topic.TopicFactory;
+import ttf.util.alchemyapi.EntityDetector;
 
 import com.orchestr8.api.AlchemyAPI;
 
@@ -43,6 +45,7 @@ public class AppContext {
 	private ArticleFactory articleFactory;
 	private TopicFactory topicFactory;
 	private IdFactory idFactory;
+	private EntityDetector entityDetector;
 
 	private AppContext(Configuration c) {
 		// DataSource
@@ -56,6 +59,11 @@ public class AppContext {
 		// Alchemy API
 		String key = c.getString("alchemy.key");
 		this.alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
+		try {
+			this.entityDetector = new EntityDetector(alchemyAPI);
+		} catch (XPathExpressionException e) {
+			throw new RuntimeException(e);
+		}
 		
 		// factories
 		this.articleFactory = new ArticleFactory();
@@ -97,5 +105,9 @@ public class AppContext {
 	
 	public IdFactory getIdFactory() {
 		return idFactory;
+	}
+	
+	public EntityDetector getEntityDetector() {
+		return entityDetector;
 	}
 }
