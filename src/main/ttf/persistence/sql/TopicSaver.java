@@ -71,7 +71,7 @@ public class TopicSaver {
 
 		sql = "INSERT INTO TopicFeatures (type, name, topicId, score) "
 				+ "VALUES (?, ?, ?, ?)";
-		// run.batch(sql, rows.toArray(new Object[0]));
+		run.batch(sql, rows.toArray(new Object[0][]));
 	}
 
 	private void insertTopic(Topic topic, DataSource dataSource)

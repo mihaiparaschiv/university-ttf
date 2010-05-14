@@ -39,7 +39,7 @@ public class EntityDetectionCommand implements Command {
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
 		EntityDetector detector = ctx.getEntityDetector();
-		Article article = ((AnalysisContext) context).getIncomingArticle();
+		Article article = ((AnalysisContext) context).getProcessedArticle();
 
 		String address = article.getAddress();
 

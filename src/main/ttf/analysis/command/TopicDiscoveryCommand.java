@@ -20,7 +20,7 @@ import java.util.Collection;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 
-import ttf.analysis.SimilarityComputer;
+import ttf.analysis.computation.SimilarityComputer;
 import ttf.analysis.context.AnalysisContext;
 import ttf.model.article.Article;
 import ttf.model.topic.Topic;
@@ -35,10 +35,16 @@ import ttf.model.topic.Topic;
  * @author Mihai Paraschiv
  */
 public class TopicDiscoveryCommand implements Command {
+	private final double minSimilarity;
+
+	public TopicDiscoveryCommand(double minSimilarity) {
+		this.minSimilarity = minSimilarity;
+	}
+
 	@Override
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
-		Article article = ctx.getIncomingArticle();
+		Article article = ctx.getProcessedArticle();
 		SimilarityComputer computer = ctx.getSimilarityComputer();
 
 		Collection<Topic> topics = ctx.getLoadedTopics();
@@ -53,8 +59,10 @@ public class TopicDiscoveryCommand implements Command {
 			}
 		}
 
-		ctx.setSelectedTopic(selectedTopic);
-
+		if (maxSimilarity >= minSimilarity) {
+			ctx.setSelectedTopic(selectedTopic);
+		}
+		
 		return false;
 	}
 }

@@ -15,7 +15,7 @@
  */
 package ttf.analysis.context;
 
-import ttf.analysis.SimilarityComputer;
+import ttf.analysis.computation.SimilarityComputer;
 import ttf.model.article.ArticleFactory;
 import ttf.model.topic.TopicFactory;
 import ttf.persistence.ModelStore;

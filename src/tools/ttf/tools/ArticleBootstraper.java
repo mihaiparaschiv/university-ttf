@@ -43,8 +43,9 @@ import com.sun.syndication.io.XmlReader;
  * @author Mihai Paraschiv
  */
 public class ArticleBootstraper {
-	private static final String CONFIG_FILE = "resources/base.properties";
+	private static final String CONFIG_FILE = "base.properties";
 	private static final String TABLE = "IncomingArticles";
+	
 	private final DataSource dataSource;
 
 	public ArticleBootstraper(DataSource dataSource) {

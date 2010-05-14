@@ -36,7 +36,7 @@ public class ModelPersistenceCommand implements Command {
 		TopicFactory topicFactory = ctx.getTopicFactory();
 		ModelStore modelStore = ctx.getModelStore();
 
-		Article article = ctx.getIncomingArticle();
+		Article article = ctx.getProcessedArticle();
 		Topic topic = ctx.getSelectedTopic();
 
 		if (topic == null) {

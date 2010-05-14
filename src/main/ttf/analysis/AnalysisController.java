@@ -32,7 +32,11 @@ public class AnalysisController {
 	public void run() {
 		Article article = null;
 		while ((article = articleProvider.poll()) != null) {
-			processor.process(article);
+			try {
+				processor.process(article);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

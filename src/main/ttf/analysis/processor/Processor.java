@@ -18,5 +18,5 @@ package ttf.analysis.processor;
 import ttf.model.article.Article;
 
 public interface Processor {
-	public void process(Article article);
+	public void process(Article article) throws Exception;
 }

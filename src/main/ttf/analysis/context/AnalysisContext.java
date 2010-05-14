@@ -19,7 +19,7 @@ import java.util.Collection;
 
 import org.apache.commons.chain.impl.ContextBase;
 
-import ttf.analysis.SimilarityComputer;
+import ttf.analysis.computation.SimilarityComputer;
 import ttf.model.article.Article;
 import ttf.model.article.ArticleFactory;
 import ttf.model.topic.Topic;
@@ -41,7 +41,7 @@ public class AnalysisContext extends ContextBase {
 	private SimilarityComputer similarityComputer;
 
 	// workflow
-	private Article incomingArticle;
+	private Article processedArticle;
 	private Collection<Topic> loadedTopics;
 	private Topic selectedTopic;
 
@@ -96,12 +96,12 @@ public class AnalysisContext extends ContextBase {
 		this.similarityComputer = similarityComputer;
 	}
 
-	public Article getIncomingArticle() {
-		return incomingArticle;
+	public Article getProcessedArticle() {
+		return processedArticle;
 	}
 
-	public void setIncomingArticle(Article incomingArticle) {
-		this.incomingArticle = incomingArticle;
+	public void setIncomingArticle(Article processedArticle) {
+		this.processedArticle = processedArticle;
 	}
 
 	public Collection<Topic> getLoadedTopics() {

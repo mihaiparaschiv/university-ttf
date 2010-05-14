@@ -15,17 +15,36 @@
  */
 package ttf.test;
 
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.apache.commons.dbutils.QueryRunner;
 
 public class TestUtil {
-	private static final String CONFIG_FILE = "resources/base.properties";
+	private static final String CONFIG_FILE = "test.properties";
 
 	public static Configuration getDefaultConfiguration() {
 		try {
 			return new PropertiesConfiguration(CONFIG_FILE);
 		} catch (ConfigurationException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static void clearDatabase(DataSource dataSource) {
+		String[] tables = { "IncomingArticles", "Sources", "Topics",
+				"TopicFeatures", "Articles", "ArticleFeatures" };
+		
+		QueryRunner run = new QueryRunner(dataSource);
+		try {
+			for (String table : tables) {
+				run.update("DELETE FROM " + table);
+			}
+		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}

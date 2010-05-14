@@ -4,13 +4,14 @@
 	<classpathentry kind="src" path="src/test"/>
 	<classpathentry kind="src" path="src/tools"/>
 	<classpathentry kind="src" path="src/incoming"/>
+	<classpathentry kind="src" path="config"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/collections-generic-4.01.jar"/>
 	<classpathentry kind="lib" path="lib/commons-chain-1.2.jar" sourcepath="C:/lib/apache commons/commons-chain-1.2/commons-chain-1.2-sources.jar"/>
 	<classpathentry kind="lib" path="lib/commons-configuration-1.6.jar" sourcepath="C:/lib/apache commons/commons-configuration-1.6/commons-configuration-1.6-sources.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.5.jar"/>
 	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar" sourcepath="C:/lib/apache commons/commons-logging-1.1.1/commons-logging-1.1.1-sources.jar"/>
 	<classpathentry kind="lib" path="lib/commons-dbutils-1.3.jar" sourcepath="C:/lib/apache commons/commons-dbutils-1.3/commons-dbutils-1.3-sources.jar"/>
 	<classpathentry kind="lib" path="lib/rome-1.0.jar" sourcepath="C:/lib/java/rome/rome-1.0-sources.jar"/>
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
@@ -18,6 +19,7 @@
 	<classpathentry kind="lib" path="lib/commons-pool-1.5.4.jar" sourcepath="C:/lib/apache commons/commons-pool-1.5.4/commons-pool-1.5.4-sources.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.12-bin.jar"/>
 	<classpathentry kind="lib" path="lib/commons-math-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

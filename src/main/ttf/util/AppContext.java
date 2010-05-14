@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.dbcp.BasicDataSource;
 
-import ttf.analysis.SimilarityComputer;
+import ttf.analysis.computation.SimilarityComputer;
 import ttf.analysis.context.ContextFactory;
 import ttf.model.article.ArticleFactory;
 import ttf.model.article.BasicArticleFactory;

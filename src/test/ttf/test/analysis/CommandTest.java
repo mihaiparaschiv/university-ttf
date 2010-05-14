@@ -22,7 +22,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.configuration.Configuration;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ttf.analysis.command.EntityDetectionCommand;
@@ -31,9 +31,7 @@ import ttf.analysis.context.ContextFactory;
 import ttf.incoming.BasicTransformer;
 import ttf.incoming.FeedEntryParser;
 import ttf.incoming.IncomingArticle;
-import ttf.incoming.Transformer;
 import ttf.model.article.Article;
-import ttf.model.article.ArticleFactory;
 import ttf.test.TestUtil;
 import ttf.util.AppContext;
 
@@ -46,32 +44,34 @@ import com.sun.syndication.io.XmlReader;
 public class CommandTest {
 	private static final String FEED = "http://feeds.feedburner.com/TechCrunch";
 
-	private ContextFactory contextFactory;
-	private Article article;
+	private static ContextFactory contextFactory;
+	private static FeedEntryParser entryParser;
+	private static BasicTransformer transformer;
+	private static SyndFeed feed;
 
-	@Before
-	public void before() throws IllegalArgumentException, FeedException,
-			IOException, XPathExpressionException {
+	@BeforeClass
+	public static void beforeClass() throws IllegalArgumentException,
+			FeedException, IOException, XPathExpressionException {
 		Configuration config = TestUtil.getDefaultConfiguration();
 		AppContext appContext = AppContext.build(config);
 		contextFactory = appContext.getContextFactory();
-		ArticleFactory articleFactory = appContext.getArticleFactory();
+		entryParser = new FeedEntryParser();
+		transformer = new BasicTransformer(appContext.getArticleFactory());
 
-		// Load the feed
+		// load the feed
 		URL feedSource = new URL(FEED);
 		SyndFeedInput input = new SyndFeedInput();
-		SyndFeed feed = input.build(new XmlReader(feedSource));
-
-		// Build an article from the first entry of the feed
-		FeedEntryParser entryParser = new FeedEntryParser();
-		Object e = feed.getEntries().get(0);
-		IncomingArticle incomingArticle = entryParser.parse((SyndEntry) e);
-		Transformer transformer = new BasicTransformer(articleFactory);
-		article = transformer.transform(incomingArticle);
+		feed = input.build(new XmlReader(feedSource));
 	}
 
 	@Test
 	public void entityDetection() throws Exception {
+		// Build an article from the first entry of the feed
+		Object e = feed.getEntries().get(0);
+		IncomingArticle incomingArticle = entryParser.parse((SyndEntry) e);
+		Article article = transformer.transform(incomingArticle);
+
+		// analyze article
 		AnalysisContext context = contextFactory.build();
 		context.setIncomingArticle(article);
 		Command command = new EntityDetectionCommand();
