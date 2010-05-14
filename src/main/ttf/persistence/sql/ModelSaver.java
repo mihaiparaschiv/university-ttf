@@ -15,19 +15,21 @@
  */
 package ttf.persistence.sql;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.commons.dbutils.ResultSetHandler;
+import javax.sql.DataSource;
 
-public class IdResultHandler implements ResultSetHandler<String> {
+import ttf.model.Model;
 
-	@Override
-	public String handle(ResultSet rs) throws SQLException {
-		if (rs.next()) {
-			return rs.getString(1);
-		} else {
-			return null;
-		}
+public abstract class ModelSaver<M extends Model> {
+	protected final DataSource dataSource;
+	protected final FeatureSaver featureSaver;
+
+	protected ModelSaver(DataSource dataSource, FeatureSaver featureSaver) {
+		this.dataSource = dataSource;
+		this.featureSaver = featureSaver;
 	}
+
+	protected abstract void save(M model) throws SQLException;
+
 }

@@ -45,9 +45,18 @@ public class SimilarityComputer {
 
 		// compute the scalar product
 		for (Entry<String, NumericalValue> entryA : groupA.entrySet()) {
-			double vA = entryA.getValue().getDouble();
-			double vB = groupB.get(entryA.getKey()).getDouble();
-			result += vA * vB;
+			String key = entryA.getKey();
+			NumericalValue nvA = entryA.getValue();
+			NumericalValue nvB = groupB.get(key);
+			if (nvB != null) {
+				double vA = nvA.getDouble();
+				double vB = nvB.getDouble();
+				result += vA * vB;
+			}
+		}
+		
+		if (result == 0) {
+			return 0;
 		}
 
 		// compute the norms - will be cached
@@ -55,7 +64,7 @@ public class SimilarityComputer {
 		double normB = computeNorm(groupB);
 
 		// compute the cosine similarity
-		result /= normA * normB;
+		result /= Math.sqrt(normA * normB);
 
 		return result;
 	}

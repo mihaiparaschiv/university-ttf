@@ -20,12 +20,16 @@ import java.util.List;
 import org.apache.commons.chain.Chain;
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.impl.ChainBase;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import ttf.analysis.context.AnalysisContext;
 import ttf.analysis.context.ContextFactory;
 import ttf.model.article.Article;
 
 public class ChainProcessor implements Processor {
+	private final Log log = LogFactory.getLog(ChainProcessor.class);
+
 	private final ContextFactory contextFactory;
 	private final List<Command> commands;
 
@@ -36,6 +40,8 @@ public class ChainProcessor implements Processor {
 
 	@Override
 	public void process(Article article) throws Exception {
+		log.info("Start: " + article);
+		
 		Chain chain = new ChainBase(commands);
 		AnalysisContext context = contextFactory.build();
 		context.setIncomingArticle(article);

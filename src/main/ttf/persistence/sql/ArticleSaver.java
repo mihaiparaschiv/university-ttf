@@ -19,16 +19,44 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.dbutils.GenKeyQueryRunner;
+import org.apache.commons.dbutils.QueryRunner;
+
 import ttf.model.article.Article;
 
-public class ArticleSaver {
-	private final DataSource dataSource;
-
+public class ArticleSaver extends ModelSaver<Article> {
 	protected ArticleSaver(DataSource dataSource) {
-		this.dataSource = dataSource;
+		super(dataSource, new FeatureSaver());
 	}
 
-	protected void save(Article topic) throws SQLException {
+	@Override
+	protected void save(Article article) throws SQLException {
+		if (article.getId() == null) {
+			insert(article);
+		}
 
+		QueryRunner run = new QueryRunner(dataSource);
+		featureSaver.saveArticleFeatures(run, article);
+	}
+
+	private void insert(Article article) throws SQLException {
+		GenKeyQueryRunner<String> run;
+		run = new GenKeyQueryRunner<String>(dataSource, new IdResultHandler());
+
+		String sql = "INSERT INTO Articles"
+				+ " (address, title, author, publishedAt, discoveredAt, content, topicId)"
+				+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
+		
+		run.update(sql, //
+				article.getAddress(), //
+				article.getTitle(), //
+				article.getAuthor(), //
+				article.getDiscoveredAt(), //
+				article.getDiscoveredAt(), //
+				article.getContent(), //
+				article.getTopic().getId());
+		
+		String id = run.getGeneratedKeys();
+		article.setId(id);
 	}
 }

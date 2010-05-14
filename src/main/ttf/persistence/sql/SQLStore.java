@@ -34,7 +34,7 @@ import ttf.persistence.query.Query;
 
 public class SQLStore implements ModelStore {
 	private final DataSource dataSource;
-	private final ArticleFactory articleFactory;
+	//private final ArticleFactory articleFactory;
 	private final TopicFactory topicFactory;
 	private final ArticleSaver articleSaver;
 	private final TopicSaver topicSaver;
@@ -42,7 +42,7 @@ public class SQLStore implements ModelStore {
 	public SQLStore(DataSource dataSource, ArticleFactory articleFactory,
 			TopicFactory topicFactory) {
 		this.dataSource = dataSource;
-		this.articleFactory = articleFactory;
+		// this.articleFactory = articleFactory;
 		this.topicFactory = topicFactory;
 		this.articleSaver = new ArticleSaver(dataSource);
 		this.topicSaver = new TopicSaver(dataSource);
@@ -67,7 +67,7 @@ public class SQLStore implements ModelStore {
 	public Collection<Topic> loadTopics(Query query)
 			throws PersistenceException {
 		QueryRunner run = new QueryRunner(dataSource);
-		String sql = "SELECT (id, title) FROM Topics";
+		String sql = "SELECT id, title FROM Topics";
 		ResultSetHandler<Collection<Topic>> rsh = new TopicListRSH(dataSource,
 				topicFactory);
 		Collection<Topic> topics;

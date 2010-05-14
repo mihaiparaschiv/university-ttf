@@ -31,6 +31,12 @@ import ttf.model.property.NumericalValue;
 import ttf.model.topic.Topic;
 import ttf.model.topic.TopicFactory;
 
+/**
+ * This class will be refactored.
+ * 
+ * @author Mihai Paraschiv
+ *
+ */
 public class TopicListRSH implements ResultSetHandler<Collection<Topic>> {
 	private final DataSource dataSource;
 	private final TopicFactory topicFactory;
@@ -47,11 +53,11 @@ public class TopicListRSH implements ResultSetHandler<Collection<Topic>> {
 		List<Topic> topics = new LinkedList<Topic>();
 
 		while (rs.next()) {
-			Topic topic = topicFactory.build(rs.getString(0));
-			topic.setTitle(rs.getString(1));
+			Topic topic = topicFactory.build(rs.getString(1));
+			topic.setTitle(rs.getString(2));
 
 			// load features
-			String sql = "SELECT (type, name, score) FROM TopicFeatures WHERE topicId = ?";
+			String sql = "SELECT type, name, score FROM TopicFeatures WHERE topicId = ?";
 			ArrayListHandler h = new ArrayListHandler();
 			List<Object[]> features = run.query(sql, h, topic.getId());
 
@@ -60,9 +66,9 @@ public class TopicListRSH implements ResultSetHandler<Collection<Topic>> {
 				String type = (String) o[0];
 				String name = (String) o[1];
 				Double score = (Double) o[2];
-				if (type == "entity") {
+				if (type.equals("entity")) {
 					topic.getEntityGroup().put(name, new NumericalValue(score));
-				} else if (type == "term") {
+				} else if (type.equals("term")) {
 					topic.getTermGroup().put(name, new NumericalValue(score));
 				}
 			}

@@ -15,6 +15,8 @@
  */
 package ttf.analysis.command;
 
+import java.util.Map.Entry;
+
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
 import org.apache.commons.logging.Log;
@@ -22,30 +24,50 @@ import org.apache.commons.logging.LogFactory;
 
 import ttf.analysis.context.AnalysisContext;
 import ttf.model.article.Article;
+import ttf.model.property.NumericalValue;
+import ttf.model.property.PropertyGroup;
 import ttf.model.topic.Topic;
-import ttf.persistence.ModelStore;
 
 /**
- * This {@link Command} saves the article and the topic.
+ * This class will be refactored.
  * 
  * @author Mihai Paraschiv
  */
-public class ModelPersistenceCommand implements Command {
-	private final Log log = LogFactory.getLog(ModelPersistenceCommand.class);
-	
+public class TopicUpdateCommand implements Command {
+	private final Log log = LogFactory.getLog(TopicUpdateCommand.class);
+
 	@Override
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
-		ModelStore modelStore = ctx.getModelStore();
-
 		Article article = ctx.getProcessedArticle();
 		Topic topic = ctx.getSelectedTopic();
 
-		modelStore.persistTopic(topic);
-		log.debug("Saved topic: " + topic);
-		modelStore.persistArticle(article);
-		log.debug("Saved article: " + article);
+		updateTopicGroup(topic.getTermGroup(), article.getTermGroup());
+		updateTopicGroup(topic.getEntityGroup(), article.getEntityGroup());
+
+		log.debug("Topic updated: " + topic);
 
 		return false;
+	}
+
+	private void updateTopicGroup(
+			PropertyGroup<String, NumericalValue> topicGroup,
+			PropertyGroup<String, NumericalValue> articleGroup) {
+		for (Entry<String, NumericalValue> e : articleGroup.entrySet()) {
+			String key = e.getKey();
+
+			// article value
+			NumericalValue av = e.getValue();
+
+			// topic value - update
+			NumericalValue tv = topicGroup.get(key);
+			if (tv == null) {
+				tv = new NumericalValue(av.getDouble());
+			} else {
+				tv = new NumericalValue(tv.getDouble() + av.getDouble());
+			}
+
+			topicGroup.put(key, tv);
+		}
 	}
 }

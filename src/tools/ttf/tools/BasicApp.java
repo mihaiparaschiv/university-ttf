@@ -28,6 +28,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import ttf.analysis.AnalysisController;
+import ttf.analysis.command.EntityDetectionCommand;
+import ttf.analysis.command.ModelPersistenceCommand;
+import ttf.analysis.command.TopicSelectionCommand;
+import ttf.analysis.command.TopicLoadingCommand;
+import ttf.analysis.command.TopicUpdateCommand;
 import ttf.analysis.context.ContextFactory;
 import ttf.analysis.input.InternalProvider;
 import ttf.analysis.processor.ChainProcessor;
@@ -54,7 +59,7 @@ import com.sun.syndication.io.XmlReader;
  * @author Mihai Paraschiv
  */
 public class BasicApp {
-	Log log = LogFactory.getLog(BasicApp.class);
+	private final Log log = LogFactory.getLog(BasicApp.class);
 	private final Configuration configuration;
 	private final ContextFactory contextFactory;
 	private final FeedEntryParser feedEntryParser;
@@ -68,6 +73,14 @@ public class BasicApp {
 		this.transformer = transformer;
 	}
 
+	/**
+	 * @param args feed addresses
+	 * @throws IllegalArgumentException
+	 * @throws FeedException
+	 * @throws IOException
+	 * @throws ConfigurationException
+	 * @throws SQLException
+	 */
 	public static void main(String[] args) throws IllegalArgumentException,
 			FeedException, IOException, ConfigurationException, SQLException {
 		Configuration config = TestUtil.getDefaultConfiguration();
@@ -84,12 +97,23 @@ public class BasicApp {
 
 	public void start(String[] feedAddresses) throws IllegalArgumentException,
 			FeedException, IOException, SQLException {
+		// setup parameters
+		double minSimilarity = configuration
+				.getDouble("analysis.minSimilarity");
+
 		// setup commands
 		List<Command> commands = new LinkedList<Command>();
+		commands.add(new EntityDetectionCommand());
+		commands.add(new TopicLoadingCommand());
+		commands.add(new TopicSelectionCommand(minSimilarity));
+		commands.add(new TopicUpdateCommand());
+		commands.add(new ModelPersistenceCommand());
 
 		// add articles
 		InternalProvider provider = new InternalProvider();
 		for (String address : feedAddresses) {
+			log.info("Start: " + address);
+
 			// load the feed
 			URL feedSource = new URL(address);
 			SyndFeedInput input = new SyndFeedInput();

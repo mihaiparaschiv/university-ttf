@@ -16,66 +16,30 @@
 package ttf.persistence.sql;
 
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import javax.sql.DataSource;
 
 import org.apache.commons.dbutils.GenKeyQueryRunner;
 import org.apache.commons.dbutils.QueryRunner;
 
-import ttf.model.property.NumericalValue;
 import ttf.model.topic.Topic;
 
-public class TopicSaver {
-	private final DataSource dataSource;
-
+public class TopicSaver extends ModelSaver<Topic> {
 	protected TopicSaver(DataSource dataSource) {
-		this.dataSource = dataSource;
+		super(dataSource, new FeatureSaver());
 	}
 
+	@Override
 	protected void save(Topic topic) throws SQLException {
-		// insert topic if needed
 		if (topic.getId() == null) {
-			insertTopic(topic, dataSource);
+			insert(topic);
 		}
 
 		QueryRunner run = new QueryRunner(dataSource);
-		String sql;
-
-		// delete all features
-		sql = "DELETE FROM TopicFeatures WHERE topicId = ?";
-		run.update(sql, topic.getId());
-
-		// save terms and entities
-		Set<Entry<String, NumericalValue>> terms = topic.getTermGroup()
-				.entrySet();
-		Set<Entry<String, NumericalValue>> entities = topic.getEntityGroup()
-				.entrySet();
-
-		List<Object[]> rows = new LinkedList<Object[]>();
-
-		for (Entry<String, NumericalValue> entry : terms) {
-			Object[] row = { "term", entry.getKey(), topic.getId(),
-					entry.getValue() };
-			rows.add(row);
-		}
-
-		for (Entry<String, NumericalValue> entry : entities) {
-			Object[] row = { "entity", entry.getKey(), topic.getId(),
-					entry.getValue() };
-			rows.add(row);
-		}
-
-		sql = "INSERT INTO TopicFeatures (type, name, topicId, score) "
-				+ "VALUES (?, ?, ?, ?)";
-		run.batch(sql, rows.toArray(new Object[0][]));
+		featureSaver.saveTopicFeatures(run, topic);
 	}
 
-	private void insertTopic(Topic topic, DataSource dataSource)
-			throws SQLException {
+	private void insert(Topic topic) throws SQLException {
 		GenKeyQueryRunner<String> run;
 		run = new GenKeyQueryRunner<String>(dataSource, new IdResultHandler());
 

@@ -52,6 +52,14 @@ public class ArticleBootstraper {
 		this.dataSource = dataSource;
 	}
 
+	/**
+	 * @param args feed addresses
+	 * @throws IllegalArgumentException
+	 * @throws FeedException
+	 * @throws IOException
+	 * @throws ConfigurationException
+	 * @throws SQLException
+	 */
 	public static void main(String[] args) throws IllegalArgumentException,
 			FeedException, IOException, ConfigurationException, SQLException {
 		Configuration config = new PropertiesConfiguration(CONFIG_FILE);

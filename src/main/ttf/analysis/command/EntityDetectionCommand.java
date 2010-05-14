@@ -19,6 +19,8 @@ import java.util.Collection;
 
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import ttf.analysis.context.AnalysisContext;
 import ttf.model.article.Article;
@@ -35,6 +37,8 @@ import com.orchestr8.api.AlchemyAPI;
  * @author Mihai Paraschiv
  */
 public class EntityDetectionCommand implements Command {
+	private final Log log = LogFactory.getLog(EntityDetectionCommand.class);
+
 	@Override
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
@@ -54,6 +58,8 @@ public class EntityDetectionCommand implements Command {
 			NumericalValue value = new NumericalValue(entity.getRelevance());
 			entityGroup.put(key, value);
 		}
+		
+		log.debug("Found: " + entityGroup.size() + " entities.");
 
 		return false;
 	}

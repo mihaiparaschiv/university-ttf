@@ -66,8 +66,6 @@ public class Topic extends Model {
 
 	@Override
 	public String toString() {
-		return "Topic [articleGroup=" + articleGroup + ", entityGroup="
-				+ entityGroup + ", termGroup=" + termGroup + ", title=" + title
-				+ "]";
+		return "Topic [id=" + id + ", title=" + title + "]";
 	}
 }

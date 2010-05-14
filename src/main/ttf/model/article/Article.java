@@ -136,11 +136,10 @@ public class Article extends Model {
 
 	@Override
 	public String toString() {
-		return "Article [address=" + address + ", author=" + author
-				+ ", content=" + content + ", discoveredAt=" + discoveredAt
-				+ ", entityGroup=" + entityGroup + ", name=" + title
-				+ ", publishedAt=" + publishedAt + ", score=" + score
-				+ ", tags=" + tags + ", termGroup=" + termGroup + ", topic="
+		return "Article [id=" + id + ", author=" + author + ", address="
+				+ address + ", content=" + content + ", discoveredAt="
+				+ discoveredAt + ", publishedAt=" + publishedAt + ", score="
+				+ score + ", tags=" + tags + ", title=" + title + ", topic="
 				+ topic + "]";
 	}
 }

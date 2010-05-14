@@ -36,13 +36,16 @@ public class TestUtil {
 	}
 
 	public static void clearDatabase(DataSource dataSource) {
-		String[] tables = { "IncomingArticles", "Sources", "Topics",
-				"TopicFeatures", "Articles", "ArticleFeatures" };
-		
+		String[] tables = { //
+		"IncomingArticles", "Sources", //
+				"ArticleFeatures", "Articles", //
+				"TopicFeatures", "Topics" };
+
 		QueryRunner run = new QueryRunner(dataSource);
 		try {
 			for (String table : tables) {
 				run.update("DELETE FROM " + table);
+				System.out.println("Cleared table: " + table);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
