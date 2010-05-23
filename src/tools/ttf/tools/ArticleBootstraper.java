@@ -91,7 +91,7 @@ public class ArticleBootstraper {
 						article.getAddress(), //
 						article.getTitle(), //
 						article.getAuthor(), //
-						article.getDiscoveredAt(), //
+						article.getPublishedAt(), //
 						article.getDiscoveredAt(), //
 						article.getContent());
 			}

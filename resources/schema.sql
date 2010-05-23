@@ -18,8 +18,11 @@
 -- Create schema ttf
 --
 
+drop database ttf;
+
 CREATE DATABASE IF NOT EXISTS ttf;
 USE ttf;
+
 CREATE TABLE `articlefeatures` (
   `type` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -57,8 +60,9 @@ CREATE TABLE `incomingarticles` (
   `publishedAt` datetime NOT NULL,
   `discoveredAt` datetime NOT NULL,
   `sourceId` int(10) unsigned DEFAULT NULL,
-  `address` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL UNIQUE,
   `content` text NOT NULL,
+  `processed` boolean NOT NULL DEFAULT 0, 
   PRIMARY KEY (`id`),
   KEY `FK_incomingarticles_1` (`sourceId`),
   CONSTRAINT `FK_incomingarticles_1` FOREIGN KEY (`sourceId`) REFERENCES `sources` (`id`)
@@ -69,8 +73,9 @@ CREATE TABLE `incomingarticles` (
 
 CREATE TABLE `sources` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
+  `retrievalInterval` mediumint unsigned DEFAULT 0,
+  `lastChecked` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `address` varchar(255) NOT NULL UNIQUE,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
