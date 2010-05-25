@@ -53,7 +53,6 @@ public class FeedReader {
 
             queue.add(new FeedInfo(address, interval, lastChecked));
         }
-        System.out.println(queue);
     }
 
     public void run() throws IllegalArgumentException, FeedException, IOException, SQLException {

@@ -7,7 +7,7 @@ import java.util.List;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 
-class FeedInfo implements Comparable<FeedInfo> {
+public class FeedInfo implements Comparable<FeedInfo> {
     public static final long MINUTE = 60 * 1000;
     private static final int MAGIC_NUMBER = 5;
     public String address;
