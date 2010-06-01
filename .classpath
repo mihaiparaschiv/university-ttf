@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src/main"/>
-	<classpathentry kind="src" path="src/test"/>
-	<classpathentry kind="src" path="src/tools"/>
-	<classpathentry kind="src" path="src/incoming"/>
-	<classpathentry kind="src" path="config"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/collections-generic-4.01.jar"/>
-	<classpathentry kind="lib" path="lib/commons-chain-1.2.jar" sourcepath="C:/lib/apache commons/commons-chain-1.2/commons-chain-1.2-sources.jar"/>
-	<classpathentry kind="lib" path="lib/commons-configuration-1.6.jar" sourcepath="C:/lib/apache commons/commons-configuration-1.6/commons-configuration-1.6-sources.jar"/>
-	<classpathentry kind="lib" path="lib/commons-lang-2.5.jar"/>
-	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar" sourcepath="C:/lib/apache commons/commons-logging-1.1.1/commons-logging-1.1.1-sources.jar"/>
-	<classpathentry kind="lib" path="lib/commons-dbutils-1.3.jar" sourcepath="C:/lib/apache commons/commons-dbutils-1.3/commons-dbutils-1.3-sources.jar"/>
-	<classpathentry kind="lib" path="lib/rome-1.0.jar" sourcepath="C:/lib/java/rome/rome-1.0-sources.jar"/>
-	<classpathentry kind="lib" path="lib/jdom.jar"/>
-	<classpathentry kind="lib" path="lib/commons-dbcp-1.4.jar" sourcepath="C:/lib/apache commons/commons-dbcp-1.4/commons-dbcp-1.4-sources.jar"/>
-	<classpathentry kind="lib" path="lib/commons-pool-1.5.4.jar" sourcepath="C:/lib/apache commons/commons-pool-1.5.4/commons-pool-1.5.4-sources.jar"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.12-bin.jar"/>
-	<classpathentry kind="lib" path="lib/commons-math-2.1.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-1.2.16.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry path="src/main" kind="src"/>
+	<classpathentry path="src/test" kind="src"/>
+	<classpathentry path="src/tools" kind="src"/>
+	<classpathentry path="src/incoming" kind="src"/>
+	<classpathentry path="config" kind="src"/>
+	<classpathentry path="org.eclipse.jdt.launching.JRE_CONTAINER" kind="con"/>
+	<classpathentry path="lib/collections-generic-4.01.jar" kind="lib"/>
+	<classpathentry sourcepath="C:/lib/apache commons/commons-chain-1.2/commons-chain-1.2-sources.jar" path="lib/commons-chain-1.2.jar" kind="lib"/>
+	<classpathentry sourcepath="C:/lib/apache commons/commons-configuration-1.6/commons-configuration-1.6-sources.jar" path="lib/commons-configuration-1.6.jar" kind="lib"/>
+	<classpathentry path="lib/commons-lang-2.5.jar" kind="lib"/>
+	<classpathentry path="lib/commons-collections-3.2.1.jar" kind="lib"/>
+	<classpathentry sourcepath="C:/lib/apache commons/commons-logging-1.1.1/commons-logging-1.1.1-sources.jar" path="lib/commons-logging-1.1.1.jar" kind="lib"/>
+	<classpathentry sourcepath="C:/lib/apache commons/commons-dbutils-1.3/commons-dbutils-1.3-sources.jar" path="lib/commons-dbutils-1.3.jar" kind="lib"/>
+	<classpathentry sourcepath="C:/lib/java/rome/rome-1.0-sources.jar" path="lib/rome-1.0.jar" kind="lib"/>
+	<classpathentry path="lib/jdom.jar" kind="lib"/>
+	<classpathentry sourcepath="C:/lib/apache commons/commons-dbcp-1.4/commons-dbcp-1.4-sources.jar" path="lib/commons-dbcp-1.4.jar" kind="lib"/>
+	<classpathentry sourcepath="C:/lib/apache commons/commons-pool-1.5.4/commons-pool-1.5.4-sources.jar" path="lib/commons-pool-1.5.4.jar" kind="lib"/>
+	<classpathentry path="lib/mysql-connector-java-5.1.12-bin.jar" kind="lib"/>
+	<classpathentry path="lib/commons-math-2.1.jar" kind="lib"/>
+	<classpathentry path="lib/log4j-1.2.16.jar" kind="lib"/>
+	<classpathentry sourcepath="D:/Kit/Java&amp;Php/junit4.8.2/junit-4.8.2-src.jar" path="lib/junit-4.8.2.jar" kind="lib"/>
+	<classpathentry sourcepath="D:/Kit/Java&amp;Php/icu3.8.1/icu4j-3_8_1-sources.jar" path="lib/icu4j-3_8_1.jar" kind="lib"/>
+	<classpathentry sourcepath="D:/Kit/Java&amp;Php/commonsIo/icommons-io-1.2-sources.jar" path="lib/commons-io-1.2.jar" kind="lib"/>
+	<classpathentry path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4" kind="con"/>
+	<classpathentry path="bin" kind="output"/>
 </classpath>

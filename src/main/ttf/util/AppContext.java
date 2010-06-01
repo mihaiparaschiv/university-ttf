@@ -28,7 +28,9 @@ import ttf.model.topic.BasicTopicFactory;
 import ttf.model.topic.TopicFactory;
 import ttf.persistence.ModelStore;
 import ttf.persistence.sql.SQLStore;
+import ttf.tfidf.TfIdf;
 import ttf.util.alchemyapi.EntityDetector;
+import ttf.util.tfidfapi.TfIdfDetector;
 
 import com.orchestr8.api.AlchemyAPI;
 
@@ -60,14 +62,15 @@ public class AppContext {
 
 		// processing
 		String key = c.getString("alchemy.key");
-		AlchemyAPI alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
+		AlchemyAPI alchemyAPI = AlchemyAPI.GetInstanceFromString(key);		
 		EntityDetector entityDetector = new EntityDetector(alchemyAPI);
+		TfIdfDetector tfIdfDectector = new TfIdfDetector(new TfIdf());
 		SimilarityComputer similarityComputer = new SimilarityComputer();
 
 		contextFactory = new ContextFactory( //
 				articleFactory, topicFactory, //
 				modelStore, //
-				alchemyAPI, entityDetector, similarityComputer);
+				alchemyAPI, entityDetector, tfIdfDectector,  similarityComputer);
 	}
 
 	public static AppContext build(Configuration c) {

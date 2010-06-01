@@ -20,6 +20,7 @@ import ttf.model.article.ArticleFactory;
 import ttf.model.topic.TopicFactory;
 import ttf.persistence.ModelStore;
 import ttf.util.alchemyapi.EntityDetector;
+import ttf.util.tfidfapi.TfIdfDetector;
 
 import com.orchestr8.api.AlchemyAPI;
 
@@ -29,11 +30,12 @@ public class ContextFactory {
 	private final ModelStore modelStore;
 	private final AlchemyAPI alchemyAPI;
 	private final EntityDetector entityDetector;
+	private final TfIdfDetector tfIdfDectector;
 	private final SimilarityComputer similarityComputer;
 
 	public ContextFactory(ArticleFactory articleFactory,
 			TopicFactory topicFactory, ModelStore modelStore,
-			AlchemyAPI alchemyAPI, EntityDetector entityDetector,
+			AlchemyAPI alchemyAPI, EntityDetector entityDetector, TfIdfDetector tfIdfDetector,
 			SimilarityComputer similarityComputer) {
 		super();
 		this.articleFactory = articleFactory;
@@ -41,6 +43,7 @@ public class ContextFactory {
 		this.modelStore = modelStore;
 		this.alchemyAPI = alchemyAPI;
 		this.entityDetector = entityDetector;
+		this.tfIdfDectector = tfIdfDetector;
 		this.similarityComputer = similarityComputer;
 	}
 
@@ -52,6 +55,7 @@ public class ContextFactory {
 		context.setModelStore(modelStore);
 		context.setAlchemyAPI(alchemyAPI);
 		context.setEntityDetector(entityDetector);
+		context.setTfIdfDetector(tfIdfDectector);
 		context.setSimilarityComputer(similarityComputer);
 
 		return context;

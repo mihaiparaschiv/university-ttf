@@ -26,6 +26,7 @@ import ttf.model.topic.Topic;
 import ttf.model.topic.TopicFactory;
 import ttf.persistence.ModelStore;
 import ttf.util.alchemyapi.EntityDetector;
+import ttf.util.tfidfapi.TfIdfDetector;
 
 import com.orchestr8.api.AlchemyAPI;
 
@@ -38,6 +39,7 @@ public class AnalysisContext extends ContextBase {
 	private ModelStore modelStore;
 	private AlchemyAPI alchemyAPI;
 	private EntityDetector entityDetector;
+	private TfIdfDetector tfIdfDetector;
 	private SimilarityComputer similarityComputer;
 
 	// workflow
@@ -86,6 +88,14 @@ public class AnalysisContext extends ContextBase {
 
 	public void setEntityDetector(EntityDetector entityDetector) {
 		this.entityDetector = entityDetector;
+	}
+	
+	public TfIdfDetector getTfIdfDetector() {
+		return tfIdfDetector;
+	}
+
+	public void setTfIdfDetector(TfIdfDetector tfIdfDetector) {
+		this.tfIdfDetector = tfIdfDetector;
 	}
 
 	public SimilarityComputer getSimilarityComputer() {
