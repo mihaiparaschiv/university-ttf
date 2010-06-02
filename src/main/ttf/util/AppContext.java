@@ -22,13 +22,13 @@ import org.apache.commons.dbcp.BasicDataSource;
 
 import ttf.analysis.computation.SimilarityComputer;
 import ttf.analysis.context.ContextFactory;
+import ttf.analysis.tfidf.TfIdf;
 import ttf.model.article.ArticleFactory;
 import ttf.model.article.BasicArticleFactory;
 import ttf.model.topic.BasicTopicFactory;
 import ttf.model.topic.TopicFactory;
 import ttf.persistence.ModelStore;
 import ttf.persistence.sql.SQLStore;
-import ttf.tfidf.TfIdf;
 import ttf.util.alchemyapi.EntityDetector;
 import ttf.util.tfidfapi.TfIdfDetector;
 
@@ -62,7 +62,7 @@ public class AppContext {
 
 		// processing
 		String key = c.getString("alchemy.key");
-		AlchemyAPI alchemyAPI = AlchemyAPI.GetInstanceFromString(key);		
+		AlchemyAPI alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
 		EntityDetector entityDetector = new EntityDetector(alchemyAPI);
 		TfIdfDetector tfIdfDectector = new TfIdfDetector(new TfIdf());
 		SimilarityComputer similarityComputer = new SimilarityComputer();
@@ -70,7 +70,7 @@ public class AppContext {
 		contextFactory = new ContextFactory( //
 				articleFactory, topicFactory, //
 				modelStore, //
-				alchemyAPI, entityDetector, tfIdfDectector,  similarityComputer);
+				alchemyAPI, entityDetector, tfIdfDectector, similarityComputer);
 	}
 
 	public static AppContext build(Configuration c) {

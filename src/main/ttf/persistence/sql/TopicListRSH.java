@@ -35,7 +35,7 @@ import ttf.model.topic.TopicFactory;
  * This class will be refactored.
  * 
  * @author Mihai Paraschiv
- *
+ * 
  */
 public class TopicListRSH implements ResultSetHandler<Collection<Topic>> {
 	private final DataSource dataSource;

@@ -35,8 +35,8 @@ public class ContextFactory {
 
 	public ContextFactory(ArticleFactory articleFactory,
 			TopicFactory topicFactory, ModelStore modelStore,
-			AlchemyAPI alchemyAPI, EntityDetector entityDetector, TfIdfDetector tfIdfDetector,
-			SimilarityComputer similarityComputer) {
+			AlchemyAPI alchemyAPI, EntityDetector entityDetector,
+			TfIdfDetector tfIdfDetector, SimilarityComputer similarityComputer) {
 		super();
 		this.articleFactory = articleFactory;
 		this.topicFactory = topicFactory;

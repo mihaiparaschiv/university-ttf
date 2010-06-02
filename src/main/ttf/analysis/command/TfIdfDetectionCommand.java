@@ -37,22 +37,23 @@ public class TfIdfDetectionCommand implements Command {
 	@Override
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
-		
-		Article article = ((AnalysisContext) context).getProcessedArticle();		
+
+		Article article = ((AnalysisContext) context).getProcessedArticle();
 		String address = article.getAddress();
 
 		TfIdfDetector detector = ctx.getTfIdfDetector();
 		Collection<TfIdfEntity> entities = detector.getTfIdfForURL(address);
 
 		PropertyGroup<String, NumericalValue> termGroup;
-		termGroup = article.getTermGroup(); //only for topic...
+		termGroup = article.getTermGroup(); // only for topic...
 
 		for (TfIdfEntity entity : entities) {
 			String key = entity.getToken().getValue();
-			NumericalValue value = new NumericalValue(entity.getTf() * entity.getIdf());
+			NumericalValue value = new NumericalValue(entity.getTf()
+					* entity.getIdf());
 			termGroup.put(key, value);
 		}
-		
+
 		log.debug("Found: " + termGroup.size() + " entities.");
 
 		return false;

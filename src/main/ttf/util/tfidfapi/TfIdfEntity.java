@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 package ttf.util.tfidfapi;
+
 import ttf.model.token.*;
 
 public class TfIdfEntity {
@@ -41,9 +42,7 @@ public class TfIdfEntity {
 
 	@Override
 	public String toString() {
-		return "TfIdf [Token Value = " + token.getValue() + " " + 
-				"tf=" + tf + " " +
-				"idf=" + idf
-				+ "]";
+		return "TfIdf [Token Value = " + token.getValue() + " " + "tf=" + tf
+				+ " " + "idf=" + idf + "]";
 	}
 }

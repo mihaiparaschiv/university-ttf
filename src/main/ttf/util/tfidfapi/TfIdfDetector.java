@@ -18,31 +18,30 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import ttf.tfidf.TfIdf;
+import ttf.analysis.tfidf.TfIdf;
 import ttf.model.token.*;
-
 
 public class TfIdfDetector {
 
 	private TfIdf tfIdf;
+
 	public TfIdfDetector(TfIdf tfIdf) {
 		this.tfIdf = tfIdf;
 	}
 
-	public Collection<TfIdfEntity> getTfIdfForURL(String url) throws Exception
-	{
+	public Collection<TfIdfEntity> getTfIdfForURL(String url) throws Exception {
 		Collection<TfIdfEntity> entities = new LinkedList<TfIdfEntity>();
 		Collection<Token> tokens = tfIdf.GetUrlTokens(url);
-		
+
 		for (Token token : tokens) {
-			double tf = 0; //compute tf
+			double tf = 0; // compute tf
 			// TODO compute tf
-			double idf = 0; //and idf
+			double idf = 0; // and idf
 			// TODO compute idf
 			TfIdfEntity entity = new TfIdfEntity(token, tf, idf);
 			entities.add(entity);
 		}
-				
+
 		return entities;
 	}
 }

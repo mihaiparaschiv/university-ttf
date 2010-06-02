@@ -32,7 +32,7 @@ import ttf.persistence.ModelStore;
  */
 public class ModelPersistenceCommand implements Command {
 	private final Log log = LogFactory.getLog(ModelPersistenceCommand.class);
-	
+
 	@Override
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;

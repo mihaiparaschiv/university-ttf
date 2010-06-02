@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ttf.tfidf;
+package ttf.analysis.tfidf;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -28,20 +28,18 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import ttf.analysis.tfidf.tokenizer.SentenceTokenizer;
+import ttf.analysis.tfidf.tokenizer.WordTokenizer;
 import ttf.model.token.BasicTokenFactory;
 import ttf.model.token.Token;
-import ttf.tfidf.tokenizer.SentenceTokenizer;
-import ttf.tfidf.tokenizer.WordTokenizer;
 import ttf.util.tfidfapi.TfIdfEntity;
 
 public class TfIdf {
-	public TfIdf()
-	{
+	public TfIdf() {
 	}
-	
-	private Document GetUrlDocument(String uri)
-		throws IOException, SAXException, ParserConfigurationException
-	{
+
+	private Document GetUrlDocument(String uri) throws IOException,
+			SAXException, ParserConfigurationException {
 		URL url = new URL(uri);
 		HttpURLConnection handle = (HttpURLConnection) url.openConnection();
 		handle.setDoOutput(true);
@@ -49,37 +47,35 @@ public class TfIdf {
 		DataInputStream istream = new DataInputStream(handle.getInputStream());
 		Document doc = DocumentBuilderFactory.newInstance()
 				.newDocumentBuilder().parse(istream);
-		
+
 		istream.close();
 		handle.disconnect();
-		
+
 		return doc;
 	}
-	
-	public Collection<Token> GetUrlTokens(String url) 
-		throws Exception
-	{
+
+	public Collection<Token> GetUrlTokens(String url) throws Exception {
 		Collection<Token> tokens = new LinkedList<Token>();
-		
+
 		Document doc = GetUrlDocument(url);
-		//parse doc ...
-		
+		// parse doc ...
+
 		SentenceTokenizer sentenceTokenizer = new SentenceTokenizer();
-	    WordTokenizer wordTokenizer = new WordTokenizer();
-	    
-    	sentenceTokenizer.setText( doc.toString()); 
-    	// TODO maybe a good doc parse would be better
-    	String sentence = null;
-    	while ((sentence = sentenceTokenizer.nextSentence()) != null) {
-    		System.out.println("sentence=" + sentence);
-    		wordTokenizer.setText(sentence);
-    		Token token = null;
-    		while ((token = wordTokenizer.nextToken()) != null) {
-    			System.out.println("token=" + token.toString());
-    			tokens.add(token);
-    		}
-    	}
-	    
+		WordTokenizer wordTokenizer = new WordTokenizer();
+
+		sentenceTokenizer.setText(doc.toString());
+		// TODO maybe a good doc parse would be better
+		String sentence = null;
+		while ((sentence = sentenceTokenizer.nextSentence()) != null) {
+			System.out.println("sentence=" + sentence);
+			wordTokenizer.setText(sentence);
+			Token token = null;
+			while ((token = wordTokenizer.nextToken()) != null) {
+				System.out.println("token=" + token.toString());
+				tokens.add(token);
+			}
+		}
+
 		return tokens;
 	}
 }

@@ -58,7 +58,7 @@ public class EntityDetectionCommand implements Command {
 			NumericalValue value = new NumericalValue(entity.getRelevance());
 			entityGroup.put(key, value);
 		}
-		
+
 		log.debug("Found: " + entityGroup.size() + " entities.");
 
 		return false;

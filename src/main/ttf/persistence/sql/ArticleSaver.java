@@ -46,7 +46,7 @@ public class ArticleSaver extends ModelSaver<Article> {
 		String sql = "INSERT INTO Articles"
 				+ " (address, title, author, publishedAt, discoveredAt, content, topicId)"
 				+ " VALUES (?, ?, ?, ?, ?, ?, ?)";
-		
+
 		run.update(sql, //
 				article.getAddress(), //
 				article.getTitle(), //
@@ -55,7 +55,7 @@ public class ArticleSaver extends ModelSaver<Article> {
 				article.getDiscoveredAt(), //
 				article.getContent(), //
 				article.getTopic().getId());
-		
+
 		String id = run.getGeneratedKeys();
 		article.setId(id);
 	}

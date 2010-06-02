@@ -54,7 +54,7 @@ public class SimilarityComputer {
 				result += vA * vB;
 			}
 		}
-		
+
 		if (result == 0) {
 			return 0;
 		}

@@ -27,8 +27,6 @@ import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import ttf.analysis.AnalysisController;
 import ttf.analysis.command.EntityDetectionCommand;
@@ -54,7 +52,6 @@ public class AdvancedApp {
     private static final String INCOMINGARTICLES = "IncomingArticles";
     private static final String SOURCES = "sources";
 
-    private final Log log = LogFactory.getLog(BasicApp.class);
     private final Configuration configuration;
     private final ContextFactory contextFactory;
     private final Transformer transformer;

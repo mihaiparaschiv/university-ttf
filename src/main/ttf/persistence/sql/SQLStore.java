@@ -34,7 +34,7 @@ import ttf.persistence.query.Query;
 
 public class SQLStore implements ModelStore {
 	private final DataSource dataSource;
-	//private final ArticleFactory articleFactory;
+	// private final ArticleFactory articleFactory;
 	private final TopicFactory topicFactory;
 	private final ArticleSaver articleSaver;
 	private final TopicSaver topicSaver;

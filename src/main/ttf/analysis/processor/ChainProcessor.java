@@ -41,7 +41,7 @@ public class ChainProcessor implements Processor {
 	@Override
 	public void process(Article article) throws Exception {
 		log.info("Start: " + article);
-		
+
 		Chain chain = new ChainBase(commands);
 		AnalysisContext context = contextFactory.build();
 		context.setIncomingArticle(article);

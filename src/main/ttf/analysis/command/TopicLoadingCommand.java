@@ -36,7 +36,7 @@ import ttf.persistence.ModelStore;
  */
 public class TopicLoadingCommand implements Command {
 	private final Log log = LogFactory.getLog(TopicLoadingCommand.class);
-	
+
 	@Override
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
@@ -44,7 +44,7 @@ public class TopicLoadingCommand implements Command {
 
 		Collection<Topic> topics = store.loadTopics(null);
 		ctx.setLoadedTopics(topics);
-		
+
 		log.debug("Loaded " + topics.size() + " topics.");
 
 		return false;

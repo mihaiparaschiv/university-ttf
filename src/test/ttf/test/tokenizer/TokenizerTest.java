@@ -7,8 +7,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
+import ttf.analysis.tfidf.tokenizer.*;
 import ttf.model.token.*;
-import ttf.tfidf.tokenizer.*;
 
 /**
  * 

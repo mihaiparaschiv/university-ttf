@@ -89,7 +89,7 @@ public class AnalysisContext extends ContextBase {
 	public void setEntityDetector(EntityDetector entityDetector) {
 		this.entityDetector = entityDetector;
 	}
-	
+
 	public TfIdfDetector getTfIdfDetector() {
 		return tfIdfDetector;
 	}
