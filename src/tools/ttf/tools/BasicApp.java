@@ -43,6 +43,7 @@ import ttf.incoming.Transformer;
 import ttf.model.article.Article;
 import ttf.test.TestUtil;
 import ttf.util.AppContext;
+import ttf.analysis.command.TfIdfDetectionCommand;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -104,6 +105,7 @@ public class BasicApp {
 		// setup commands
 		List<Command> commands = new LinkedList<Command>();
 		commands.add(new EntityDetectionCommand());
+		commands.add(new TfIdfDetectionCommand());
 		commands.add(new TopicLoadingCommand());
 		commands.add(new TopicSelectionCommand(minSimilarity));
 		commands.add(new TopicUpdateCommand());

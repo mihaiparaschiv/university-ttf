@@ -14,7 +14,6 @@
  */
 package ttf.util.tfidfapi;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -31,12 +30,17 @@ public class TfIdfDetector {
 
 	public Collection<TfIdfEntity> getTfIdfForURL(String url) throws Exception {
 		Collection<TfIdfEntity> entities = new LinkedList<TfIdfEntity>();
+
 		Collection<Token> tokens = tfIdf.GetUrlTokens(url);
+		int count = 0;
 
 		for (Token token : tokens) {
-			double tf = 0; // compute tf
-			// TODO compute tf
-			double idf = 0; // and idf
+			count += token.getCount();		
+		}
+
+		for (Token token : tokens) {
+			double tf = (double)token.getCount() / (double)count; 
+			double idf = 1.00;
 			// TODO compute idf
 			TfIdfEntity entity = new TfIdfEntity(token, tf, idf);
 			entities.add(entity);

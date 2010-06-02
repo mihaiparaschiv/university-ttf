@@ -15,67 +15,112 @@
  */
 package ttf.analysis.tfidf;
 
-import java.io.DataInputStream;
+
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
 import ttf.analysis.tfidf.tokenizer.SentenceTokenizer;
 import ttf.analysis.tfidf.tokenizer.WordTokenizer;
-import ttf.model.token.BasicTokenFactory;
 import ttf.model.token.Token;
-import ttf.util.tfidfapi.TfIdfEntity;
+import ttf.model.token.TokenType;
+
+import org.apache.commons.collections.bag.HashBag;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.lucene.analysis.StopFilter;
+import org.htmlparser.parserapplications.StringExtractor;
 
 public class TfIdf {
 	public TfIdf() {
+		SummaryAnalyzer(); // make the stopwords set
 	}
 
-	private Document GetUrlDocument(String uri) throws IOException,
-			SAXException, ParserConfigurationException {
-		URL url = new URL(uri);
-		HttpURLConnection handle = (HttpURLConnection) url.openConnection();
-		handle.setDoOutput(true);
+	private Set<String> stopset;
 
-		DataInputStream istream = new DataInputStream(handle.getInputStream());
-		Document doc = DocumentBuilderFactory.newInstance()
-				.newDocumentBuilder().parse(istream);
+	public void SummaryAnalyzer(){
 
-		istream.close();
-		handle.disconnect();
+		String[] stopwords = null;
+		try
+		{
+			stopwords = filterComments(StringUtils.split(
+					FileUtils.readFileToString(new File(
+							"resources/stopwords.txt"), "UTF-8")));
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 
-		return doc;
+		if (stopwords != null)
+			this.stopset = StopFilter.makeStopSet(stopwords, true);
+	}		
+
+	private String[] filterComments(String[] input) {
+		List<String> stopwords = new ArrayList<String>();
+		for (String stopword : input) {
+			if (! stopword.startsWith("#")) {
+				stopwords.add(stopword);
+			}
+		}
+		return stopwords.toArray(new String[0]);
 	}
 
-	public Collection<Token> GetUrlTokens(String url) throws Exception {
+	public Collection<Token> GetUrlTokens(String uri) throws Exception {
+
 		Collection<Token> tokens = new LinkedList<Token>();
-
-		Document doc = GetUrlDocument(url);
-		// parse doc ...
+		HashMap <String, Token> TokenOccurences = new HashMap<String, Token>();
 
 		SentenceTokenizer sentenceTokenizer = new SentenceTokenizer();
 		WordTokenizer wordTokenizer = new WordTokenizer();
 
-		sentenceTokenizer.setText(doc.toString());
-		// TODO maybe a good doc parse would be better
+		StringExtractor se = new StringExtractor (uri); // uses HTML parser - StringExtractor
+
+		sentenceTokenizer.setText(se.extractStrings (false)); 
 		String sentence = null;
 		while ((sentence = sentenceTokenizer.nextSentence()) != null) {
-			System.out.println("sentence=" + sentence);
+			//System.out.println("sentence=" + sentence);
 			wordTokenizer.setText(sentence);
 			Token token = null;
 			while ((token = wordTokenizer.nextToken()) != null) {
-				System.out.println("token=" + token.toString());
-				tokens.add(token);
-			}
+				//System.out.println("token=" + token.toString());
+				if (filterToken(token))
+				{
+					if (TokenOccurences.containsKey(token.getValue()))
+					{						
+						token = TokenOccurences.get(token.getValue());
+						token.incrementCount();
+					}
+					else		
+					{						
+						TokenOccurences.put(token.getValue(), token);
+						tokens.add(token);
+					}				
+				}
+			}	
 		}
 
 		return tokens;
 	}
+
+	private Boolean filterToken(Token token)
+	{
+		if (token.getType() != TokenType.WORD &&
+				token.getType() != TokenType.NUMBER
+		)
+			return false;
+
+		if (stopset.contains(token.getValue()))	 // is a stop word					
+			return false;
+
+		return true;
+	}
+
+
+
 }
