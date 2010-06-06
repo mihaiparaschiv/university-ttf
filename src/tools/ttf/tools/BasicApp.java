@@ -15,6 +15,7 @@
  */
 package ttf.tools;
 
+import java.io.Console;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;

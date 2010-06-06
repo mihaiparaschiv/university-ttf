@@ -59,18 +59,18 @@ public class AppContext {
 		articleFactory = new BasicArticleFactory();
 		topicFactory = new BasicTopicFactory();
 		modelStore = new SQLStore(dataSource, articleFactory, topicFactory);
-
+		
 		// processing
 		String key = c.getString("alchemy.key");
 		AlchemyAPI alchemyAPI = AlchemyAPI.GetInstanceFromString(key);
 		EntityDetector entityDetector = new EntityDetector(alchemyAPI);
-		TfIdfDetector tfIdfDectector = new TfIdfDetector(new TfIdf());
+		TfIdfDetector tfIdfDetector = new TfIdfDetector(new TfIdf());
 		SimilarityComputer similarityComputer = new SimilarityComputer();
 
 		contextFactory = new ContextFactory( //
 				articleFactory, topicFactory, //
 				modelStore, //
-				alchemyAPI, entityDetector, tfIdfDectector, similarityComputer);
+				alchemyAPI, entityDetector, tfIdfDetector, similarityComputer);
 	}
 
 	public static AppContext build(Configuration c) {

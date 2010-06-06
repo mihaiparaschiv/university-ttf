@@ -38,6 +38,8 @@ import org.apache.lucene.analysis.StopFilter;
 import org.htmlparser.parserapplications.StringExtractor;
 
 public class TfIdf {
+	
+	private final int MaxWordCount = 24;//eliminates unwanted tokens  
 	public TfIdf() {
 		SummaryAnalyzer(); // make the stopwords set
 	}
@@ -51,7 +53,7 @@ public class TfIdf {
 		{
 			stopwords = filterComments(StringUtils.split(
 					FileUtils.readFileToString(new File(
-							"resources/stopwords.txt"), "UTF-8")));
+					"resources/stopwords.txt"), "UTF-8")));
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -110,12 +112,15 @@ public class TfIdf {
 
 	private Boolean filterToken(Token token)
 	{
-		if (token.getType() != TokenType.WORD &&
-				token.getType() != TokenType.NUMBER
+		if (token.getType() != TokenType.WORD /*&&
+				token.getType() != TokenType.NUMBER*/
 		)
 			return false;
 
-		if (stopset.contains(token.getValue()))	 // is a stop word					
+		if (stopset.contains(StringUtils.lowerCase(token.getValue())))	 // is a stop word					
+			return false;
+		
+		if (token.getValue().length() > MaxWordCount)
 			return false;
 
 		return true;

@@ -37,7 +37,7 @@ public class TestUtil {
 
 	public static void clearDatabase(DataSource dataSource) {
 		String[] tables = { //
-		"IncomingArticles", "Sources", //
+		"IncomingArticles", //"Sources", //
 				"ArticleFeatures", "Articles", //
 				"TopicFeatures", "Topics" };
 

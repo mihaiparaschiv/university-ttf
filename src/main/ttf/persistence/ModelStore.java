@@ -15,21 +15,30 @@
  */
 package ttf.persistence;
 
+import java.sql.SQLException;
 import java.util.Collection;
 
 import ttf.model.article.Article;
+import ttf.model.property.NumericalValue;
+import ttf.model.property.PropertyGroup;
 import ttf.model.topic.Topic;
 import ttf.persistence.query.Query;
 
 public interface ModelStore {
 
 	public Collection<Article> loadArticles(Query query)
-			throws PersistenceException;
+	throws PersistenceException;
 
 	public void persistArticle(Article article) throws PersistenceException;
 
 	public Collection<Topic> loadTopics(Query query)
-			throws PersistenceException;
+	throws PersistenceException;
 
 	public void persistTopic(Topic topic) throws PersistenceException;
+
+	public PropertyGroup<String, NumericalValue> loadAppearancy() 
+	throws PersistenceException, SQLException;
+	
+	public double loadNrOfArticles()
+	throws PersistenceException, SQLException;
 }

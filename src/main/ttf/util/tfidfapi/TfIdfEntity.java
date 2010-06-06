@@ -42,7 +42,7 @@ public class TfIdfEntity {
 
 	@Override
 	public String toString() {
-		return "[Token = " + token.getValue() + " " + "tf=" + tf
+		return "[Entity Token = '" + token.getValue() + "' " + "tf=" + tf
 		+ " " + "idf=" + idf + "]";
 	}
 }

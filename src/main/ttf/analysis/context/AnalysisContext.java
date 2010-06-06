@@ -22,6 +22,9 @@ import org.apache.commons.chain.impl.ContextBase;
 import ttf.analysis.computation.SimilarityComputer;
 import ttf.model.article.Article;
 import ttf.model.article.ArticleFactory;
+import ttf.model.property.HashMapPropertyGroup;
+import ttf.model.property.NumericalValue;
+import ttf.model.property.PropertyGroup;
 import ttf.model.topic.Topic;
 import ttf.model.topic.TopicFactory;
 import ttf.persistence.ModelStore;
@@ -46,8 +49,12 @@ public class AnalysisContext extends ContextBase {
 	private Article processedArticle;
 	private Collection<Topic> loadedTopics;
 	private Topic selectedTopic;
+	private PropertyGroup<String, NumericalValue> TokenAppearancy;
+	private PropertyGroup<String, NumericalValue> Idf;
+	private double TotalArticles;
 
 	protected AnalysisContext() {
+		Idf = new HashMapPropertyGroup<String, NumericalValue>();
 	}
 
 	public ArticleFactory getArticleFactory() {
@@ -128,5 +135,29 @@ public class AnalysisContext extends ContextBase {
 
 	public void setSelectedTopic(Topic selectedTopic) {
 		this.selectedTopic = selectedTopic;
+	}
+
+	public void setTokenAppearancy(PropertyGroup<String, NumericalValue> tokenAppearancy) {
+		TokenAppearancy = tokenAppearancy;
+	}
+
+	public PropertyGroup<String, NumericalValue> getTokenAppearancy() {
+		return TokenAppearancy;
+	}
+
+	public void setTotalArticles(double totalArticles) {
+		TotalArticles = totalArticles;
+	}
+
+	public double getTotalArticles() {
+		return TotalArticles;
+	}
+
+	public void setIdf(PropertyGroup<String, NumericalValue> idf) {
+		Idf = idf;
+	}
+
+	public PropertyGroup<String, NumericalValue> getIdf() {
+		return Idf;
 	}
 }

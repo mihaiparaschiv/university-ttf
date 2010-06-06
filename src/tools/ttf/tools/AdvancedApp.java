@@ -34,6 +34,7 @@ import ttf.analysis.command.ModelPersistenceCommand;
 import ttf.analysis.command.TopicLoadingCommand;
 import ttf.analysis.command.TopicSelectionCommand;
 import ttf.analysis.command.TopicUpdateCommand;
+import ttf.analysis.command.TfIdfHelperCommand;
 import ttf.analysis.context.ContextFactory;
 import ttf.analysis.input.InternalProvider;
 import ttf.analysis.processor.ChainProcessor;
@@ -85,6 +86,7 @@ public class AdvancedApp {
         // setup commands
         List<Command> commands = new LinkedList<Command>();
         commands.add(new EntityDetectionCommand());
+        commands.add(new TfIdfHelperCommand());
         commands.add(new TfIdfDetectionCommand());
         commands.add(new TopicLoadingCommand());
         commands.add(new TopicSelectionCommand(minSimilarity));

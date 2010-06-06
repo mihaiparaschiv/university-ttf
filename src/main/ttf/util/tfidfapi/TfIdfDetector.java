@@ -44,6 +44,7 @@ public class TfIdfDetector {
 			// TODO compute idf
 			TfIdfEntity entity = new TfIdfEntity(token, tf, idf);
 			entities.add(entity);
+			System.out.println(entity.toString());
 		}
 
 		return entities;

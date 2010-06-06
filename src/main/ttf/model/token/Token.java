@@ -1,6 +1,7 @@
 package ttf.model.token;
 
 import java.util.Comparator;
+import org.apache.commons.lang.StringUtils;
 
 import org.apache.commons.lang.builder.CompareToBuilder;
 
@@ -27,7 +28,7 @@ public class Token{
 	private int count;
 
 	public String getValue() {
-		return value;
+		return StringUtils.lowerCase(value);
 	}
 
 	public void setValue(String value) {

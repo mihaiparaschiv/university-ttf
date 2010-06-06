@@ -23,18 +23,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import ttf.analysis.context.AnalysisContext;
+import ttf.model.property.NumericalValue;
+import ttf.model.property.PropertyGroup;
 import ttf.model.topic.Topic;
 import ttf.persistence.ModelStore;
 
-/**
- * This {@link Command} loads topics from the database.
- * 
- * The code is very inefficient. The topics should be saved in cache and
- * conditions for topic selection should be added.
- * 
- * @author Mihai Paraschiv
- */
-public class TopicLoadingCommand implements Command {
+
+public class TfIdfHelperCommand implements Command {
 	private final Log log = LogFactory.getLog(TopicLoadingCommand.class);
 
 	@Override
@@ -42,10 +37,16 @@ public class TopicLoadingCommand implements Command {
 		AnalysisContext ctx = (AnalysisContext) context;
 		ModelStore store = ctx.getModelStore();
 
-		Collection<Topic> topics = store.loadTopics(null);
-		ctx.setLoadedTopics(topics);
+		PropertyGroup <String, NumericalValue> Appearancy = store.loadAppearancy();
+		ctx.setTokenAppearancy(Appearancy);
+
+		System.out.println("Loaded " + Appearancy.size() + " appearancies.");
+		log.debug("Loaded " + Appearancy.size() + " appearancies.");
+	
+		double noArticles = store.loadNrOfArticles();
+		ctx.setTotalArticles(noArticles);
 		
-		log.debug("Loaded " + topics.size() + " topics.");
+		System.out.println("Loaded " + noArticles + " articles no.");
 
 		return false;
 	}
