@@ -47,6 +47,7 @@ public class TfIdfHelperCommand implements Command {
 		ctx.setTotalArticles(noArticles);
 		
 		System.out.println("Loaded " + noArticles + " articles no.");
+		log.debug("Loaded " + noArticles + " articles no.");
 
 		return false;
 	}

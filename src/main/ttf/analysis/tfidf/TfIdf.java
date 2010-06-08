@@ -80,10 +80,9 @@ public class TfIdf {
 
 		SentenceTokenizer sentenceTokenizer = new SentenceTokenizer();
 		WordTokenizer wordTokenizer = new WordTokenizer();
-
+		
 		StringExtractor se = new StringExtractor (uri); // uses HTML parser - StringExtractor
-
-		sentenceTokenizer.setText(se.extractStrings (false)); 
+		sentenceTokenizer.setText(se.extractStrings (false));
 		String sentence = null;
 		while ((sentence = sentenceTokenizer.nextSentence()) != null) {
 			//System.out.println("sentence=" + sentence);
@@ -106,7 +105,6 @@ public class TfIdf {
 				}
 			}	
 		}
-
 		return tokens;
 	}
 

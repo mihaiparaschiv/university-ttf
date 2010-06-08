@@ -41,10 +41,8 @@ public class TfIdfDetector {
 		for (Token token : tokens) {
 			double tf = (double)token.getCount() / (double)count; 
 			double idf = 1.00;
-			// TODO compute idf
 			TfIdfEntity entity = new TfIdfEntity(token, tf, idf);
-			entities.add(entity);
-			System.out.println(entity.toString());
+			entities.add(entity);			
 		}
 
 		return entities;

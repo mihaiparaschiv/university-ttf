@@ -54,15 +54,19 @@ public class TfIdfDetectionCommand implements Command {
 
 		for (TfIdfEntity entity : entities) {
 			String key = entity.getToken().getValue();
-			NumericalValue value = new NumericalValue(entity.getTf());
-					//* entity.getIdf());
-			NumericalValue Appearancy = tokenAppearancy.get(entity.getToken().getValue());
+			
+			NumericalValue Appearancy = tokenAppearancy.get(key);
 			if (Appearancy == null)
 				Appearancy = new NumericalValue(0);
-			double idf = Math.log10((NoArticles+1) / (Appearancy.getDouble() + 1));  		
+			
+			double idf = Math.log10((NoArticles + 1) / (Appearancy.getDouble() + 1));
+			
+			entity.setIdf(idf);				
 			ctx.getIdf().put(key, new NumericalValue(idf));
 			
-			termGroup.put(key, value);
+			termGroup.put(key, new NumericalValue(entity.getTf()));
+			
+			System.out.println(entity);
 		}
 
 		log.debug("Found: " + termGroup.size() + " entities.");

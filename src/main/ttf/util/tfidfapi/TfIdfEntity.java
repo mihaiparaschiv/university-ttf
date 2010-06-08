@@ -18,8 +18,8 @@ import ttf.model.token.*;
 
 public class TfIdfEntity {
 	private final Token token;
-	private final double tf;
-	private final double idf;
+	private double tf;
+	private double idf;
 
 	public TfIdfEntity(Token token, double tf, double idf) {
 		super();
@@ -38,6 +38,10 @@ public class TfIdfEntity {
 
 	public double getIdf() {
 		return idf;
+	}
+	
+	public void setIdf(double idf) {
+		this.idf = idf;
 	}
 
 	@Override
