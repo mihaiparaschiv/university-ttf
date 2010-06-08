@@ -31,6 +31,7 @@ import org.apache.commons.logging.LogFactory;
 import ttf.analysis.AnalysisController;
 import ttf.analysis.command.EntityDetectionCommand;
 import ttf.analysis.command.ModelPersistenceCommand;
+import ttf.analysis.command.TfIdfHelperCommand;
 import ttf.analysis.command.TopicSelectionCommand;
 import ttf.analysis.command.TopicLoadingCommand;
 import ttf.analysis.command.TopicUpdateCommand;
@@ -106,11 +107,12 @@ public class BasicApp {
 		// setup commands
 		List<Command> commands = new LinkedList<Command>();
 		commands.add(new EntityDetectionCommand());
-		commands.add(new TfIdfDetectionCommand());
-		commands.add(new TopicLoadingCommand());
-		commands.add(new TopicSelectionCommand(minSimilarity));
-		commands.add(new TopicUpdateCommand());
-		commands.add(new ModelPersistenceCommand());
+        commands.add(new TfIdfHelperCommand());
+        commands.add(new TfIdfDetectionCommand());
+        commands.add(new TopicLoadingCommand());
+        commands.add(new TopicSelectionCommand(minSimilarity));
+        commands.add(new TopicUpdateCommand());
+        commands.add(new ModelPersistenceCommand());
 
 		// add articles
 		InternalProvider provider = new InternalProvider();
