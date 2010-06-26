@@ -44,7 +44,7 @@ public class TopicLoadingCommand implements Command {
 
 		Collection<Topic> topics = store.loadTopics(null);
 		ctx.setLoadedTopics(topics);
-		
+
 		log.debug("Loaded " + topics.size() + " topics.");
 
 		return false;

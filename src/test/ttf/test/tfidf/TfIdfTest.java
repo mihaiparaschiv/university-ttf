@@ -27,11 +27,11 @@ public class TfIdfTest {
 		Collection<Token> tokens = tfIdf.GetUrlTokens(uri);
 
 		for (Token token : tokens) {
-			count += token.getCount();		
+			count += token.getCount();
 		}
 
 		for (Token token : tokens) {
-			double tf = (double)token.getCount() / (double)count; 
+			double tf = (double) token.getCount() / (double) count;
 			double idf = 1.00;
 			// TODO compute idf
 			TfIdfEntity entity = new TfIdfEntity(token, tf, idf);
@@ -40,6 +40,5 @@ public class TfIdfTest {
 
 		System.out.println("Total count: " + count);
 	}
-
 
 }

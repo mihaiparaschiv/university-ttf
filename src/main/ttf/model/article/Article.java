@@ -137,7 +137,7 @@ public class Article extends Model {
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", author=" + author + ", address="
-				+ address + ", content=" + content + ", discoveredAt="
+				+ address + ", content=" + content.substring(0, 20) + ", discoveredAt="
 				+ discoveredAt + ", publishedAt=" + publishedAt + ", score="
 				+ score + ", tags=" + tags + ", title=" + title + ", topic="
 				+ topic + "]";

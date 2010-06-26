@@ -24,25 +24,28 @@ import java.util.List;
 
 import org.apache.commons.dbutils.ResultSetHandler;
 
-public class IncomingArticleListRSH implements ResultSetHandler<List<IncomingArticle>>{
+public class IncomingArticleListRSH implements
+		ResultSetHandler<List<IncomingArticle>> {
 
-    @Override
-    public List<IncomingArticle> handle(ResultSet rs) throws SQLException {
-        List<IncomingArticle> incomingArticles = new LinkedList<IncomingArticle>(); 
-        
-        while (rs.next()) {            
-            IncomingArticle incomingArticle = new IncomingArticle();
-            incomingArticle.setTitle((String)rs.getObject(1));
-            incomingArticle.setAuthor((String)rs.getObject(2));
-            incomingArticle.setPublishedAt(new Date(((Timestamp)rs.getObject(3)).getTime()));
-            incomingArticle.setDiscoveredAt(new Date(((Timestamp)rs.getObject(4)).getTime()));
-            incomingArticle.setAddress((String)rs.getObject(5));
-            incomingArticle.setContent((String)rs.getObject(6));
-            
-            incomingArticles.add(incomingArticle);
-        }
-    
-        return incomingArticles;
-    }
+	@Override
+	public List<IncomingArticle> handle(ResultSet rs) throws SQLException {
+		List<IncomingArticle> incomingArticles = new LinkedList<IncomingArticle>();
+
+		while (rs.next()) {
+			IncomingArticle incomingArticle = new IncomingArticle();
+			incomingArticle.setTitle((String) rs.getObject(1));
+			incomingArticle.setAuthor((String) rs.getObject(2));
+			incomingArticle.setPublishedAt(new Date(((Timestamp) rs
+					.getObject(3)).getTime()));
+			incomingArticle.setDiscoveredAt(new Date(((Timestamp) rs
+					.getObject(4)).getTime()));
+			incomingArticle.setAddress((String) rs.getObject(5));
+			incomingArticle.setContent((String) rs.getObject(6));
+
+			incomingArticles.add(incomingArticle);
+		}
+
+		return incomingArticles;
+	}
 
 }

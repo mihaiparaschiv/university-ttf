@@ -137,7 +137,8 @@ public class AnalysisContext extends ContextBase {
 		this.selectedTopic = selectedTopic;
 	}
 
-	public void setTokenAppearancy(PropertyGroup<String, NumericalValue> tokenAppearancy) {
+	public void setTokenAppearancy(
+			PropertyGroup<String, NumericalValue> tokenAppearancy) {
 		TokenAppearancy = tokenAppearancy;
 	}
 

@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import ttf.analysis.tfidf.TfIdf;
-import ttf.model.token.*;
+import ttf.model.token.Token;
 
 public class TfIdfDetector {
 
@@ -35,14 +35,14 @@ public class TfIdfDetector {
 		int count = 0;
 
 		for (Token token : tokens) {
-			count += token.getCount();		
+			count += token.getCount();
 		}
 
 		for (Token token : tokens) {
-			double tf = (double)token.getCount() / (double)count; 
+			double tf = (double) token.getCount() / (double) count;
 			double idf = 1.00;
 			TfIdfEntity entity = new TfIdfEntity(token, tf, idf);
-			entities.add(entity);			
+			entities.add(entity);
 		}
 
 		return entities;

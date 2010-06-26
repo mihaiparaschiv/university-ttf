@@ -15,7 +15,6 @@
  */
 package ttf.tools;
 
-import java.io.Console;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -31,9 +30,10 @@ import org.apache.commons.logging.LogFactory;
 import ttf.analysis.AnalysisController;
 import ttf.analysis.command.EntityDetectionCommand;
 import ttf.analysis.command.ModelPersistenceCommand;
+import ttf.analysis.command.TfIdfDetectionCommand;
 import ttf.analysis.command.TfIdfHelperCommand;
-import ttf.analysis.command.TopicSelectionCommand;
 import ttf.analysis.command.TopicLoadingCommand;
+import ttf.analysis.command.TopicSelectionCommand;
 import ttf.analysis.command.TopicUpdateCommand;
 import ttf.analysis.context.ContextFactory;
 import ttf.analysis.input.InternalProvider;
@@ -45,7 +45,6 @@ import ttf.incoming.Transformer;
 import ttf.model.article.Article;
 import ttf.test.TestUtil;
 import ttf.util.AppContext;
-import ttf.analysis.command.TfIdfDetectionCommand;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
@@ -77,7 +76,8 @@ public class BasicApp {
 	}
 
 	/**
-	 * @param args feed addresses
+	 * @param args
+	 *            feed addresses
 	 * @throws IllegalArgumentException
 	 * @throws FeedException
 	 * @throws IOException
@@ -100,19 +100,19 @@ public class BasicApp {
 
 	public void start(String[] feedAddresses) throws IllegalArgumentException,
 			FeedException, IOException, SQLException {
-		// setup parameters
+		// set up parameters
 		double minSimilarity = configuration
 				.getDouble("analysis.minSimilarity");
 
-		// setup commands
+		// set up commands
 		List<Command> commands = new LinkedList<Command>();
 		commands.add(new EntityDetectionCommand());
-        commands.add(new TfIdfHelperCommand());
-        commands.add(new TfIdfDetectionCommand());
-        commands.add(new TopicLoadingCommand());
-        commands.add(new TopicSelectionCommand(minSimilarity));
-        commands.add(new TopicUpdateCommand());
-        commands.add(new ModelPersistenceCommand());
+		commands.add(new TfIdfHelperCommand());
+		commands.add(new TfIdfDetectionCommand());
+		commands.add(new TopicLoadingCommand());
+		commands.add(new TopicSelectionCommand(minSimilarity));
+		commands.add(new TopicUpdateCommand());
+		commands.add(new ModelPersistenceCommand());
 
 		// add articles
 		InternalProvider provider = new InternalProvider();

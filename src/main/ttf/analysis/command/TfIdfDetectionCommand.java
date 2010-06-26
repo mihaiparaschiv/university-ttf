@@ -25,7 +25,8 @@ import ttf.analysis.context.AnalysisContext;
 import ttf.model.article.Article;
 import ttf.model.property.NumericalValue;
 import ttf.model.property.PropertyGroup;
-import ttf.util.tfidfapi.*;
+import ttf.util.tfidfapi.TfIdfDetector;
+import ttf.util.tfidfapi.TfIdfEntity;
 
 /**
  * Detects TfIdf.
@@ -46,26 +47,27 @@ public class TfIdfDetectionCommand implements Command {
 
 		PropertyGroup<String, NumericalValue> termGroup;
 		termGroup = article.getTermGroup();
-		
+
 		PropertyGroup<String, NumericalValue> tokenAppearancy;
 		tokenAppearancy = ctx.getTokenAppearancy();
-		
+
 		double NoArticles = ctx.getTotalArticles();
 
 		for (TfIdfEntity entity : entities) {
 			String key = entity.getToken().getValue();
-			
+
 			NumericalValue Appearancy = tokenAppearancy.get(key);
 			if (Appearancy == null)
 				Appearancy = new NumericalValue(0);
-			
-			double idf = Math.log10((NoArticles + 1) / (Appearancy.getDouble() + 1));
-			
-			entity.setIdf(idf);				
+
+			double idf = Math.log10((NoArticles + 1)
+					/ (Appearancy.getDouble() + 1));
+
+			entity.setIdf(idf);
 			ctx.getIdf().put(key, new NumericalValue(idf));
-			
+
 			termGroup.put(key, new NumericalValue(entity.getTf()));
-			
+
 			System.out.println(entity);
 		}
 

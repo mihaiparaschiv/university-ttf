@@ -17,7 +17,6 @@ package ttf.persistence.sql;
 
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -28,7 +27,6 @@ import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.commons.lang.NotImplementedException;
 
-import ttf.incoming.FeedInfo;
 import ttf.model.article.Article;
 import ttf.model.article.ArticleFactory;
 import ttf.model.property.HashMapPropertyGroup;
@@ -86,40 +84,39 @@ public class SQLStore implements ModelStore {
 		}
 		return topics;
 	}
-	
+
 	@Override
-	public double loadNrOfArticles()
-			throws PersistenceException, SQLException {
+	public double loadNrOfArticles() throws PersistenceException, SQLException {
 		QueryRunner run = new QueryRunner(dataSource);
-		
+
 		double NrOfArticles = 0;
 		String queryInterval = "SELECT count(*) FROM articles";
-		
-		Long count = (Long)run.query(queryInterval, new ScalarHandler());
-        if (count != null)
-        	NrOfArticles = ((double)count); 
-        
+
+		Long count = (Long) run.query(queryInterval, new ScalarHandler());
+		if (count != null)
+			NrOfArticles = ((double) count);
+
 		return NrOfArticles;
 	}
-	
+
 	@Override
 	public PropertyGroup<String, NumericalValue> loadAppearancy()
 			throws PersistenceException, SQLException {
 		QueryRunner run = new QueryRunner(dataSource);
 		String sql = "SELECT name, count(articleId) FROM articlefeatures where type='term' group by name";
-		
+
 		PropertyGroup<String, NumericalValue> Appearancy = new HashMapPropertyGroup<String, NumericalValue>();
-		
+
 		List<Object[]> features = run.query(sql, new ArrayListHandler());
 
 		// parse features
 		for (Object[] o : features) {
 			String name = (String) o[0];
 			Long count = (Long) o[1];
-			
-			Appearancy.put(name, new NumericalValue(count));			
+
+			Appearancy.put(name, new NumericalValue(count));
 		}
-		 
+
 		return Appearancy;
 	}
 

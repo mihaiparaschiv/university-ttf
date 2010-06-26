@@ -59,7 +59,7 @@ public class AppContext {
 		articleFactory = new BasicArticleFactory();
 		topicFactory = new BasicTopicFactory();
 		modelStore = new SQLStore(dataSource, articleFactory, topicFactory);
-		
+
 		// processing
 		String key = c.getString("alchemy.key");
 		AlchemyAPI alchemyAPI = AlchemyAPI.GetInstanceFromString(key);

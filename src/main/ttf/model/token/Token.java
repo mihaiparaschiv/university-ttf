@@ -1,16 +1,13 @@
 package ttf.model.token;
 
-import java.util.Comparator;
 import org.apache.commons.lang.StringUtils;
-
-import org.apache.commons.lang.builder.CompareToBuilder;
 
 /**
  * Models a word token. Also contains information about the type of entity the
  * token represents.
  */
 
-public class Token{
+public class Token {
 
 	protected Token() {
 		super();
@@ -56,7 +53,7 @@ public class Token{
 		return count;
 	}
 
-	public void incrementCount(){
+	public void incrementCount() {
 		count++;
 	}
 

@@ -27,18 +27,17 @@ import ttf.persistence.query.Query;
 public interface ModelStore {
 
 	public Collection<Article> loadArticles(Query query)
-	throws PersistenceException;
+			throws PersistenceException;
 
 	public void persistArticle(Article article) throws PersistenceException;
 
 	public Collection<Topic> loadTopics(Query query)
-	throws PersistenceException;
+			throws PersistenceException;
 
 	public void persistTopic(Topic topic) throws PersistenceException;
 
-	public PropertyGroup<String, NumericalValue> loadAppearancy() 
-	throws PersistenceException, SQLException;
-	
-	public double loadNrOfArticles()
-	throws PersistenceException, SQLException;
+	public PropertyGroup<String, NumericalValue> loadAppearancy()
+			throws PersistenceException, SQLException;
+
+	public double loadNrOfArticles() throws PersistenceException, SQLException;
 }

@@ -51,87 +51,95 @@ import ttf.analysis.command.TfIdfDetectionCommand;
 import com.sun.syndication.io.FeedException;
 
 public class AdvancedApp {
-    private static final String INCOMINGARTICLES = "IncomingArticles";
-    private static final String SOURCES = "sources";
+	private static final String INCOMINGARTICLES = "IncomingArticles";
+	private static final String SOURCES = "sources";
 
-    private final Configuration configuration;
-    private final ContextFactory contextFactory;
-    private final Transformer transformer;
-    private final DataSource dataSource;
+	private final Configuration configuration;
+	private final ContextFactory contextFactory;
+	private final Transformer transformer;
+	private final DataSource dataSource;
 
-    public AdvancedApp(Configuration configuration, ContextFactory contextFactory, DataSource dataSource,
-            Transformer transformer) {
-        this.configuration = configuration;
-        this.contextFactory = contextFactory;
-        this.transformer = transformer;
-        this.dataSource = dataSource;
-    }
+	public AdvancedApp(Configuration configuration,
+			ContextFactory contextFactory, DataSource dataSource,
+			Transformer transformer) {
+		this.configuration = configuration;
+		this.contextFactory = contextFactory;
+		this.transformer = transformer;
+		this.dataSource = dataSource;
+	}
 
-    public static void main(String[] args) throws IllegalArgumentException, FeedException, IOException,
-            ConfigurationException, SQLException {
-        Configuration config = TestUtil.getDefaultConfiguration();
-        AppContext appContext = AppContext.build(config);
+	public static void main(String[] args) throws IllegalArgumentException,
+			FeedException, IOException, ConfigurationException, SQLException {
+		Configuration config = TestUtil.getDefaultConfiguration();
+		AppContext appContext = AppContext.build(config);
 
-        Transformer transformer = new BasicTransformer(appContext.getArticleFactory());
+		Transformer transformer = new BasicTransformer(appContext
+				.getArticleFactory());
 
-        AdvancedApp app = new AdvancedApp(config, appContext.getContextFactory(), appContext.getDataSource(),
-                transformer);
-        app.run();
-    }
+		AdvancedApp app = new AdvancedApp(config, appContext
+				.getContextFactory(), appContext.getDataSource(), transformer);
+		app.run();
+	}
 
-    public void run() throws IllegalArgumentException, FeedException, IOException, SQLException {
-        // setup parameters
-        double minSimilarity = configuration.getDouble("analysis.minSimilarity");
+	public void run() throws IllegalArgumentException, FeedException,
+			IOException, SQLException {
+		// set up parameters
+		double minSimilarity = configuration
+				.getDouble("analysis.minSimilarity");
 
-        // setup commands
-        List<Command> commands = new LinkedList<Command>();
-        commands.add(new EntityDetectionCommand());
-        commands.add(new TfIdfHelperCommand());
-        commands.add(new TfIdfDetectionCommand());
-        commands.add(new TopicLoadingCommand());
-        commands.add(new TopicSelectionCommand(minSimilarity));
-        commands.add(new TopicUpdateCommand());
-        commands.add(new ModelPersistenceCommand());
+		// set up commands
+		List<Command> commands = new LinkedList<Command>();
+		commands.add(new EntityDetectionCommand());
+		commands.add(new TfIdfHelperCommand());
+		commands.add(new TfIdfDetectionCommand());
+		commands.add(new TopicLoadingCommand());
+		commands.add(new TopicSelectionCommand(minSimilarity));
+		commands.add(new TopicUpdateCommand());
+		commands.add(new ModelPersistenceCommand());
 
-        QueryRunner run = new QueryRunner(dataSource);
-        String queryInterval = "SELECT min(retrievalInterval) FROM " + SOURCES;
-        String queryArticles = "SELECT title, author, publishedAt, discoveredAt, address, content FROM "
-                + INCOMINGARTICLES + " WHERE processed = 0";
-        String updateArticle = "UPDATE " + INCOMINGARTICLES + " SET processed = 1 WHERE address = ?";
+		QueryRunner run = new QueryRunner(dataSource);
+		String queryInterval = "SELECT min(retrievalInterval) FROM " + SOURCES;
+		String queryArticles = "SELECT title, author, publishedAt, discoveredAt, address, content FROM "
+				+ INCOMINGARTICLES + " WHERE processed = 0";
+		String updateArticle = "UPDATE " + INCOMINGARTICLES
+				+ " SET processed = 1 WHERE address = ?";
 
-        // Read update interval
-        long updateInterval = 0;
-        Integer interval = (Integer)run.query(queryInterval, new ScalarHandler());
-        if (interval != null)
-            updateInterval = ((Integer)interval) * FeedInfo.MINUTE;
-        
-        while (updateInterval > 0) {
-            // Get unprocessed incoming articles
-            InternalProvider provider = new InternalProvider();
-            List<IncomingArticle> incomingArticles = run.query(queryArticles, new IncomingArticleListRSH());
-            
-            for (IncomingArticle incomingArticle : incomingArticles) {
-                Article article = transformer.transform(incomingArticle);
-                provider.add(article);            
-            }
+		// Read update interval
+		long updateInterval = 0;
+		Integer interval = (Integer) run.query(queryInterval,
+				new ScalarHandler());
+		if (interval != null)
+			updateInterval = ((Integer) interval) * FeedInfo.MINUTE;
 
-            process(commands, provider);
-            
-            // Mark processed
-            for (IncomingArticle incomingArticle : incomingArticles) {
-                run.update(updateArticle, incomingArticle.getAddress());
-            }
-                        
-            try {
-                Thread.sleep(updateInterval);
-            } catch (InterruptedException e) {
-            }
-        }
-    }
+		while (updateInterval > 0) {
+			// Get unprocessed incoming articles
+			InternalProvider provider = new InternalProvider();
+			List<IncomingArticle> incomingArticles = run.query(queryArticles,
+					new IncomingArticleListRSH());
 
-    private void process(List<Command> commands, InternalProvider provider) {
-        ChainProcessor processor = new ChainProcessor(contextFactory, commands);
-        AnalysisController controller = new AnalysisController(provider, processor);
-        controller.run();
-    }
+			for (IncomingArticle incomingArticle : incomingArticles) {
+				Article article = transformer.transform(incomingArticle);
+				provider.add(article);
+			}
+
+			process(commands, provider);
+
+			// Mark processed
+			for (IncomingArticle incomingArticle : incomingArticles) {
+				run.update(updateArticle, incomingArticle.getAddress());
+			}
+
+			try {
+				Thread.sleep(updateInterval);
+			} catch (InterruptedException e) {
+			}
+		}
+	}
+
+	private void process(List<Command> commands, InternalProvider provider) {
+		ChainProcessor processor = new ChainProcessor(contextFactory, commands);
+		AnalysisController controller = new AnalysisController(provider,
+				processor);
+		controller.run();
+	}
 }

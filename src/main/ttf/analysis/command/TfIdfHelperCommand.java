@@ -15,39 +15,28 @@
  */
 package ttf.analysis.command;
 
-import java.util.Collection;
-
 import org.apache.commons.chain.Command;
 import org.apache.commons.chain.Context;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import ttf.analysis.context.AnalysisContext;
 import ttf.model.property.NumericalValue;
 import ttf.model.property.PropertyGroup;
-import ttf.model.topic.Topic;
 import ttf.persistence.ModelStore;
 
-
 public class TfIdfHelperCommand implements Command {
-	private final Log log = LogFactory.getLog(TopicLoadingCommand.class);
+	// private final Log log = LogFactory.getLog(TopicLoadingCommand.class);
 
 	@Override
 	public boolean execute(Context context) throws Exception {
 		AnalysisContext ctx = (AnalysisContext) context;
 		ModelStore store = ctx.getModelStore();
 
-		PropertyGroup <String, NumericalValue> Appearancy = store.loadAppearancy();
+		PropertyGroup<String, NumericalValue> Appearancy = store
+				.loadAppearancy();
 		ctx.setTokenAppearancy(Appearancy);
 
-		System.out.println("Loaded " + Appearancy.size() + " appearancies.");
-		log.debug("Loaded " + Appearancy.size() + " appearancies.");
-	
 		double noArticles = store.loadNrOfArticles();
 		ctx.setTotalArticles(noArticles);
-		
-		System.out.println("Loaded " + noArticles + " articles no.");
-		log.debug("Loaded " + noArticles + " articles no.");
 
 		return false;
 	}

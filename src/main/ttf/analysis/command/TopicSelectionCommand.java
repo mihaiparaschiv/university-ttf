@@ -58,7 +58,7 @@ public class TopicSelectionCommand implements Command {
 		Topic selectedTopic = null;
 		double maxSimilarity = 0;
 		for (Topic topic : topics) {
-			double sim = computer.compute(article, topic);
+			double sim = computer.compute(article, topic, ctx);
 			if (sim > maxSimilarity) {
 				selectedTopic = topic;
 				maxSimilarity = sim;

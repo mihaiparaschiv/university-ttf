@@ -37,7 +37,7 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
 /**
- * This class should can be used to build an initial collections of Articles for
+ * This class should be used to build an initial collections of Articles for
  * testing purposes.
  * 
  * @author Mihai Paraschiv
@@ -45,7 +45,7 @@ import com.sun.syndication.io.XmlReader;
 public class ArticleBootstraper {
 	private static final String CONFIG_FILE = "base.properties";
 	private static final String TABLE = "IncomingArticles";
-	
+
 	private final DataSource dataSource;
 
 	public ArticleBootstraper(DataSource dataSource) {
@@ -53,7 +53,8 @@ public class ArticleBootstraper {
 	}
 
 	/**
-	 * @param args feed addresses
+	 * @param args
+	 *            feed addresses
 	 * @throws IllegalArgumentException
 	 * @throws FeedException
 	 * @throws IOException

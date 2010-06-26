@@ -17,6 +17,7 @@ package ttf.analysis.computation;
 
 import java.util.Map.Entry;
 
+import ttf.analysis.context.AnalysisContext;
 import ttf.model.article.Article;
 import ttf.model.property.NumericalValue;
 import ttf.model.property.PropertyGroup;
@@ -29,10 +30,11 @@ import ttf.model.topic.Topic;
  * 
  */
 public class SimilarityComputer {
-	public double compute(Article article, Topic topic) {
+	public double compute(Article article, Topic topic, AnalysisContext context) {
 		double result = 0;
 
 		result += computeEntitySimilarity(article, topic);
+		result += computeTfIdfSimilarity(article, topic, context);
 
 		return result;
 	}
@@ -59,7 +61,7 @@ public class SimilarityComputer {
 			return 0;
 		}
 
-		// compute the norms - will be cached
+		// compute the norms - should be cached
 		double normA = computeNorm(groupA);
 		double normB = computeNorm(groupB);
 
@@ -76,5 +78,11 @@ public class SimilarityComputer {
 			norm += v * v;
 		}
 		return norm;
+	}
+	
+	private double computeTfIdfSimilarity(Article article, Topic topic,
+			AnalysisContext context) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

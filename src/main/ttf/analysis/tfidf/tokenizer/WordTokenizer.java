@@ -1,6 +1,5 @@
 package ttf.analysis.tfidf.tokenizer;
 
-import ttf.model.token.*;
 import java.io.File;
 import java.util.Map;
 
@@ -8,6 +7,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import ttf.model.token.BasicTokenFactory;
+import ttf.model.token.Token;
+import ttf.model.token.TokenType;
 
 import com.ibm.icu.text.BreakIterator;
 import com.ibm.icu.text.RuleBasedBreakIterator;

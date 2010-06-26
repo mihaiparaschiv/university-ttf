@@ -14,7 +14,7 @@
  */
 package ttf.util.tfidfapi;
 
-import ttf.model.token.*;
+import ttf.model.token.Token;
 
 public class TfIdfEntity {
 	private final Token token;
@@ -39,14 +39,14 @@ public class TfIdfEntity {
 	public double getIdf() {
 		return idf;
 	}
-	
+
 	public void setIdf(double idf) {
 		this.idf = idf;
 	}
 
 	@Override
 	public String toString() {
-		return "[Entity Token = '" + token.getValue() + "' " + "tf=" + tf
-		+ " " + "idf=" + idf + "]";
+		return "[Entity Token = '" + token.getValue() + "' " + "tf=" + tf + " "
+				+ "idf=" + idf + "]";
 	}
 }
