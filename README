@@ -1,4 +1,0 @@
-In order to set up logging, you can copy commons-logging.properties and log4j.properties
-from resources to config.
-
-See resources/properties.template for application configuration.
